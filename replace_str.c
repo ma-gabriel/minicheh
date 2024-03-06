@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 05:14:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/06 05:24:51 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/06 09:49:25 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft/libft.h"
 #include "minishell.h"
 
-static int	replace_inside(char **p_s, size_t start, size_t end, char *s2)
+int	replace_inside(char **p_s, size_t start, size_t end, char *s2)
 {
 	size_t	i;
 	char	*res;
@@ -47,6 +47,10 @@ static size_t	word_len(char *str)
 	size_t	i;
 
 	i = 0;
+	if (!str)
+		return (0);
+	if (str[0] == '?')
+		return (1);
 	while (str[i])
 	{
 		if (!ft_isalnum(str[i]) && str[i] != '_')

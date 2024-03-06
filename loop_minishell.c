@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 02:27:31 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/06 08:53:47 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/06 09:31:49 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ void	loops_minishell(t_env **env)
 		}
 		if (!ft_strncmp(line, "env", 3) && (line[3] == ' ' || !line[3]))
 			bi_env(env);
+		if (!ft_strncmp(line, "echo ", 5))
+			bi_echo(line, env);
 	}
 }

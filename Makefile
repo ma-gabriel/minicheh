@@ -6,7 +6,7 @@
 #    By: geymat <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 04:17:20 by geymat            #+#    #+#              #
-#    Updated: 2024/03/06 08:35:31 by geymat           ###   ########.fr        #
+#    Updated: 2024/03/06 09:33:41 by geymat           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SRCS = main.c \
        get_new_line.c \
        replace_str.c \
        create_envp.c \
-       built_in_env.c
+       built_in_env.c \
+       built_in_echo.c
 
 HEADERS = minishell.h
 
