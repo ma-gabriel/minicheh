@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 02:56:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/06 05:03:43 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/06 09:04:19 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,23 +99,6 @@ void	ft_envclear(t_env *env)
 	}
 }
 
-int	ft_strcmp(const char *first, const char *second)
-{
-	size_t	i;
-
-	i = 0;
-	if (!(first[i]))
-		return (-second[i]);
-	while (first[i] && i + 1 && first[i])
-	{
-		if (first[i] - second[i])
-			return (((unsigned char) first[i]
-					- (unsigned char)second[i]));
-		i++;
-	}
-	return (((unsigned char) first[i] - (unsigned char)second[i]));
-}
-
 void	ft_envlstadd_until_sorted(t_env **lst, t_env *new_lst)
 {
 	t_env	*temp;
@@ -187,7 +170,7 @@ int	main(int argc, char **argv, char **envp)
 	env = dup_envp(envp);
 	if (!env)
 		return (2);
-	loops_minishell(env);
+	loops_minishell(&env);
 	ft_envclear(env);
 	return (0);
 }

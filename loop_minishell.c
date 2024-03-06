@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 02:27:31 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/06 05:19:17 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/06 08:53:47 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "libft.h"
 #include "minishell.h"
 
-void	loops_minishell(t_env *env)
+void	loops_minishell(t_env **env)
 {
 	char	*line;
 	
@@ -23,16 +23,14 @@ void	loops_minishell(t_env *env)
 	while (line)
 	{
 		free(line);
-		line = get_a_new_line(env);
+		line = get_a_new_line(*env);
 		if (!line || !ft_strncmp(line, "exit", 8))
 		{
 			if (line)
 				free(line);
 			return ;
 		}
-		//if (!ft_strncmp(line, "export ", 7))
-		//	bi_export(line, &envp);
-		//if (!ft_strncmp(line, "env", 3) && (line[3] == ' ' || !line[3]))
-		//	bi_env(envp);
+		if (!ft_strncmp(line, "env", 3) && (line[3] == ' ' || !line[3]))
+			bi_env(env);
 	}
 }
