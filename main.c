@@ -6,59 +6,15 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 02:56:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/06 03:10:59 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/06 05:03:43 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
-
-char	*ft_strdup(const char *src)
-{
-	size_t	i;
-	char	*dest;
-	size_t	len;
-
-	i = -1;
-	len = 0;
-	while (src[len])
-		len++;
-	dest = (char *) malloc((len + 1) * sizeof(char));
-	if (!dest)
-		return (NULL);
-	while (++i < len)
-		dest[i] = src[i];
-	dest[i] = 0;
-	return (dest);
-}
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
-{
-	size_t	i;
-	size_t	res;
-
-	i = 0;
-	res = 0;
-	while (src[i++])
-		res = i;
-	i = 0;
-	while (src[i] && i + 1 < size)
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	if (size)
-		dst[i] = 0;
-	return (res);
-}
-
-typedef struct s_env
-{
-	char *key;
-	char *value;
-	struct s_env *next;
-}	t_env;
+#include "minishell.h"
+#include "libft/libft.h"
 
 t_env	*ft_envlstnew(char *key, char *value)
 {
@@ -194,21 +150,12 @@ void	ft_envlstadd_until_sorted(t_env **lst, t_env *new_lst)
 	{
 		if (temp->value && new_lst->value)
 			free(temp->value);
-		new_lst->value && (temp->value = new_lst->value);
+		(void) (new_lst->value && (temp->value = new_lst->value));
 		free(new_lst->key);
 		free(new_lst);
 	}
 	else
 		temp->next = new_lst;
-}
-
-t_env	*back_up(void)
-{
-	t_env	*env;
-
-	env = NULL;
-	ft_envlstadd_until_sorted(&env, ft_envlstnew("PWD", "")); //La fonction qui donne le pwd
-	ft_envlstadd_until_sorted(&env, ft_envlstnew("SHLVL", "1"));
 }
 
 t_env	*dup_envp(char **envp)
@@ -217,8 +164,6 @@ t_env	*dup_envp(char **envp)
 	t_env	*env;
 
 	env = NULL;
-	if (!envp)
-		return (back_up());
 	while (*envp)
 	{
 		key_value = sep_in_two(*envp);
@@ -235,15 +180,14 @@ t_env	*dup_envp(char **envp)
 
 int	main(int argc, char **argv, char **envp)
 {
+	(void) argc;
+	(void) argv;
 	t_env	*env;
-	t_env	*temp;
 
 	env = dup_envp(envp);
-	temp = env;
-	while (temp)
-	{
-		printf("%s=%s\n", temp->key, temp->value);
-		temp = temp->next;
-	}
+	if (!env)
+		return (2);
+	loops_minishell(env);
 	ft_envclear(env);
+	return (0);
 }
