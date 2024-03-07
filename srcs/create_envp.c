@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   create_envp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 08:09:18 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/06 08:37:30 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/07 03:53:47 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "minishell.h"
-#include "libft/libft.h"
+#include "../inc/minishell.h"
 
 //	permet de savoir la taille de l'envrionnement qu on va ecrire dans l'envp 
 //	(= ce qu on donne a execve ou qui s'imprimera avec env)

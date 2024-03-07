@@ -3,17 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 06:04:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/06 09:35:34 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/07 04:13:27 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-# include <unistd.h>
-# include <stdlib.h>
+
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <signal.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+#include "../libft/libft.h"
 
 typedef struct s_env
 {
@@ -33,5 +39,10 @@ void	bi_env(t_env **env);
 void	the_return_value(t_env **env, int value);
 void	bi_echo(char *line, t_env **env);
 int	replace_inside(char **p_s, size_t start, size_t end, char *s2);
+void get_sig(int sig);
+void	ft_envlstadd_until_sorted(t_env **lst, t_env *new_lst);
+void	ft_envclear(t_env *env);
+t_env	*ft_envlstnew(char *key, char *value);
+t_env	*ft_envlstnew_frees(char **key_value);
 
 #endif

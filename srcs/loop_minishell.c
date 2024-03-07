@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   loop_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 02:27:31 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/06 09:31:49 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/07 04:00:42 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
-#include "libft.h"
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 void	loops_minishell(t_env **env)
 {

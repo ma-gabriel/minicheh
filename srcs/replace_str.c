@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   replace_str.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 05:14:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/06 09:49:25 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/07 03:53:40 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft/libft.h"
-#include "minishell.h"
+
+#include "../inc/minishell.h"
 
 int	replace_inside(char **p_s, size_t start, size_t end, char *s2)
 {
