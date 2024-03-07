@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 06:04:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/07 05:01:11 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/07 05:15:59 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <signal.h>
+#include <errno.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "../libft/libft.h"
@@ -44,5 +45,6 @@ void	ft_envlstadd_until_sorted(t_env **lst, t_env *new_lst);
 void	ft_envclear(t_env *env);
 t_env	*ft_envlstnew(char *key, char *value);
 t_env	*ft_envlstnew_frees(char **key_value);
+void bi_pwd(t_env **env);
 
 #endif
