@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 06:04:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/07 05:15:59 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/07 05:39:47 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,18 @@ void	ft_envclear(t_env *env);
 t_env	*ft_envlstnew(char *key, char *value);
 t_env	*ft_envlstnew_frees(char **key_value);
 void bi_pwd(t_env **env);
+void bi_cd(char *line, t_env **env);
+int     cd(char *path);
+
+
+
+
+
+
+
+
+
+
+
 
 #endif

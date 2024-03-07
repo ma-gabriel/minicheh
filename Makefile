@@ -13,6 +13,7 @@ SRCS =	built_in_echo.c \
 		sig.c \
 		env_utils.c \
 		build_in_pwd.c \
+		build_in_cd.c \
 
 SRCS_DIR = $(addprefix srcs/, $(SRCS))
 OBJS_DIR = objs
