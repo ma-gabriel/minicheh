@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 02:56:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/07 05:02:44 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/07 05:27:38 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ t_env	*dup_envp(char **envp)
 		ft_envlstadd_until_sorted(&env, ft_envlstnew_frees(key_value));
 		envp++;
 	}
+	the_return_value(&env, 0);
 	return (env);
 }
 
