@@ -6,11 +6,12 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 02:56:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/07 04:34:44 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/07 05:02:44 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
 
 size_t	world_len_until_equal(char *str)
 {

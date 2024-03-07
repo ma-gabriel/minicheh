@@ -1,7 +1,7 @@
 NAME = minishell
 CC = cc
-FLAGS = -Wall -Wextra -Werror
-HEADER = -I inc -I libft/libft.h
+FLAGS = -Wall -Wextra -Werror -g3
+HEADER = -I inc -I libft
 LIBFT = libft/libft.a
 SRCS =	built_in_echo.c \
 		built_in_env.c \

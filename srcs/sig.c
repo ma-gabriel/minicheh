@@ -1,13 +1,16 @@
 #include "../inc/minishell.h"
 
-void get_sig(int sig)
+int sig;
+
+void get_sig(int signal)
 {
-    if (SIGQUIT == sig)
+    if (SIGQUIT == signal)
     {
         ;
     }
-    if (SIGINT == sig) {
-        printf("\n");  // Aller à la ligne après le signal SIGINT
+    if (SIGINT == signal) {
+        sig = 1;
+        printf("\n");
         write(1, "MiniCheh -> " , 13);
     }
 }
