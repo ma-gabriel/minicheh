@@ -1,54 +1,40 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: geymat <marvin@42.fr>                      +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/11/08 04:17:20 by geymat            #+#    #+#              #
-#    Updated: 2024/03/06 09:33:41 by geymat           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-
-SRCS = main.c \
-       loop_minishell.c \
-       get_new_line.c \
-       replace_str.c \
-       create_envp.c \
-       built_in_env.c \
-       built_in_echo.c
-
-HEADERS = minishell.h
-
-OBJECTS = $(SRCS:.c=.o)
-
-LIBFT = libft/libft.a
-
 NAME = minishell
+CC = cc
+FLAGS = -Wall -Wextra -Werror
+HEADER = -I inc -I libft/libft.h
+LIBFT = libft/libft.a
+SRCS =	built_in_echo.c \
+		built_in_env.c \
+		create_envp.c \
+		get_new_line.c \
+		loop_minishell.c \
+		main.c \
+		replace_str.c \
+		sig.c \
+		env_utils.c \
 
-CFLAGS = -Wall -Wextra -Werror
+SRCS_DIR = $(addprefix srcs/, $(SRCS))
+OBJS_DIR = objs
+OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
 all: $(NAME)
 
-%.o: %.c $(HEADERS) $(MINIHEADERS)
-	$(CC) $(CFLAGS) -c $< -o $@ -I. -I./libft
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(HEADER) -Llibft -lft -lreadline
+
+$(OBJS_DIR)/%.o: srcs/%.c
+	mkdir -p $(OBJS_DIR)
+	$(CC) $(FLAGS) $(HEADER) -c $< -o $@ -I./inc -I./libft
 
 $(LIBFT):
 	cd ./libft && $(MAKE) all
 
-
-$(NAME): $(OBJECTS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME) -Llibft -lft -lreadline
- 
 clean:
-	cd ./libft && $(MAKE) fclean
-	$(RM) $(OBJECTS)
+	rm -rf $(OBJS_DIR)
 
 fclean: clean
-	$(RM) $(NAME)
+	rm -f $(NAME)
 
-re: fclean
-	$(MAKE) all
+re: fclean all
 
-.PHONY: re all clean fclean
+.PHONY: all clean fclean re

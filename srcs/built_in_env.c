@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 08:27:35 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/06 09:32:23 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/07 03:53:05 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "minishell.h"
-#include "libft/libft.h"
+#include "../inc/minishell.h"
 
 void	the_return_value(t_env **env, int value)
 {

@@ -3,47 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 02:56:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/06 09:04:19 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/07 04:11:48 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include "minishell.h"
-#include "libft/libft.h"
+#include "../inc/minishell.h"
 
-t_env	*ft_envlstnew(char *key, char *value)
-{
-	t_env	*new;
 
-	new = malloc(sizeof(t_env));
-	if (!new)
-		return (NULL);
-	new->key = key;
-	new->value = value;
-	new->next = NULL;
-	return (new);
-}
 
-t_env	*ft_envlstnew_frees(char **key_value)
-{
-	t_env	*new;
-
-	if (!key_value)
-		return (NULL);
-	new = ft_envlstnew(key_value[0], key_value[1]);
-	if (!new)
-	{
-		free(key_value[0]);
-		free(key_value[1]);
-	}
-	free(key_value);
-	return (new);
-}
 
 size_t	world_len_until_equal(char *str)
 {
@@ -85,61 +55,7 @@ char	**sep_in_two(char *str)
 	return (res);
 }
 
-void	ft_envclear(t_env *env)
-{
-	t_env	*temp;
 
-	while (env)
-	{
-		temp = env->next;
-		free(env->key);
-		free(env->value);
-		free(env);
-		env = temp;
-	}
-}
-
-void	ft_envlstadd_until_sorted(t_env **lst, t_env *new_lst)
-{
-	t_env	*temp;
-	t_env	*temp2;
-
-	if (!new_lst)
-		return ;
-	if (!(*lst))
-	{
-		*lst = new_lst;
-		return ;
-	}
-	temp = *lst;
-	temp2 = temp;
-	if (ft_strcmp(new_lst->key, temp->key) < 0)
-	{
-		*lst = new_lst;
-		new_lst->next = temp;
-		return ;
-	}
-	while (temp->next && ft_strcmp(new_lst->key, temp->key) > 0)
-	{
-		temp2 = temp;
-		temp = temp->next;
-	}
-	if (ft_strcmp(new_lst->key, temp->key) < 0)
-	{
-		new_lst->next = temp2->next;
-		temp2->next = new_lst;
-	}
-	else if (!ft_strcmp(new_lst->key, temp->key))
-	{
-		if (temp->value && new_lst->value)
-			free(temp->value);
-		(void) (new_lst->value && (temp->value = new_lst->value));
-		free(new_lst->key);
-		free(new_lst);
-	}
-	else
-		temp->next = new_lst;
-}
 
 t_env	*dup_envp(char **envp)
 {
@@ -168,9 +84,12 @@ int	main(int argc, char **argv, char **envp)
 	t_env	*env;
 
 	env = dup_envp(envp);
+	signal(SIGQUIT, &get_sig); //ctrl /
+    signal(SIGINT, &get_sig); //ctrl c 
 	if (!env)
 		return (2);
 	loops_minishell(&env);
 	ft_envclear(env);
+	rl_clear_history();
 	return (0);
 }
