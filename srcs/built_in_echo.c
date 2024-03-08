@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 09:15:38 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/07 03:53:51 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/08 15:41:08 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static char	*rm_useless_quotes_env(char *str)
 	return (str);
 }
 
-void	bi_echo(char *line, t_env **env)
+int	bi_echo(char *line, t_env **env)
 {
 	size_t	temp;
 	short	b00l;
@@ -71,8 +71,9 @@ void	bi_echo(char *line, t_env **env)
 	if (!line)
 		the_return_value(env, 1);
 	if (!line)
-		return ;
+		return (1);
 	write(1, line, ft_strlen(line));
 	free(line);
 	the_return_value(env, 0);
+	return (0);
 }

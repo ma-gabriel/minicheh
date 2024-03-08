@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 02:27:31 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/07 05:40:20 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/07 11:28:34 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,6 @@ void	loops_minishell(t_env **env)
 				free(line);
 			return ;
 		}
-		if (!ft_strncmp(line, "env", 3) && (line[3] == ' ' || !line[3]))
-			bi_env(env);
-		if (!ft_strncmp(line, "echo ", 5))
-			bi_echo(line, env);
-		if (!ft_strncmp(line, "pwd", 3)) // && (line[3] == ' ' || !line[3]))
-			bi_pwd(env);
-		if (!ft_strncmp(line, "cd", 2))
-			bi_cd(line, env);
+		executions(line, env);
 	}
 }

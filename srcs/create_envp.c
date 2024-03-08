@@ -6,14 +6,11 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 08:09:18 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/07 03:53:47 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/07 14:26:18 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-//	permet de savoir la taille de l'envrionnement qu on va ecrire dans l'envp 
-//	(= ce qu on donne a execve ou qui s'imprimera avec env)
 
 static size_t	ft_envlstsize_to_env(t_env *lst)
 {

@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 08:27:35 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/07 03:53:05 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/08 15:41:31 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	the_return_value(t_env **env, int value)
 	ft_envlstadd_until_sorted(env, new_env);
 }
 
-void	bi_env(t_env **env)
+int	bi_env(t_env **env)
 {
 	char	**envp;
 	size_t	i;
@@ -49,10 +49,11 @@ void	bi_env(t_env **env)
 	if (!envp)
 	{
 		the_return_value(env, 1);
-		return ;
+		return (1);
 	}
 	while(envp[++i])
 		printf("%s\n", envp[i]);
 	ft_strsfree(envp);
 	the_return_value(env, 0);
+	return (0);
 }

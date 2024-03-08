@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 02:56:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/07 05:33:01 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:49:33 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	main(int argc, char **argv, char **envp)
 
 	env = dup_envp(envp);
 	signal(SIGQUIT, &get_sig); //ctrl /
-    signal(SIGINT, &get_sig); //ctrl c 
+	signal(SIGINT, &get_sig); //ctrl c 
 	if (!env)
 		return (2);
 	loops_minishell(&env);
