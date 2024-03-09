@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:22:00 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/08 17:55:03 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/09 22:37:29 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,10 @@ int	is_a_built_in(char *line, t_env **env)
 		return (bi_pwd(env) || 1);
 	if (!ft_strncmp(line, "cd ", 3))
 		return (bi_cd(line, env) || 1);
+	if (!ft_strncmp(line, "unset", 5))
+		return (bi_unset(line, env) || 1);
+	if (!ft_strncmp(line, "export ", 6))
+		return (bi_export(line, env) || 1);
 	return (0);
 }
 
@@ -73,7 +77,7 @@ void executions(char *line, t_env **env)
 		the_return_value(env, 1);
 		return ;
 	}
-	change_string(line, '|',-2);
+	change_string(line, '|', -2);
 	argv = ft_split(line, '|');
 	if (!argv)
 	{

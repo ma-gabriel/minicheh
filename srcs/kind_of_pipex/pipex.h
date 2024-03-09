@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 23:40:12 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/08 16:56:41 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/09 20:10:07 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <sys/wait.h>
 # include <errno.h>
 # include <stdlib.h>
+#include <stdint.h>
 # ifndef BONUS
 #  define BONUS 0
 # endif
@@ -28,7 +29,7 @@ char	*ft_strjoin_free_first(char *s1, char *s2);
 char	*ft_strjoinwithslash(char const *s1, char const *s2);
 size_t	ft_strlen_p(char *s1);
 size_t	ft_wordlen(char *s1);
-void	merge_fd(int fd1, int fd2, int fd_res[2]);
+void	merge_fd(size_t fd1, size_t fd2, int fd_res[2]);
 char	*ft_getenv(char **envp, char *key);
 int		close_3_free(int fd1, int fd2, int fd3, void *allocation);
 void	free_the_split(char **argv);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 23:08:43 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/08 18:09:19 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/09 22:32:25 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	print_error(char *name, char *error, char *file)
 	free(temp);
 }
 
-void	merge_fd(int fd1, int fd2, int fd_res[2])
+void	merge_fd(size_t fd1, size_t fd2, int fd_res[2])
 {
 	fd_res[0] = fd1;
 	fd_res[1] = fd2;
@@ -92,10 +92,7 @@ int	almost_pipex(char **argv, char **envp, void *env)
 		return (1);
 	base_fd[1] = dup(1);
 	if (base_fd[1] == -1)
-	{
-		close(base_fd[0]);
-		return (1);
-	}
+		return (close(base_fd[0]), 1);
 	pid = loops_executions(argv, envp, base_fd, env);
 	res = 1;
 	infos = -1;

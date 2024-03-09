@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 05:13:05 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/07 05:04:36 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/09 22:01:12 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*get_a_new_line(t_env *env)
 	char	*str;
 	char	*temp;
 
-	str = readline("MiniCheh -> ");
+	str = readline(RED"MiniCheh"M" -> "RST);
 	if (!str)
 		return(write(1, "exit\n", 5), free(str), NULL);
 	if (sig == 1)

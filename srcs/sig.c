@@ -11,7 +11,6 @@ void	get_sig(int signal)
 	if (SIGINT == signal)
 	{
 		sig = 1;
-		printf("\n");
-		write(1, "MiniCheh -> " , 13);
+		write(1, "\n"RED"MiniCheh"M" -> "RST , 31);
 	}
 }
