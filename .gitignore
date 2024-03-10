@@ -2,5 +2,5 @@
 *.a
 *.out
 ./idea
-.vscode
+./vscode
 minishell
