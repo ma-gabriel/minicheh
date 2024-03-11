@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 06:04:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/09 22:58:25 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/11 13:36:07 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ int	ft_strsfree(char **strs);
 char	**create_envp(t_env *env);
 void	ft_envlstadd_until_sorted(t_env **lst, t_env *new_lst);
 t_env	*ft_envlstnew(char *key, char *value);
-void	the_return_value(t_env **env, int value);
+int	the_return_value(t_env **env, int value);
 int	replace_inside(char **p_s, size_t start, size_t end, char *s2);
-void get_sig(int signal);
+void	get_sig(int signal);
 void	ft_envlstadd_until_sorted(t_env **lst, t_env *new_lst);
 void	ft_envclear(t_env *env);
 t_env	*ft_envlstnew(char *key, char *value);
@@ -62,9 +62,10 @@ void	executions(char *line, t_env **env);
 char	*get_pwd(void);
 int	is_a_built_in(char *line, t_env **env);
 int	bi_unset(char *line, t_env **env);
-int ft_envlst_remove_if(t_env **start, char *line, int (strncmp)(const char *s1, const char *s2, size_t len));
-int bi_export(char *line, t_env **env);
-int bi_exp_print(t_env **env);
+int	ft_envlst_remove_if(t_env **start, char *line, int (strncmp)(const char *s1, const char *s2, size_t len));
+int	bi_export(char *line, t_env **env);
+char	**sep_in_two(char *str);
+size_t	word_len_until_equal(char *str);
 
 
 

@@ -6,14 +6,13 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 02:56:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/09 21:44:58 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/11 13:20:21 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-
-size_t	world_len_until_equal(char *str)
+size_t	word_len_until_equal(char *str)
 {
 	size_t	i;
 
@@ -31,14 +30,18 @@ char	**sep_in_two(char *str)
 	char	*value;
 	char	**res;
 
-	key = malloc(world_len_until_equal(str) + 1);
+	value = NULL;
+	key = malloc(word_len_until_equal(str) + 1);
 	if (!key)
 		return (NULL);
-	value = ft_strdup(str + world_len_until_equal(str) + 1);
-	if (!value)
+	if (ft_strchr(str, '='))
 	{
-		free(key);
-		return (NULL);
+		value = ft_strdup(str + word_len_until_equal(str) + 1);
+		if (!value)
+		{
+			free(key);
+			return (NULL);
+		}
 	}
 	res = malloc(16);
 	if (!res)
@@ -47,13 +50,11 @@ char	**sep_in_two(char *str)
 		free(value);
 		return (NULL);
 	}
-	ft_strlcpy(key, str, world_len_until_equal(str) + 1);
+	ft_strlcpy(key, str, word_len_until_equal(str) + 1);
 	res[0] = key;
 	res[1] = value;
 	return (res);
 }
-
-
 
 t_env	*dup_envp(char **envp)
 {

@@ -33,8 +33,8 @@ int	bi_unset(char *line, t_env **env)
     while (*line == ' ')
 		line++;
     if (!*line)
-        return(the_return_value(env, 0), 1);
+        return(the_return_value(env, 0));
     ft_envlst_remove_if(env, line, ft_strncmp);
     the_return_value(env, 0);
-    return (1);
+    return (0);
 }

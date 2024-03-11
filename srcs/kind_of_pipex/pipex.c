@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 23:08:43 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/09 22:32:25 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:08:16 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	almost_pipex(char **argv, char **envp, void *env)
 	return_value = 1;
 	while (res != -1)
 	{
-		res = waitpid(0, &infos, WNOHANG);
+		res = waitpid(0, &infos, 0);
 		if (res == pid)
 			return_value = WEXITSTATUS(infos);
 	}

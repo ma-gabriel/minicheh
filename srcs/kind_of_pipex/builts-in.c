@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:43:19 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/08 17:40:42 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/11 14:29:02 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,29 @@
 int	is_a_built_in_pipe(char *line, void *env, int fd[3])
 {
 	int	temp;
+	size_t	i;
 
 	temp = -1;
 	if (fd[0] == -1 || fd[1] == -1 || dup2(fd[1], 1) == -1
 		|| dup2(fd[0], 0) == -1)
 		return (-(close_3_free(fd[0], fd[1], -1, NULL) || 1));
 	close_3_free(fd[0], fd[1], -1, NULL);
-	while (*line == ' ')
-		line++;
-	if (!ft_strncmp(line, "env", 3) && (line[3] == ' ' || !line[3]))
+	i = 0;
+	while (*(line + i) == ' ')
+		i++;
+	if (!ft_strncmp(line + i, "env", 3) && (line[3 + i] == ' ' || !line[3 + i]))
 		temp = bi_env((t_env **) env);
-	else if (!ft_strncmp(line, "echo ", 5))
+	else if (!ft_strncmp(line + i, "echo ", 5))
 		temp = bi_echo(line,(t_env **) env);
-	else if (!ft_strncmp(line, "pwd", 3) && (line[3] == ' ' || !line[3]))
+	else if (!ft_strncmp(line + i, "pwd", 3) && (line[3 + i] == ' ' || !line[3 + i]))
 		temp = bi_pwd((t_env **) env);
-	else if (!ft_strncmp(line, "cd ", 3))
+	else if (!ft_strncmp(line + i, "cd ", 3))
 		temp = bi_cd(line,(t_env **) env);
 	if (temp != -1)
+	{
+		free(line);
+		ft_envclear(*((t_env **)env));
 		exit((close_3_free(fd[0], fd[1], -1, NULL) || 1) * temp);
+	}
 	return (-1);
 }
