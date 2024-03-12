@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 08:27:35 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/11 13:18:31 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/12 21:07:17 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	the_return_value(t_env **env, int value)
 	char	*key;
 	t_env	*new_env;
 
-	if (!env)
+	if (!env || value < 0)
 		return (value);
 	env_value = ft_itoa(value);
 	if (!env_value)
