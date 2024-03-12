@@ -103,7 +103,7 @@ int	bi_cd(char *line, t_env **env)
 	if (!args)
 		write(2, "minishell: cd: HOME not set\n", 28);
 	if (args >= 2)
-		write(2, "minishell: cd: too many arguments\n", 39);
+		write(2, "minishell: cd: too many arguments\n", 35);
 	if (args != 1)
 		return (the_return_value(env, 1));
 	res = cd(line);

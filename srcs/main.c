@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 02:56:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/11 13:20:21 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/12 16:05:39 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,20 @@ t_env	*dup_envp(char **envp)
 	return (env);
 }
 
+
+void free_history(void)
+{
+	HISTORY_STATE *myhist = history_get_history_state();
+	HIST_ENTRY **mylist = history_list();
+
+	int i = 0;
+	while (i < myhist->length) 
+	{
+		free_history_entry (mylist[i]);
+		i++;
+	}
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	(void) argc;
@@ -86,10 +100,13 @@ int	main(int argc, char **argv, char **envp)
 	env = dup_envp(envp);
 	signal(SIGQUIT, &get_sig); //ctrl /
 	signal(SIGINT, &get_sig); //ctrl c 
+	if (open("history", O_RDONLY) != -1)
+		read_history("history");
 	if (!env)
 		return (2);
 	loops_minishell(&env);
 	ft_envclear(env);
-	rl_clear_history();
+	write_history("history");
+	free_history();
 	return (0);
 }

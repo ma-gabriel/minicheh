@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_new_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 05:13:05 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/10 01:54:51 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:59:55 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,3 +66,4 @@ char	*get_a_new_line(t_env *env)
 		add_history(str);
 	return (replace_env(str, env));
 }
+

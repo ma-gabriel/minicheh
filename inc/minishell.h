@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 06:04:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/11 13:36:07 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/12 16:04:01 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <signal.h>
 # include <errno.h>
+# include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/libft.h"
@@ -66,11 +67,7 @@ int	ft_envlst_remove_if(t_env **start, char *line, int (strncmp)(const char *s1,
 int	bi_export(char *line, t_env **env);
 char	**sep_in_two(char *str);
 size_t	word_len_until_equal(char *str);
-
-
-
-
-
+void free_history(void);
 
 
 
