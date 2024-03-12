@@ -1,17 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builts-in.c                                        :+:      :+:    :+:   */
+/*   minishell_part.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:43:19 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/11 14:29:02 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/12 09:42:38 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 #include "pipex.h"
+
+/*
+int	redirections(char **line, int fd[2])
+{
+	char *ft_substr()
+}*/
 
 int	is_a_built_in_pipe(char *line, void *env, int fd[3])
 {

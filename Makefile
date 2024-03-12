@@ -25,7 +25,7 @@ SRCS =	build_in/built_in_echo.c \
 	kind_of_pipex/get_next_line_utils.c \
 	kind_of_pipex/open_close_free.c \
 	kind_of_pipex/pipex.c \
-	kind_of_pipex/builts-in.c \
+	kind_of_pipex/minishell_part.c \
 
 SRCS_DIR = $(addprefix srcs/, $(SRCS))
 OBJS_DIR = objs

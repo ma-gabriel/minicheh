@@ -21,7 +21,7 @@ static int bi_exp_print(t_env **env)
 	return (the_return_value(env, 0));
 }
 
-static int	any_forbidden_chars(char *temp, t_env **env)
+static int	any_forbidden_chars_export(char *temp, t_env **env)
 {
 	size_t	i;
 
@@ -48,7 +48,7 @@ int bi_export(char *line, t_env **env)
 		line++;
 	if (!*line)
 		return (bi_exp_print(env));
-	if (any_forbidden_chars(line, env))
+	if (any_forbidden_chars_export(line, env))
 		return (the_return_value(env, 1));
 	key_value = sep_in_two(line); 
 	if (!key_value)
