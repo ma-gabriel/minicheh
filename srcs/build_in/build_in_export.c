@@ -26,7 +26,7 @@ static int	any_forbidden_chars_export(char *temp, t_env **env)
 	size_t	i;
 
 	i = 0;
-	while (temp[i] != '=' && temp[i])
+	while (temp[i] != '=' && temp[i] && temp[i] != ' ')
 	{
 		if (!ft_isalnum(temp[i]) && temp[i] != '_')
 		{

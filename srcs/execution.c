@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:22:00 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/09 22:37:29 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/12 11:53:31 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,15 @@ int	is_a_built_in(char *line, t_env **env)
 		line++;
 	if (!ft_strncmp(line, "env", 3) && (line[3] == ' ' || !line[3]))
 		return (bi_env(env) || 1);
-	if (!ft_strncmp(line, "echo ", 5))
+	if (!ft_strncmp(line, "echo", 4) && (line[4] == ' ' || !line[4]))
 		return (bi_echo(line, env) || 1);
 	if (!ft_strncmp(line, "pwd", 3) && (line[3] == ' ' || !line[3]))
 		return (bi_pwd(env) || 1);
-	if (!ft_strncmp(line, "cd ", 3))
+	if (!ft_strncmp(line, "cd", 2) && (line[2] == ' ' || !line[2]))
 		return (bi_cd(line, env) || 1);
-	if (!ft_strncmp(line, "unset", 5))
+	if (!ft_strncmp(line, "unset", 5) && (line[5] == ' ' || !line[5]))
 		return (bi_unset(line, env) || 1);
-	if (!ft_strncmp(line, "export ", 6))
+	if (!ft_strncmp(line, "export ", 6) && (line[6] == ' ' || !line[6]))
 		return (bi_export(line, env) || 1);
 	return (0);
 }
