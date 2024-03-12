@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 02:56:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/12 16:05:39 by root             ###   ########.fr       */
+/*   Updated: 2024/03/12 16:18:15 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,13 @@ int	main(int argc, char **argv, char **envp)
 	env = dup_envp(envp);
 	signal(SIGQUIT, &get_sig); //ctrl /
 	signal(SIGINT, &get_sig); //ctrl c 
-	if (open("history", O_RDONLY) != -1)
-		read_history("history");
+	if (open(".history", O_RDONLY) != -1)
+		read_history(".history");
 	if (!env)
 		return (2);
 	loops_minishell(&env);
 	ft_envclear(env);
-	write_history("history");
+	write_history(".history");
 	free_history();
 	return (0);
 }
