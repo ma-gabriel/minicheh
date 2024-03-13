@@ -6,6 +6,7 @@
         "readline.h": "c",
         "libft.h": "c",
         "errno.h": "c",
-        "history.h": "c"
+        "history.h": "c",
+        "complex": "c"
     }
 }

@@ -43,8 +43,34 @@ int ft_envlst_remove_if(t_env **start, char *line, int (strncmp)(const char *s1,
     return (0);
 }
 
+
+char *ft_space_strtok(char *str)
+{
+    static char *save;
+    char *temp;
+    char *res;
+
+    if (str)
+        save = str;
+    if (!save || !*save)
+        return (NULL);
+    while (*save == ' ')
+        save++;
+    temp = save;
+    while (*save && *save != ' ')
+        save++;
+    res = malloc(save - temp + 1);
+    if (!res)
+        return (NULL);
+    ft_strlcpy(res, temp, save - temp + 1);
+    return (res);
+}
+
+
 int	bi_unset(char *line, t_env **env)
 {
+    char *args;
+    
     line += 5;
     while (*line == ' ')
 		line++;
@@ -52,7 +78,12 @@ int	bi_unset(char *line, t_env **env)
 	    return (the_return_value(env, 1));
     if (!*line)
         return(the_return_value(env, 0));
-    ft_envlst_remove_if(env, line, ft_strncmp);
+    while ((args = ft_space_strtok(line)))
+    {
+        ft_envlst_remove_if(env, args, ft_strncmp);
+        line = NULL;
+        free(args);
+    }
     the_return_value(env, 0);
     return (0);
 }

@@ -11,6 +11,7 @@ void	get_sig(int signal)
 	if (SIGINT == signal)
 	{
 		sig = 1;
-		write(1, "\n"RED"MiniCheh"M" -> "RST , 31);
+		write(1, "\n"RED"MiniCheh"M" -> "RST, 31);
+		// write(1, "\n", 1);
 	}
 }

@@ -40,22 +40,32 @@ static int	any_forbidden_chars_export(char *temp, t_env **env)
 
 int bi_export(char *line, t_env **env)
 {
-	char	**key_value;
-	t_env	*new_lst;
+	char **key_value;
+	t_env *new_lst;
+	char *temp;
 
 	line += 7;
 	while (*line == ' ')
 		line++;
 	if (!*line)
 		return (bi_exp_print(env));
-	if (any_forbidden_chars_export(line, env))
-		return (the_return_value(env, 1));
-	key_value = sep_in_two(line); 
-	if (!key_value)
-		return (the_return_value(env, 1));
-	new_lst = ft_envlstnew_frees(key_value);
-	if (!new_lst)
-		return (the_return_value(env, 1));
-	ft_envlstadd_until_sorted(env, new_lst);
+	while (*line)
+	{
+		temp = ft_space_strtok(line);
+		if (any_forbidden_chars_export(temp, env))
+			return (the_return_value(env, 1));
+		key_value = sep_in_two(temp);
+		if (!key_value)
+			return (the_return_value(env, 1));
+		new_lst = ft_envlstnew_frees(key_value);
+		if (!new_lst)
+			return (the_return_value(env, 1));
+		ft_envlstadd_until_sorted(env, new_lst);
+		while (*line && *line != ' ')
+			line++;
+		while (*line == ' ')
+			line++;
+		free(temp);
+	}
 	return (the_return_value(env, 0));
 }
