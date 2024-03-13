@@ -6,11 +6,13 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 02:27:31 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/13 17:23:14 by root             ###   ########.fr       */
+/*   Updated: 2024/03/13 17:25:52 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+extern int sig;	
 
 int signal_funciton(int activation, char **line, t_env **env)
 {
