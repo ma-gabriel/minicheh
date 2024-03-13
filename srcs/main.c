@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 02:56:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/13 13:20:22 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:30:04 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	main(int argc, char **argv, char **envp)
 
 	env = dup_envp(envp);
 	signal(SIGQUIT, &get_sig); //ctrl /
-	signal(SIGINT, &get_sig); //ctrl c 
+    signal(SIGINT, &sahandler);
 	if (open(".history", O_RDONLY) != -1)
 		read_history(".history");
 	if (!env)

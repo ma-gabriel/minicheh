@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 06:04:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/13 13:43:04 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:46:46 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ char	**sep_in_two(char *str);
 size_t	word_len_until_equal(char *str);
 void free_history(void);
 char *ft_space_strtok(char *str);
+char** signal_funciton(int activation, char **line, t_env **env);
+void sahandler(int sig);
 
 
 #endif

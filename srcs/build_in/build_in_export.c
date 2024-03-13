@@ -52,14 +52,14 @@ int bi_export(char *line, t_env **env)
 	while (*line)
 	{
 		temp = ft_space_strtok(line);
-		if (any_forbidden_chars_export(temp, env))
+		if (temp && any_forbidden_chars_export(temp, env))
 			return (the_return_value(env, 1));
 		key_value = sep_in_two(temp);
 		if (!key_value)
 			return (the_return_value(env, 1));
 		new_lst = ft_envlstnew_frees(key_value);
 		if (!new_lst)
-			return (the_return_value(env, 1));
+			return (free(temp), the_return_value(env, 1));
 		ft_envlstadd_until_sorted(env, new_lst);
 		while (*line && *line != ' ')
 			line++;
