@@ -1,6 +1,6 @@
 #include "../inc/minishell.h"
 
-int	sig;
+int sig;
 
 void	get_sig(int signal)
 {
