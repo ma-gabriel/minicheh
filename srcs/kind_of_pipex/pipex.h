@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 23:40:12 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/11 14:29:21 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/13 19:33:09 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <sys/wait.h>
 # include <errno.h>
 # include <stdlib.h>
-#include <stdint.h>
+# include <stdint.h>
 # ifndef BONUS
 #  define BONUS 0
 # endif

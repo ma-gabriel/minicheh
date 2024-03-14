@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   build_in_pwd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/14 01:13:29 by geymat            #+#    #+#             */
+/*   Updated: 2024/03/14 01:14:00 by geymat           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/minishell.h"
 
-char    *get_pwd(void)
+char	*get_pwd(void)
 {
-	char    *path;
-	size_t  i;
+	char	*path;
+	size_t	i;
 
 	i = 1;
 	path = NULL;
@@ -27,19 +39,15 @@ char    *get_pwd(void)
 	return (NULL);
 }
 
-
-int	bi_pwd(t_env **env)
+int	bi_pwd(void)
 {
-	char *pwd_string;
+	char	*pwd_string;
 
 	pwd_string = get_pwd();
 	if (!pwd_string)
-	{
-		the_return_value(env, 1);
-		return (1);
-	}
+		return (the_return_value(1));
 	printf("%s\n", pwd_string);
 	free(pwd_string);
-	the_return_value(env, 0);
+	the_return_value(0);
 	return (0);
 }

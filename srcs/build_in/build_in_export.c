@@ -18,10 +18,10 @@ static int bi_exp_print(t_env **env)
 			printf("declare -x %s\n", lst->key);
 		lst = lst->next;
 	}
-	return (the_return_value(env, 0));
+	return (the_return_value(0));
 }
 
-static int	any_forbidden_chars_export(char *temp, t_env **env)
+static int	any_forbidden_chars_export(char *temp)
 {
 	size_t	i;
 
@@ -31,7 +31,7 @@ static int	any_forbidden_chars_export(char *temp, t_env **env)
 		if (!ft_isalnum(temp[i]) && temp[i] != '_')
 		{
 			write(2, "minishell: export: the identifier is not valid\n", 48);
-			return (the_return_value(env, 1));
+			return (the_return_value(1));
 		}
 		i++;
 	}
@@ -52,14 +52,14 @@ int bi_export(char *line, t_env **env)
 	while (*line)
 	{
 		temp = ft_space_strtok(line);
-		if (temp && any_forbidden_chars_export(temp, env))
-			return (the_return_value(env, 1));
+		if (temp && any_forbidden_chars_export(temp))
+			return (the_return_value(1));
 		key_value = sep_in_two(temp);
 		if (!key_value)
-			return (the_return_value(env, 1));
+			return (the_return_value(1));
 		new_lst = ft_envlstnew_frees(key_value);
 		if (!new_lst)
-			return (free(temp), the_return_value(env, 1));
+			return (free(temp), the_return_value(1));
 		ft_envlstadd_until_sorted(env, new_lst);
 		while (*line && *line != ' ')
 			line++;
@@ -67,5 +67,5 @@ int bi_export(char *line, t_env **env)
 			line++;
 		free(temp);
 	}
-	return (the_return_value(env, 0));
+	return (the_return_value(0));
 }

@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 02:56:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/13 15:30:04 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/14 06:48:33 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ t_env	*dup_envp(char **envp)
 		ft_envlstadd_until_sorted(&env, ft_envlstnew_frees(key_value));
 		envp++;
 	}
-	the_return_value(&env, 0);
+	the_return_value((size_t) &env);
+	the_return_value(0);
 	return (env);
 }
-
 
 void free_history(void)
 {
@@ -98,12 +98,13 @@ int	main(int argc, char **argv, char **envp)
 	t_env	*env;
 
 	env = dup_envp(envp);
-	signal(SIGQUIT, &get_sig); //ctrl /
-    signal(SIGINT, &sahandler);
-	if (open(".history", O_RDONLY) != -1)
-		read_history(".history");
 	if (!env)
 		return (2);
+	the_return_value((size_t) &env);
+	signal(SIGQUIT, &sahandler);
+	signal(SIGINT, &sahandler);
+	if (open(".history", O_RDONLY) != -1)
+		read_history(".history");
 	loops_minishell(&env);
 	ft_envclear(env);
 	write_history(".history");

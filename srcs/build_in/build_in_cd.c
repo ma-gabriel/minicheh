@@ -45,17 +45,13 @@ static char	*get_home(t_env *env)
 	while (env && env->key)
 	{
 		if (!ft_strncmp("HOME", env->key, 5))
-		{
-			if (!env->value)
-				return (NULL);
 			return (env->value);
-		}
 		env = env->next;
 	}
 	return (NULL);
 }
 
-static size_t	count_args(char **line, t_env **env)
+static size_t	count_args(char **line, t_env *env)
 {
 	size_t	i;
 	size_t	res;
@@ -65,7 +61,7 @@ static size_t	count_args(char **line, t_env **env)
 	res = 0;
 	is_word = 0;
 	if (!(**line))
-		return ((*line = get_home(*env)) && 1);
+		return ((*line = get_home(env)) && 1);
 
 		/*\
 		 *
@@ -99,16 +95,16 @@ int	bi_cd(char *line, t_env **env)
 	line += 2;
 	while (*line == ' ')
 		line++;
-	args = count_args(&line, env);
+	args = count_args(&line, *env);
 	if (!args)
 		write(2, "minishell: cd: HOME not set\n", 28);
 	if (args >= 2)
 		write(2, "minishell: cd: too many arguments\n", 35);
 	if (args != 1)
-		return (the_return_value(env, 1));
+		return (the_return_value(1));
 	res = cd(line);
 	if (res)
-		return (the_return_value(env, 1));
+		return (the_return_value(1));
 	res = change_pwd_env(env);
-	return (the_return_value(env, res));	
+	return (the_return_value(res));	
 }

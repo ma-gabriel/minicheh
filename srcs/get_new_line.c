@@ -6,13 +6,11 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 05:13:05 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/13 17:24:15 by root             ###   ########.fr       */
+/*   Updated: 2024/03/13 19:16:45 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-extern int sig;
 
 static int	quotes(char     *str)
 {
@@ -46,8 +44,6 @@ char	*get_a_new_line(t_env *env)
 	str = readline(RED"MiniCheh"M" -> "RST);
 	if (!str)
 		return(write(1, "exit\n", 5), free(str), NULL);
-	if (sig == 1)
-		return(sig = 0, free(str), ft_strdup(""));
 	while (quotes(str))
 	{	
 		str = ft_strjoin_free_first(str, "\n");

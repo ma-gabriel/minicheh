@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 06:04:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/13 17:22:17 by root             ###   ########.fr       */
+/*   Updated: 2024/03/14 01:39:17 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_strsfree(char **strs);
 char	**create_envp(t_env *env);
 void	ft_envlstadd_until_sorted(t_env **lst, t_env *new_lst);
 t_env	*ft_envlstnew(char *key, char *value);
-int	the_return_value(t_env **env, int value);
+int	the_return_value(size_t value);
 int	replace_inside(char **p_s, size_t start, size_t end, char *s2);
 void	get_sig(int signal);
 void	ft_envlstadd_until_sorted(t_env **lst, t_env *new_lst);
@@ -54,8 +54,8 @@ void	ft_envclear(t_env *env);
 t_env	*ft_envlstnew(char *key, char *value);
 t_env	*ft_envlstnew_frees(char **key_value);
 int		bi_env(t_env **env);
-int		bi_echo(char *line, t_env **env);
-int		bi_pwd(t_env **env);
+int		bi_echo(char *line);
+int		bi_pwd(void);
 int		bi_cd(char *line, t_env **env);
 int     cd(char *path);
 int	almost_pipex(char **argv, char **envp, void *env);
@@ -69,9 +69,6 @@ char	**sep_in_two(char *str);
 size_t	word_len_until_equal(char *str);
 void free_history(void);
 char *ft_space_strtok(char *str);
-int signal_funciton(int activation, char **line, t_env **env);
 void sahandler(int sig);
-
-
 
 #endif 

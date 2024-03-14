@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:22:00 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/12 11:53:31 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/14 01:42:27 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ int	is_a_built_in(char *line, t_env **env)
 	if (!ft_strncmp(line, "env", 3) && (line[3] == ' ' || !line[3]))
 		return (bi_env(env) || 1);
 	if (!ft_strncmp(line, "echo", 4) && (line[4] == ' ' || !line[4]))
-		return (bi_echo(line, env) || 1);
+		return (bi_echo(line) || 1);
 	if (!ft_strncmp(line, "pwd", 3) && (line[3] == ' ' || !line[3]))
-		return (bi_pwd(env) || 1);
+		return (bi_pwd() || 1);
 	if (!ft_strncmp(line, "cd", 2) && (line[2] == ' ' || !line[2]))
 		return (bi_cd(line, env) || 1);
 	if (!ft_strncmp(line, "unset", 5) && (line[5] == ' ' || !line[5]))
@@ -74,7 +74,7 @@ void executions(char *line, t_env **env)
 	envp = create_envp(*env);
 	if (!envp)
 	{
-		the_return_value(env, 1);
+		the_return_value(1);
 		return ;
 	}
 	change_string(line, '|', -2);
@@ -82,12 +82,12 @@ void executions(char *line, t_env **env)
 	if (!argv)
 	{
 		ft_strsfree(envp);
-		the_return_value(env, 1);
+		the_return_value(1);
 		return ;
 	}
 	change_split(argv, -2, '|');
 	if (argv[0] && (argv[1] || !(is_a_built_in(argv[0], env))))
-		the_return_value(env, almost_pipex(argv, envp, (void *) env));
+		the_return_value(almost_pipex(argv, envp, (void *) env));
 	ft_strsfree(envp);
 	ft_strsfree(argv);
 }

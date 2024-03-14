@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:43:19 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/12 09:42:38 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/14 01:43:01 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	is_a_built_in_pipe(char *line, void *env, int fd[3])
 	if (!ft_strncmp(line + i, "env", 3) && (line[3 + i] == ' ' || !line[3 + i]))
 		temp = bi_env((t_env **) env);
 	else if (!ft_strncmp(line + i, "echo ", 5))
-		temp = bi_echo(line,(t_env **) env);
+		temp = bi_echo(line);
 	else if (!ft_strncmp(line + i, "pwd", 3) && (line[3 + i] == ' ' || !line[3 + i]))
-		temp = bi_pwd((t_env **) env);
+		temp = bi_pwd();
 	else if (!ft_strncmp(line + i, "cd ", 3))
 		temp = bi_cd(line,(t_env **) env);
 	if (temp != -1)

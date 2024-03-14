@@ -1,15 +1,13 @@
 #include "../inc/minishell.h"
 
-int sig;
-
-void	get_sig(int signal)
+void sahandler(int sig)
 {
-	if (SIGQUIT == signal)
+	if (SIGINT == sig)
 	{
-		;
-	}
-	if (SIGINT == signal)
-	{
-		sig = 1;
+		the_return_value(130);
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
 }

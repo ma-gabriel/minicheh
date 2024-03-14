@@ -6,13 +6,11 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 23:08:43 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/12 21:06:19 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/13 19:33:46 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-extern int sig;
 
 char	*ft_getenv(char **envp, char *key)
 {
