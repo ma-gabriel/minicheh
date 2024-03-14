@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 02:56:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/14 06:48:33 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/14 10:30:12 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,19 +78,6 @@ t_env	*dup_envp(char **envp)
 	return (env);
 }
 
-void free_history(void)
-{
-	HISTORY_STATE *myhist = history_get_history_state();
-	HIST_ENTRY **mylist = history_list();
-
-	int i = 0;
-	while (i < myhist->length) 
-	{
-		free_history_entry (mylist[i]);
-		i++;
-	}
-}
-
 int	main(int argc, char **argv, char **envp)
 {
 	(void) argc;
@@ -103,11 +90,8 @@ int	main(int argc, char **argv, char **envp)
 	the_return_value((size_t) &env);
 	signal(SIGQUIT, &sahandler);
 	signal(SIGINT, &sahandler);
-	if (open(".history", O_RDONLY) != -1)
-		read_history(".history");
 	loops_minishell(&env);
 	ft_envclear(env);
-	write_history(".history");
-	free_history();
+	rl_clear_history();
 	return (0);
 }

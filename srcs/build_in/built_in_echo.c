@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_echo.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 09:15:38 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/14 01:33:51 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/14 10:17:33 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,8 @@ int	bi_echo(char *line)
 	if (!b00l)
 		line = ft_strjoin_free_first(line, "\n");
 	if (!line)
-		the_return_value(1);
-	if (!line)
-		return (1);
+		return (the_return_value(1), 1);
 	write(1, line, ft_strlen(line));
-	free(line);
 	the_return_value(0);
-	return (0);
+	return (free(line), 0);
 }

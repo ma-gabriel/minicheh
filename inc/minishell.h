@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 06:04:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/14 01:39:17 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/14 10:30:19 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int	ft_envlst_remove_if(t_env **start, char *line, int (strncmp)(const char *s1,
 int	bi_export(char *line, t_env **env);
 char	**sep_in_two(char *str);
 size_t	word_len_until_equal(char *str);
-void free_history(void);
 char *ft_space_strtok(char *str);
 void sahandler(int sig);
 
