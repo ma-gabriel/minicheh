@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:54:44 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/14 13:34:47 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/14 13:48:34 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,15 @@ char	*find_command(char **paths, char *command, int i)
 		free(path);
 		path = ft_strjoinwithslash(paths[i++], command);
 	}
-	if (path && access(path, X_OK))
+	if (paths && path && access(path, X_OK))
 	{
 		if (ft_strchr(command, '/') > command + len || ft_strchr(command, '/'))
 			print_error("minishell", ft_strerror(), path);
-		else
+		else if (*paths)
 			print_error("minishell", "command not found", path
 				+ ft_strlen_p(paths[i - 1]) + 1);
+		else
+			write(2, "minishell, no valid PATH found\n", 31);
 		free(path);
 		path = NULL;
 	}
@@ -49,8 +51,11 @@ int	middle_command(char *line, char **envp, int fd[3])
 
 	while (*line == ' ')
 		line++;
-	command = find_command(ft_split(ft_getenv(envp, "PATH") + 5, ':'),
+	if (ft_getenv(envp, "PATH"))
+		command = find_command(ft_split(ft_getenv(envp, "PATH") + 5, ':'),
 			line, 0);
+	else
+		command = find_command(ft_split("", ':'), line, 0);
 	if (!command)		
 		return (close_3_free(fd[0], fd[1], -1, (char *) remember_line));
 	args = ft_split(line, ' ');
