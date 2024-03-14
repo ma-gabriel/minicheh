@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 02:27:31 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/14 01:43:45 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/14 10:44:55 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void	loops_minishell(t_env **env)
 	{
 		free(line);
 		line = NULL;
+		signal(SIGINT, &sahandler_true);
 		line = get_a_new_line(*env);
+		signal(SIGINT, &sahandler_fake);
 		if (!line || (!ft_strncmp(line, "exit", 4) && (line[4] == ' ' || !line[4])))
 		{
 			if (line)

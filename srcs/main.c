@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 02:56:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/14 10:30:12 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/14 10:45:02 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,7 @@ int	main(int argc, char **argv, char **envp)
 	if (!env)
 		return (2);
 	the_return_value((size_t) &env);
-	signal(SIGQUIT, &sahandler);
-	signal(SIGINT, &sahandler);
+	signal(SIGQUIT, &sahandler_true);
 	loops_minishell(&env);
 	ft_envclear(env);
 	rl_clear_history();

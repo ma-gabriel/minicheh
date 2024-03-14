@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve_stuff.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:54:44 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/12 09:30:21 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/14 11:19:28 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ char	*find_command(char **paths, char *command, int i)
 	if (!paths)
 		return (NULL);
 	path = ft_strdup_until_space(command);
-	(void) (path && (len = ft_strlen_p(path)));
-	while ((ft_strchr(command, '/') > command + len || !ft_strchr
-			(command, '/')) && path && access(path, X_OK) && paths[i])
+	(void) ( (size_t) path && (len = ft_strlen_p(path)));
+	while (path && (ft_strchr(command, '/') > command + len || !ft_strchr
+			(command, '/')) && access(path, X_OK) && paths[i])
 	{
 		free(path);
 		path = ft_strjoinwithslash(paths[i++], command);

@@ -13,7 +13,7 @@ static int bi_exp_print(t_env **env)
 			continue ;
 		}
 		if (lst->value)
-			printf("declare -x %s=%s\n", lst->key, lst->value);
+			printf("declare -x %s=\"%s\n\"", lst->key, lst->value);
 		else
 			printf("declare -x %s\n", lst->key);
 		lst = lst->next;
@@ -53,10 +53,10 @@ int bi_export(char *line, t_env **env)
 	{
 		temp = ft_space_strtok(line);
 		if (temp && any_forbidden_chars_export(temp))
-			return (the_return_value(1));
+			return (free(temp), the_return_value(1));
 		key_value = sep_in_two(temp);
 		if (!key_value)
-			return (the_return_value(1));
+			return (free(temp), the_return_value(1));
 		new_lst = ft_envlstnew_frees(key_value);
 		if (!new_lst)
 			return (free(temp), the_return_value(1));

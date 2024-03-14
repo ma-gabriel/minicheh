@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 06:04:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/14 10:30:19 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/14 11:03:04 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,12 @@ void	executions(char *line, t_env **env);
 char	*get_pwd(void);
 int	is_a_built_in(char *line, t_env **env);
 int	bi_unset(char *line, t_env **env);
-int	ft_envlst_remove_if(t_env **start, char *line, int (strncmp)(const char *s1, const char *s2, size_t len));
+int	ft_envlst_remove_if(t_env **start, char *line);
 int	bi_export(char *line, t_env **env);
 char	**sep_in_two(char *str);
 size_t	word_len_until_equal(char *str);
 char *ft_space_strtok(char *str);
-void sahandler(int sig);
+void sahandler_fake(int sig);
+void sahandler_true(int sig);
 
 #endif 

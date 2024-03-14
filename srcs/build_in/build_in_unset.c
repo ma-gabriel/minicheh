@@ -17,7 +17,7 @@ static int	any_forbidden_chars_unset(char *temp)
 	return (0);
 }
 
-int ft_envlst_remove_if(t_env **start, char *line, int (strncmp)(const char *s1, const char *s2, size_t len))
+int ft_envlst_remove_if(t_env **start, char *line)
 {
 	t_env *temp;
 	t_env *prev;
@@ -26,7 +26,7 @@ int ft_envlst_remove_if(t_env **start, char *line, int (strncmp)(const char *s1,
 	prev = NULL;
 	while (temp)
 	{
-		if (!strncmp(temp->key, line, ft_strlen(line)))
+		if (!ft_strncmp(temp->key, line, ft_strlen(line)))
 		{
 			if (prev)
 				prev->next = temp->next;
@@ -80,7 +80,7 @@ int	bi_unset(char *line, t_env **env)
 		return(the_return_value(0));
 	while ((args = ft_space_strtok(line)))
 	{
-		ft_envlst_remove_if(env, args, ft_strncmp);
+		ft_envlst_remove_if(env, args);
 		line = NULL;
 		free(args);
 	}

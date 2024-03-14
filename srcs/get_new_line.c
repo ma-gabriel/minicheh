@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 05:13:05 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/14 10:23:41 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/14 10:58:45 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*get_a_new_line(t_env *env)
 
 	str = readline(RED"MiniCheh"M" -> "RST);
 	if (!str)
-		return(write(1, "exit\n", 5), free(str), NULL);
+		return((void *) (write(1, "exit\n", 5) * 0));
 	while (quotes(str))
 	{	
 		str = ft_strjoin_free_first(str, "\n");
@@ -58,7 +58,7 @@ char	*get_a_new_line(t_env *env)
 		str = ft_strjoin_free_first(str, temp);
 		free(temp);
 	}
-	if (*str)
+	if (str && *str)
 		add_history(str);
 	return (replace_env(str, env));
 }
