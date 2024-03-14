@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:54:44 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/14 11:19:28 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/14 13:34:47 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	middle_command(char *line, char **envp, int fd[3])
 		line++;
 	command = find_command(ft_split(ft_getenv(envp, "PATH") + 5, ':'),
 			line, 0);
-	if (!command)
+	if (!command)		
 		return (close_3_free(fd[0], fd[1], -1, (char *) remember_line));
 	args = ft_split(line, ' ');
 	if (!args)
@@ -110,7 +110,7 @@ int	loops_executions(char **argv, char **envp, int init_fd[2], void *env)
 	int		pid;
 
 	merge_fd(init_fd[0], i = -1, fd_old);
-	while (argv[++i])
+ 	while (argv[++i])
 	{
 		if (argv[i + 1] && pipe(fd_new))
 			exit(close_3_free(fd_old[0], fd_old[1], -1, NULL));
@@ -124,7 +124,7 @@ int	loops_executions(char **argv, char **envp, int init_fd[2], void *env)
 			close_3_free(fd_old[0], fd_old[1], -1, NULL);
 			exit(127 + 0 * close_3_free(fd_new[0], fd_new[1], -1, NULL));
 		}
-		close_3_free(fd_old[0], fd_old[1], fd_new[1], NULL);
+ 		close_3_free(fd_old[0], fd_old[1], fd_new[1], NULL);
 		fd_old[0] = fd_new[0];
 	}
 	return (pid + 0 * close_3_free(fd_old[0], fd_old[1], -1, NULL));

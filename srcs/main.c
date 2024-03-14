@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 02:56:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/14 10:45:02 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/14 12:46:41 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,34 @@ t_env	*dup_envp(char **envp)
 	return (env);
 }
 
+
+t_env *hardcode_env()
+{
+	t_env *temp;
+	char *pwd;
+
+	temp = NULL;
+	pwd = get_pwd();
+	if (!pwd)
+		exit(1);
+	temp = ft_envlstnew(ft_strdup("PWD"), pwd);
+	temp->next = ft_envlstnew(ft_strdup("SHLVL"), ft_strdup("1"));
+	temp->next->next = ft_envlstnew(ft_strdup("?"), ft_strdup("0"));
+	return (temp);
+}
+
+
 int	main(int argc, char **argv, char **envp)
 {
 	(void) argc;
 	(void) argv;
 	t_env	*env;
-
-	env = dup_envp(envp);
+	
+	envp = NULL;
+	if (!envp)
+		env = hardcode_env();
+	else 
+		env = dup_envp(envp);
 	if (!env)
 		return (2);
 	the_return_value((size_t) &env);
@@ -93,4 +114,6 @@ int	main(int argc, char **argv, char **envp)
 	ft_envclear(env);
 	rl_clear_history();
 	return (0);
+
+	//TODO Handle SHLVL 
 }

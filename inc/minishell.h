@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 06:04:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/14 11:03:04 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/14 12:11:55 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ size_t	word_len_until_equal(char *str);
 char *ft_space_strtok(char *str);
 void sahandler_fake(int sig);
 void sahandler_true(int sig);
+t_env *hardcode_env();
 
 #endif 
