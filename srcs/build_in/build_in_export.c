@@ -13,7 +13,7 @@ static int bi_exp_print(t_env **env)
 			continue ;
 		}
 		if (lst->value)
-			printf("declare -x %s=\"%s\n\"", lst->key, lst->value);
+			printf("declare -x %s=\"%s\"\n", lst->key, lst->value);
 		else
 			printf("declare -x %s\n", lst->key);
 		lst = lst->next;

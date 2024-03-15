@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 02:56:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/15 03:10:28 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/15 14:09:55 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,7 @@ int	main(int argc, char **argv, char **envp)
 	int	end;
 	(void) (argv + argc);
 	t_env	*env;
-	
-	envp = NULL;
+
 	if (!envp)
 		env = hardcode_env();
 	else 
@@ -115,6 +114,7 @@ int	main(int argc, char **argv, char **envp)
 	ft_envclear(env);
 	rl_clear_history();
 	return (end);
+
 
 	//TODO Handle SHLVL 
 }
