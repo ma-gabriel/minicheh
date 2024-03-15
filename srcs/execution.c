@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:22:00 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/14 13:00:25 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/15 04:03:48 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,25 @@ static void	change_split(char **env, char c1, char c2)
 
 int	is_a_built_in(char *line, t_env **env)
 {
-	while (*line == ' ')
-		line++;
-	if (!ft_strncmp(line, "env", 3) && (line[3] == ' ' || !line[3]))
+	size_t	i;
+
+	i = 0;
+	while (*(line + i) == ' ')
+		i++;
+	if (!ft_strncmp(line + i, "env", 3) && (line[i + 3] == ' ' || !line[i + 3]))
 		return (bi_env(env) || 1);
-	if (!ft_strncmp(line, "echo", 4) && (line[4] == ' ' || !line[4]))
-		return (bi_echo(line) || 1);
-	if (!ft_strncmp(line, "pwd", 3) && (line[3] == ' ' || !line[3]))
+	if (!ft_strncmp(line + i, "echo", 4) && (line[i + 4] == ' ' || !line[i + 4]))
+		return (bi_echo(line + i) || 1);
+	if (!ft_strncmp(line + i, "pwd", 3) && (line[i + 3] == ' ' || !line[i + 3]))
 		return (bi_pwd() || 1);
-	if (!ft_strncmp(line, "cd", 2) && (line[2] == ' ' || !line[2]))
-		return (bi_cd(line, env) || 1);
-	if (!ft_strncmp(line, "unset", 5) && (line[5] == ' ' || !line[5]))
-		return (bi_unset(line, env) || 1);
-	if (!ft_strncmp(line, "export ", 6) && (line[6] == ' ' || !line[6]))
+	if (!ft_strncmp(line + i, "cd", 2) && (line[i + 2] == ' ' || !line[i + 2]))
+		return (bi_cd(line + i, env) || 1);
+	if (!ft_strncmp(line + i, "unset", 5) && (line[5] == ' ' || !line[i + 5]))
+		return (bi_unset(line + i, env) || 1);
+	if (!ft_strncmp(line + i, "export", 6) && (line[i + 6] == ' ' || !line[i + 6]))
 		return (bi_export(line, env) || 1);
+	if (!ft_strncmp(line, "exit", 4) && (line[4] == ' ' || !line[4]))
+		return (bi_exit(line) || 1);
 	return (0);
 }
 
@@ -86,7 +91,7 @@ void executions(char *line, t_env **env)
 		return ;
 	}
 	change_split(argv, -2, '|');
-	if (argv[0] && (argv[1] || !(is_a_built_in(argv[0], env))))
+	if (argv[0] && (argv[1] || !(is_a_built_in(line, env))))
 		the_return_value(almost_pipex(argv, envp, (void *) env));
 	ft_strsfree(envp);
 	ft_strsfree(argv);

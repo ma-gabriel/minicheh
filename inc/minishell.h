@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 06:04:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/14 12:11:55 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/15 03:45:52 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int		bi_env(t_env **env);
 int		bi_echo(char *line);
 int		bi_pwd(void);
 int		bi_cd(char *line, t_env **env);
+int		bi_exit(char *line);
 int     cd(char *path);
 int	almost_pipex(char **argv, char **envp, void *env);
 void	executions(char *line, t_env **env);
@@ -71,5 +72,6 @@ char *ft_space_strtok(char *str);
 void sahandler_fake(int sig);
 void sahandler_true(int sig);
 t_env *hardcode_env();
+char	*get_value(char *str, t_env *env);
 
 #endif 

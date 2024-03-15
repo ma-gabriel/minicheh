@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 16:10:42 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/08 18:12:23 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/15 03:02:31 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	open_file(char *file, char *name, int flags)
 	if (flags == 3)
 		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0666);
 	if (fd == -1)
-		print_error(name, ft_strerror(), file);
+		print_error(name, strerror(errno), file);
 	return (fd);
 }
 

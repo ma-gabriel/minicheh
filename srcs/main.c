@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 02:56:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/14 12:46:41 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/15 03:10:28 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ t_env *hardcode_env()
 
 int	main(int argc, char **argv, char **envp)
 {
-	(void) argc;
-	(void) argv;
+	int	end;
+	(void) (argv + argc);
 	t_env	*env;
 	
 	envp = NULL;
@@ -111,9 +111,10 @@ int	main(int argc, char **argv, char **envp)
 	the_return_value((size_t) &env);
 	signal(SIGQUIT, &sahandler_true);
 	loops_minishell(&env);
+	end = ft_atoi(get_value("?", env));
 	ft_envclear(env);
 	rl_clear_history();
-	return (0);
+	return (end);
 
 	//TODO Handle SHLVL 
 }

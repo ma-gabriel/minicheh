@@ -3,9 +3,15 @@
 int     cd(char *path)
 {
 	int     res;
+	int	i;
 
 	if (!path)
 		return (0);
+	i = 0;
+	while (path[i])
+		i++;
+	while (path[--i] == ' ')
+		path[i] = 0;
 	res = chdir(path);
 	if (!res)
 		return (0);

@@ -5,6 +5,7 @@ HEADER = -I inc -I libft
 LIBFT = libft/libft.a
 SRCS =	build_in/built_in_echo.c \
 	build_in/built_in_env.c \
+	build_in/built_in_exit.c \
 	build_in/build_in_unset.c \
 	build_in/build_in_pwd.c \
 	build_in/build_in_export.c \

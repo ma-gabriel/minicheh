@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:54:44 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/14 13:48:34 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/15 03:02:51 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*find_command(char **paths, char *command, int i)
 	if (paths && path && access(path, X_OK))
 	{
 		if (ft_strchr(command, '/') > command + len || ft_strchr(command, '/'))
-			print_error("minishell", ft_strerror(), path);
+			print_error("minishell", strerror(errno), path);
 		else if (*paths)
 			print_error("minishell", "command not found", path
 				+ ft_strlen_p(paths[i - 1]) + 1);

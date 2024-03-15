@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 05:14:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/12 11:58:41 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/15 03:06:56 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ static size_t	word_len(char *str)
 	return (i);
 }
 
-
-static char	*get_value(char *str, t_env *env)
+char	*get_value(char *str, t_env *env)
 {
 	if (!env)
 		return (NULL);
