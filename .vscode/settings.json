@@ -1,0 +1,19 @@
+{
+    "files.associations": {
+        "minishell.h": "c",
+        "signal.h": "c",
+        "unistd.h": "c",
+        "readline.h": "c",
+        "libft.h": "c",
+        "errno.h": "c",
+        "history.h": "c",
+        "complex": "c"
+    },
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/lcamerly/Documents/minicheh",
+            "binaryPath": "/home/lcamerly/Documents/minicheh/minishell",
+            "binaryArgs": []
+        }
+    ]
+}
