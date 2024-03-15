@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 06:04:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/15 03:45:52 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/15 14:40:24 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ void sahandler_fake(int sig);
 void sahandler_true(int sig);
 t_env *hardcode_env();
 char	*get_value(char *str, t_env *env);
+void set_shlvl(t_env *env);
 
 #endif 

@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 02:56:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/15 14:09:55 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:47:49 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,29 @@ t_env	*dup_envp(char **envp)
 		ft_envlstadd_until_sorted(&env, ft_envlstnew_frees(key_value));
 		envp++;
 	}
+	set_shlvl(env);
 	the_return_value((size_t) &env);
 	the_return_value(0);
 	return (env);
 }
 
+void set_shlvl(t_env *env)
+{
+	static int temp;
+	
+	while (env)
+	{
+		if (ft_strcmp(env->key, "SHLVL") == 0)
+		{
+			temp = ft_atoi(env->value);
+			temp++;
+			free(env->value);
+			env->value = ft_itoa(temp);
+			return ;
+		}
+		env = env->next;
+	}
+}
 
 t_env *hardcode_env()
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 03:11:22 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/15 03:45:26 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/15 14:54:34 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	check_args_exit(char *line)
 			write(2, "minishell: exit: numeric argument required\n", 44);
 			return (1);
 		}
-		if (*line == ' ')
+		if (*line == ' ' && line[1] && line[1]!= ' ')
 		{
 			write(2, "minishell: exit: too many arguments\n", 36);
 			return (2);
