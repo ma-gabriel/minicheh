@@ -43,7 +43,7 @@ $(OBJS_DIR)/%.o: srcs/%.c
 	$(CC) $(FLAGS) $(HEADER) -c $< -o $@ -I./inc -I./libft
 
 $(LIBFT):
-	cd ./libft && $(MAKE) all
+	cd ./libft && $(MAKE) bonus
 
 
 end : 
