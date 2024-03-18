@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:58:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/18 21:22:40 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/18 23:30:19 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static size_t	path_len(char *str)
 	return (i);
 }
 
-int	redirect(char *line, size_t len, int flag)
+static int	open_dup2(char *line, size_t len, int flag)
 {
 	char	*file;
 	int		fd_temp;
@@ -57,7 +57,7 @@ int	redirect(char *line, size_t len, int flag)
 	return (res);
 }
 
-int	line_shortener(char *line, int flag)
+static int	line_shortener(char *line, int flag)
 {
 	int		spaces;
 	size_t	len;
@@ -71,28 +71,38 @@ int	line_shortener(char *line, int flag)
 		spaces++;
 	len = path_len(line + (flag == 1 || flag == 3) + spaces + 1);
 	if (len != 0)
-		returned = redirect(line + (flag == 1 || flag == 3) \
-			+ spaces + 1, len, flag);
+		returned = open_dup2(line + (flag == 1 || flag == 3) \
+				+ spaces + 1, len, flag);
 	else
 		write(2, "minishell: syntax error near unexpected token\n", 47);
-	strcpy(line, line + (flag == 1 || flag == 3) + spaces + 1 + len);
+	ft_strcpy(line, line + (flag == 1 || flag == 3) + spaces + 1 + len);
 	return (-(returned == -1));
 }
 
 int	redirections(char *line)
 {
-	char	*temp;
+	size_t	i;
+	int	delimiter;
 
-	while (ft_strchr(line, '>') || ft_strchr(line, '<'))
+	i = 0;
+	delimiter = 0;
+	while (line[i])
 	{
-		temp = ft_strchr(line, '<');
-		if (temp)
-			if (line_shortener(temp, 0 + (temp[1] == '<')))
+		if (delimiter == 1 && line[i] == '\"')
+			delimiter = 0;
+		else if (delimiter == 2 && line[i] == '\'')
+			delimiter = 0;
+		else if (line[i] == '\"' && !delimiter)
+			delimiter = 1;
+		else if (line[i] == '\'' && !delimiter)
+			delimiter = 2;
+		if (line[i] == '<' && !delimiter)
+			if (line_shortener(line + i, 0 + (line[i + 1] == '<')))
 				return (-1);
-		temp = strchr(line, '>');
-		if (temp)
-			if (line_shortener(temp, 2 + (temp[1] == '>')))
+		if (line[i] == '>' && !delimiter)
+			if (line_shortener(line + i, 2 + (line[i + 1] == '>')))
 				return (-1);
+		i++;
 	}
 	return (0);
 }

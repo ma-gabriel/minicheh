@@ -6,7 +6,7 @@
 #    By: geymat <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 04:17:20 by geymat            #+#    #+#              #
-#    Updated: 2024/03/06 05:11:08 by geymat           ###   ########.fr        #
+#    Updated: 2024/03/18 23:35:06 by geymat           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,26 +43,15 @@ SRCS = ft_atoi.c \
        ft_strmapi.c \
        ft_striteri.c \
        ft_strnstr.c \
+       ft_strcpy.c \
        ft_putchar_fd.c \
        ft_putstr_fd.c \
        ft_putendl_fd.c \
        ft_putnbr_fd.c
 
-SRCS_BONUS = ft_lstadd_front_bonus.c \
-	     ft_lstnew_bonus.c \
-	     ft_lstsize_bonus.c \
-	     ft_lstlast_bonus.c \
-	     ft_lstadd_back_bonus.c \
-	     ft_lstdelone_bonus.c \
-	     ft_lstclear_bonus.c \
-	     ft_lstiter_bonus.c \
-	     ft_lstmap_bonus.c
-
 HEADERS = libft.h
 
 OBJECTS = $(SRCS:.c=.o)
-
-OBJECTS_BONUS = $(SRCS_BONUS:.c=.o)
 
 NAME = libft.a
 
@@ -82,10 +71,7 @@ clean:
 fclean: clean
 	$(RM) $(NAME)
 
-bonus:
-	$(MAKE) $(NAME) SRCS="$(SRCS) $(SRCS_BONUS)"
-
 re: fclean
 	$(MAKE) all
 
-.PHONY: re all clean fclean bonus
+.PHONY: re all clean fclean

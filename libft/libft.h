@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 23:40:12 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/06 05:10:49 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/18 23:09:37 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int		ft_memcmp(const void *str1, const void *str2, size_t n);
 char	*ft_strstr(char *str, char *to_find);
 int		ft_atoi(const char *str);
 char	*ft_strdup(const char *src);
+char	*ft_strcpy(char *string1, const char *string2);
 void	*ft_calloc(size_t num, size_t size);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);

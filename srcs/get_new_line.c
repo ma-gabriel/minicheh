@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 05:13:05 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/14 10:58:45 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/18 23:25:17 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,15 @@ static int	quotes(char     *str)
 
 	delimiter = 0;
 	i = 0;
-
 	while (str[i])
 	{
-		if (delimiter == 1 && (!i || str[i - 1] != '\\') && (str[i] == '\"'))
+		if (delimiter == 1 && str[i] == '\"')
 			delimiter = 0;
-		else if ((delimiter == 2) && (!i || str[i - 1] != '\\')
-			&& str[i] == '\'')
+		else if (delimiter == 2 && str[i] == '\'')
 			delimiter = 0;
-		else if ((str[i] == '\"') && (!i || str[i - 1] != '\\') && !delimiter)
+		else if (str[i] == '\"' && !delimiter)
 			delimiter = 1;
-		else if ((str[i] == '\'') && (!i || str[i - 1] != '\\') && !delimiter)
+		else if (str[i] == '\'' && !delimiter)
 			delimiter = 2;
 		i++;
 	}

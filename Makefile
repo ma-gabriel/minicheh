@@ -58,9 +58,11 @@ end :
 
 clean:
 	rm -rf $(OBJS_DIR)
+	cd ./libft && $(MAKE) clean
 
 fclean: clean
 	rm -f $(NAME)
+	cd ./libft && $(MAKE) fclean
 
 re: fclean all
 
