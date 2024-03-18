@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:43:19 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/15 04:17:39 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/18 21:37:39 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,6 @@ int	is_a_built_in_pipe(char *line, void *env, int fd[3])
 	size_t	i;
 
 	temp = -2;
-	if (fd[0] == -1 || fd[1] == -1 || dup2(fd[1], 1) == -1
-		|| dup2(fd[0], 0) == -1)
-		return (-(close_3_free(fd[0], fd[1], -1, NULL) || 1));
-	close_3_free(fd[0], fd[1], -1, NULL);
 	i = 0;
 	while (*(line + i) == ' ')
 		i++;

@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:54:44 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/15 03:02:51 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/18 21:37:51 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,9 @@ char	*find_command(char **paths, char *command, int i)
 	{
 		if (ft_strchr(command, '/') > command + len || ft_strchr(command, '/'))
 			print_error("minishell", strerror(errno), path);
-		else if (*paths)
+		else
 			print_error("minishell", "command not found", path
 				+ ft_strlen_p(paths[i - 1]) + 1);
-		else
-			write(2, "minishell, no valid PATH found\n", 31);
 		free(path);
 		path = NULL;
 	}
@@ -55,7 +53,7 @@ int	middle_command(char *line, char **envp, int fd[3])
 		command = find_command(ft_split(ft_getenv(envp, "PATH") + 5, ':'),
 			line, 0);
 	else
-		command = find_command(ft_split("", ':'), line, 0);
+		command = find_command(ft_split(".", ':'), line, 0);
 	if (!command)		
 		return (close_3_free(fd[0], fd[1], -1, (char *) remember_line));
 	args = ft_split(line, ' ');
@@ -100,6 +98,11 @@ int	the_execve_stuff(char *command, char *envp[], int fd[3], void *env)
 	if (fd[2] != -1)
 		close(fd[2]);
 	fd[2] = -1;
+	if (fd[0] == -1 || fd[1] == -1 || dup2(fd[1], 1) == -1 \
+		|| dup2(fd[0], 0) == -1)
+		return (-(close_3_free(fd[0], fd[1], -1, NULL) || 1));
+	close_3_free(fd[0], fd[1], -1, NULL);
+	redirections(command);
 	is_a_built_in_pipe(command, env, fd);
 	line = ft_strdup(command);
 	middle_command(line, envp, fd);

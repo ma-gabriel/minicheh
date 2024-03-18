@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 02:56:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/15 03:10:28 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/18 21:32:03 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,7 @@ int	main(int argc, char **argv, char **envp)
 	(void) (argv + argc);
 	t_env	*env;
 	
-	envp = NULL;
-	if (!envp)
+	if (!*envp)
 		env = hardcode_env();
 	else 
 		env = dup_envp(envp);

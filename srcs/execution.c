@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:22:00 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/15 04:03:48 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/18 21:19:02 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,34 @@ int	is_a_built_in(char *line, t_env **env)
 	return (0);
 }
 
+int	redirect_before_bi(char *line, t_env **env)
+{
+	int	fd[2];
+	int	res;
+
+	fd[0] = dup(0);
+	if (fd[0] == -1)
+		return (-1);
+	fd[1] = dup(1);
+	if (fd[1] == -1)
+	{
+		close(fd[0]);
+		return (-1);
+	}
+	res = redirections(line);
+	if (res != -1)
+		res = is_a_built_in(line, env);
+	if (dup2(fd[0], 0) == -1 || dup2(fd[1], 1) == -1)
+	{
+		close(fd[0]);
+		close(fd[1]);
+		return (-(bi_exit(line) || 1));
+	}
+	close(fd[0]);
+	close(fd[1]);
+	return (res);
+}
+
 void executions(char *line, t_env **env)
 {
 	char	**envp;
@@ -91,7 +119,7 @@ void executions(char *line, t_env **env)
 		return ;
 	}
 	change_split(argv, -2, '|');
-	if (argv[0] && (argv[1] || !(is_a_built_in(line, env))))
+	if (argv[0] && (argv[1] || !(redirect_before_bi(line, env))))
 		the_return_value(almost_pipex(argv, envp, (void *) env));
 	ft_strsfree(envp);
 	ft_strsfree(argv);

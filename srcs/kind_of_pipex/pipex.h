@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 23:40:12 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/13 19:33:09 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/18 21:25:11 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int		loops_executions(char **argv, char **envp, int init_fd[2], void *env);
 char	*ft_strchr(char *str, int c);
 char	*ft_strdup_until_space(const char *src);
 int		is_a_built_in_pipe(char *line, void *env, int fd[3]);
+int	redirections(char *line);
 
 
 #endif

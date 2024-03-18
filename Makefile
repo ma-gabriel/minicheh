@@ -16,6 +16,7 @@ SRCS =	build_in/built_in_echo.c \
 	main.c \
 	replace_str.c \
 	sig.c \
+	redirections.c \
 	env_utils.c \
 	execution.c \
 	kind_of_pipex/almost_libft_utils.c \
