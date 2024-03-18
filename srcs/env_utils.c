@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 04:11:58 by lcamerly          #+#    #+#             */
-/*   Updated: 2024/03/14 12:36:51 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:35:33 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,14 @@ void	ft_envlstadd_until_sorted(t_env **lst, t_env *new_lst)
 	{
 		if (temp->value && new_lst->value)
 			free(temp->value);
-		(void) (new_lst->value && (temp->value = new_lst->value));
+		(void)(new_lst->value && (temp->value = new_lst->value));
 		free(new_lst->key);
 		free(new_lst);
 	}
 	else
 		temp->next = new_lst;
 }
+
 void	ft_envclear(t_env *env)
 {
 	t_env	*temp;
@@ -94,4 +95,19 @@ t_env	*ft_envlstnew_frees(char **key_value)
 	}
 	free(key_value);
 	return (new);
+}
+
+t_env	*hardcode_env(void)
+{
+	t_env	*temp;
+	char	*pwd;
+
+	temp = NULL;
+	pwd = get_pwd();
+	if (!pwd)
+		exit(1);
+	temp = ft_envlstnew(ft_strdup("PWD"), pwd);
+	temp->next = ft_envlstnew(ft_strdup("SHLVL"), ft_strdup("1"));
+	temp->next->next = ft_envlstnew(ft_strdup("?"), ft_strdup("0"));
+	return (temp);
 }

@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   build_in_export.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/18 10:42:15 by lcamerly          #+#    #+#             */
+/*   Updated: 2024/03/18 10:42:15 by lcamerly         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/minishell.h"
 
-static int bi_exp_print(t_env **env)
+static int	bi_exp_print(t_env **env)
 {
 	t_env	*lst;
 
 	lst = *env;
-	while(lst)
+	while (lst)
 	{
 		if ((lst->key)[0] == '?')
 		{
@@ -38,11 +50,11 @@ static int	any_forbidden_chars_export(char *temp)
 	return (0);
 }
 
-int bi_export(char *line, t_env **env)
+int	bi_export(char *line, t_env **env)
 {
-	char **key_value;
-	t_env *new_lst;
-	char *temp;
+	char	**key_value;
+	t_env	*new_lst;
+	char	*temp;
 
 	line += 7;
 	while (*line == ' ')

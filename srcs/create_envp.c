@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 08:09:18 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/07 14:26:18 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/18 10:30:55 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_strsfree(char **strs)
 	copy = strs;
 	if (!strs)
 		return (-1);
-	while(*strs)
+	while (*strs)
 	{
 		free(*strs);
 		strs++;

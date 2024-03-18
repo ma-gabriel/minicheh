@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 02:56:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/15 15:02:39 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:41:18 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ size_t	word_len_until_equal(char *str)
 	i = 0;
 	if (!str)
 		return (0);
-	while(str[i] && str[i] != '=')
+	while (str[i] && str[i] != '=')
 		i++;
 	return (i);
 }
@@ -74,15 +74,15 @@ t_env	*dup_envp(char **envp)
 		envp++;
 	}
 	set_shlvl(env);
-	the_return_value((size_t) &env);
+	the_return_value((size_t)(&env));
 	the_return_value(0);
 	return (env);
 }
 
-void set_shlvl(t_env *env)
+void	set_shlvl(t_env *env)
 {
-	static int temp;
-	
+	static int	temp;
+
 	while (env)
 	{
 		if (ft_strcmp(env->key, "SHLVL") == 0)
@@ -97,42 +97,23 @@ void set_shlvl(t_env *env)
 	}
 }
 
-t_env *hardcode_env()
-{
-	t_env *temp;
-	char *pwd;
-
-	temp = NULL;
-	pwd = get_pwd();
-	if (!pwd)
-		exit(1);
-	temp = ft_envlstnew(ft_strdup("PWD"), pwd);
-	temp->next = ft_envlstnew(ft_strdup("SHLVL"), ft_strdup("1"));
-	temp->next->next = ft_envlstnew(ft_strdup("?"), ft_strdup("0"));
-	return (temp);
-}
-
-
 int	main(int argc, char **argv, char **envp)
 {
-	int	end;
-	(void) (argv + argc);
+	int		end;
 	t_env	*env;
 
+	(void)(argv + argc);
 	if (!envp || !*envp || !**envp)
 		env = hardcode_env();
-	else 
+	else
 		env = dup_envp(envp);
 	if (!env)
 		return (2);
-	the_return_value((size_t) &env);
+	the_return_value((size_t)(&env));
 	signal(SIGQUIT, &sahandler_true);
 	loops_minishell(&env);
 	end = ft_atoi(get_value("?", env));
 	ft_envclear(env);
 	rl_clear_history();
 	return (end);
-
-
-	//TODO Handle SHLVL 
 }

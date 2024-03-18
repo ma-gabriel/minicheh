@@ -7,7 +7,8 @@
         "libft.h": "c",
         "errno.h": "c",
         "history.h": "c",
-        "complex": "c"
+        "complex": "c",
+        "stdio.h": "c"
     },
     "makefile.launchConfigurations": [
         {

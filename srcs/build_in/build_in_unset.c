@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   build_in_unset.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/18 10:49:42 by lcamerly          #+#    #+#             */
+/*   Updated: 2024/03/18 10:58:49 by lcamerly         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/minishell.h"
 
 static int	any_forbidden_chars_unset(char *temp)
@@ -17,10 +29,10 @@ static int	any_forbidden_chars_unset(char *temp)
 	return (0);
 }
 
-int ft_envlst_remove_if(t_env **start, char *line)
+int	ft_envlst_remove_if(t_env **start, char *line)
 {
-	t_env *temp;
-	t_env *prev;
+	t_env	*temp;
+	t_env	*prev;
 
 	temp = *start;
 	prev = NULL;
@@ -43,12 +55,11 @@ int ft_envlst_remove_if(t_env **start, char *line)
 	return (0);
 }
 
-
-char *ft_space_strtok(char *str)
+char	*ft_space_strtok(char *str)
 {
-	static char *save;
-	char *temp;
-	char *res;
+	static char	*save;
+	char		*temp;
+	char		*res;
 
 	if (str)
 		save = str;
@@ -66,10 +77,9 @@ char *ft_space_strtok(char *str)
 	return (res);
 }
 
-
 int	bi_unset(char *line, t_env **env)
 {
-	char *args;
+	char	*args;
 
 	line += 5;
 	while (*line == ' ')
@@ -77,12 +87,14 @@ int	bi_unset(char *line, t_env **env)
 	if (any_forbidden_chars_unset(line))
 		return (the_return_value(1));
 	if (!*line)
-		return(the_return_value(0));
-	while ((args = ft_space_strtok(line)))
+		return (the_return_value(0));
+	args = ft_space_strtok(line);
+	while (args)
 	{
 		ft_envlst_remove_if(env, args);
 		line = NULL;
 		free(args);
+		args = ft_space_strtok(line);
 	}
 	the_return_value(0);
 	return (0);

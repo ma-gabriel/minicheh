@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_echo.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 09:15:38 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/14 11:11:59 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:45:05 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	*rm_useless_quotes_env(char *str)
 {
-	int	delimiter;
+	int		delimiter;
 	size_t	i;
 
 	delimiter = 0;
@@ -57,8 +57,8 @@ int	bi_echo(char *line)
 	temp = 0;
 	b00l = 0;
 	if (line[0] == '-' && ++b00l)
-		while(line[++temp] != ' ')
-			if (line[temp] != 'n') 
+		while (line[++temp] != ' ')
+			if (line[temp] != 'n')
 				b00l = 0;
 	if (b00l)
 		line += temp;

@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../inc/minishell.h"
 
 int	replace_inside(char **p_s, size_t start, size_t end, char *s2)
@@ -78,12 +77,11 @@ char	*get_value(char *str, t_env *env)
 
 char	*replace_env(char *str, t_env *env)
 {
-	int delimiter;
-	size_t i;
+	int		delimiter;
+	size_t	i;
 
 	delimiter = 0;
 	i = 0;
-
 	while (str && str[i])
 	{
 		if (delimiter == 1 && (str[i] == '\"'))
@@ -92,11 +90,12 @@ char	*replace_env(char *str, t_env *env)
 			delimiter = 0;
 		else if ((str[i] == '\"') && !delimiter)
 			delimiter = 1;
-		else if ((str[i] == '\'')  && !delimiter)
+		else if ((str[i] == '\'') && !delimiter)
 			delimiter = 2;
-		if (str[i] == '$'&& delimiter != 2)
+		if (str[i] == '$' && delimiter != 2)
 		{
-			replace_inside(&str, i, i + word_len(str + i + 1) + 1, get_value(str + i + 1, env));
+			replace_inside(&str, i, i + word_len(str + i + 1) + 1, get_value(str
+					+ i + 1, env));
 			i--;
 		}
 		i++;
