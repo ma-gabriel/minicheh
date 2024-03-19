@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   build_in_cd.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/19 00:32:15 by geymat            #+#    #+#             */
+/*   Updated: 2024/03/19 01:06:37 by geymat           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/minishell.h"
 
-int     cd(char *path)
+static int	cd(char *path)
 {
-	int     res;
+	int	res;
 	int	i;
 
 	if (!path)
@@ -67,22 +79,12 @@ static size_t	count_args(char **line, t_env *env)
 	res = 0;
 	is_word = 0;
 	if (!(**line))
-		return ((*line = get_home(env)) && 1);
-
-		/*\
-		 *
-		 *
-		 *
-
-	 en gros ca equivaut a faire:
-
 	{
-		*line = get_home(*env);
+		*line = get_home(env);
 		if (!(*line))
 			return (0);
 		return (1);
 	}
-	*/
 	while ((*line)[++i])
 	{
 		if (!is_word && (*line)[i] != ' ')
@@ -95,7 +97,7 @@ static size_t	count_args(char **line, t_env *env)
 
 int	bi_cd(char *line, t_env **env)
 {
-	int res;
+	int		res;
 	size_t	args;
 
 	line += 2;
@@ -112,5 +114,5 @@ int	bi_cd(char *line, t_env **env)
 	if (res)
 		return (the_return_value(1));
 	res = change_pwd_env(env);
-	return (the_return_value(res));	
+	return (the_return_value(res));
 }

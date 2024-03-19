@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sig.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/19 01:55:47 by geymat            #+#    #+#             */
+/*   Updated: 2024/03/19 01:55:56 by geymat           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
-void sahandler_true(int sig)
+void	sahandler_true(int sig)
 {
 	if (SIGINT == sig)
 	{
@@ -12,7 +24,7 @@ void sahandler_true(int sig)
 	}
 }
 
-void sahandler_fake(int sig)
+void	sahandler_fake(int sig)
 {
 	if (SIGINT == sig)
 	{

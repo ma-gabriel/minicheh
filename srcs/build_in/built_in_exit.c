@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 03:11:22 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/15 03:45:26 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/18 23:54:52 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static int	check_args_exit(char *line)
 int	bi_exit(char *line)
 {
 	char	*line_cpy;
-	int	res;
-	int	args_flag;
+	int		res;
+	int		args_flag;
 
 	line_cpy = line;
 	while (*line == ' ')

@@ -10,8 +10,10 @@ SRCS =	build_in/built_in_echo.c \
 	build_in/build_in_pwd.c \
 	build_in/build_in_export.c \
 	build_in/build_in_cd.c \
+	more_env_utils.c \
 	create_envp.c \
 	get_new_line.c \
+	quote_stuff.c \
 	loop_minishell.c \
 	main.c \
 	replace_str.c \

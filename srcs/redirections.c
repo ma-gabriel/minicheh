@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:58:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/18 23:30:19 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 00:36:27 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static int	line_shortener(char *line, int flag)
 int	redirections(char *line)
 {
 	size_t	i;
-	int	delimiter;
+	int		delimiter;
 
 	i = 0;
 	delimiter = 0;

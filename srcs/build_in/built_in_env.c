@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 08:27:35 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/14 18:23:27 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/18 23:55:21 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	the_return_value(size_t value)
 	t_env			*new_env;
 
 	if (value > 255)
-		return ((value == (size_t) -1) || (env = (t_env **) value));
+		return ((value == (size_t) - 1) || (env = (t_env **) value));
 	env_value = ft_itoa(value);
 	if (!env_value)
 		return (value);

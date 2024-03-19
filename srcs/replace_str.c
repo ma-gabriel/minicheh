@@ -6,10 +6,9 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 05:14:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/15 03:06:56 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 01:57:14 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../inc/minishell.h"
 
@@ -78,12 +77,11 @@ char	*get_value(char *str, t_env *env)
 
 char	*replace_env(char *str, t_env *env)
 {
-	int delimiter;
-	size_t i;
+	int		delimiter;
+	size_t	i;
 
 	delimiter = 0;
 	i = 0;
-
 	while (str && str[i])
 	{
 		if (delimiter == 1 && (str[i] == '\"'))
@@ -92,11 +90,12 @@ char	*replace_env(char *str, t_env *env)
 			delimiter = 0;
 		else if ((str[i] == '\"') && !delimiter)
 			delimiter = 1;
-		else if ((str[i] == '\'')  && !delimiter)
+		else if ((str[i] == '\'') && !delimiter)
 			delimiter = 2;
-		if (str[i] == '$'&& delimiter != 2)
+		if (str[i] == '$' && delimiter != 2)
 		{
-			replace_inside(&str, i, i + word_len(str + i + 1) + 1, get_value(str + i + 1, env));
+			replace_inside(&str, i, i + word_len(str + i + 1) + 1,
+				get_value(str + i + 1, env));
 			i--;
 		}
 		i++;

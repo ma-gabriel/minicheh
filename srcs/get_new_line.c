@@ -6,13 +6,13 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 05:13:05 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/18 23:25:17 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 00:36:06 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static int	quotes(char     *str)
+static int	quotes(char *str)
 {
 	size_t	i;
 	int		delimiter;
@@ -41,9 +41,9 @@ char	*get_a_new_line(t_env *env)
 
 	str = readline(RED"MiniCheh"M" -> "RST);
 	if (!str)
-		return((void *) (write(1, "exit\n", 5) * 0));
+		return ((void *)(write(1, "exit\n", 5) * 0));
 	while (quotes(str))
-	{	
+	{
 		str = ft_strjoin_free_first(str, "\n");
 		if (!str)
 			return (NULL);
@@ -60,4 +60,3 @@ char	*get_a_new_line(t_env *env)
 		add_history(str);
 	return (replace_env(str, env));
 }
-

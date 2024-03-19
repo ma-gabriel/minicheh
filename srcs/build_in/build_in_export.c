@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   build_in_export.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/19 00:21:40 by geymat            #+#    #+#             */
+/*   Updated: 2024/03/19 01:11:20 by geymat           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/minishell.h"
 
-static int bi_exp_print(t_env **env)
+static int	bi_exp_print(t_env **env)
 {
 	t_env	*lst;
 
 	lst = *env;
-	while(lst)
+	while (lst)
 	{
 		if ((lst->key)[0] == '?')
 		{
@@ -13,7 +25,7 @@ static int bi_exp_print(t_env **env)
 			continue ;
 		}
 		if (lst->value)
-			printf("declare -x %s=\"%s\n\"", lst->key, lst->value);
+			printf("declare -x %s=\"%s\"\n", lst->key, lst->value);
 		else
 			printf("declare -x %s\n", lst->key);
 		lst = lst->next;
@@ -38,28 +50,29 @@ static int	any_forbidden_chars_export(char *temp)
 	return (0);
 }
 
-int bi_export(char *line, t_env **env)
+static int	free_ret_1(char *str)
 {
-	char **key_value;
-	t_env *new_lst;
-	char *temp;
+	free(str);
+	return (1);
+}
 
-	line += 7;
-	while (*line == ' ')
-		line++;
-	if (!*line)
-		return (bi_exp_print(env));
+static int	export_multiple(char *line, t_env **env)
+{
+	char	*temp;
+	char	**key_value;
+	t_env	*new_lst;
+
 	while (*line)
 	{
 		temp = ft_space_strtok(line);
 		if (temp && any_forbidden_chars_export(temp))
-			return (free(temp), the_return_value(1));
+			return (free_ret_1(temp));
 		key_value = sep_in_two(temp);
 		if (!key_value)
-			return (free(temp), the_return_value(1));
+			return (free_ret_1(temp));
 		new_lst = ft_envlstnew_frees(key_value);
 		if (!new_lst)
-			return (free(temp), the_return_value(1));
+			return (free_ret_1(temp));
 		ft_envlstadd_until_sorted(env, new_lst);
 		while (*line && *line != ' ')
 			line++;
@@ -67,5 +80,18 @@ int bi_export(char *line, t_env **env)
 			line++;
 		free(temp);
 	}
-	return (the_return_value(0));
+	return (0);
+}
+
+int	bi_export(char *line, t_env **env)
+{
+	int	res;
+
+	line += 7;
+	while (*line == ' ')
+		line++;
+	if (!*line)
+		return (bi_exp_print(env));
+	res = export_multiple(line, env);
+	return (the_return_value(res));
 }
