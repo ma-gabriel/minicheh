@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:58:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 06:42:46 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 07:15:57 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static int	open_dup2(char *line, size_t len, int flag, t_env *env)
 		fd_temp = open(file, O_WRONLY | O_CREAT | O_APPEND, 0666);
 	if (fd_temp == -1 && flag != 1)
 		perror(file);
-	printf("%i\n", fd_temp);
 	free(file);
 	if (fd_temp == -1)
 		return (-1);
@@ -82,19 +81,19 @@ static int	line_shortener(char *line, int flag, t_env *env)
 
 static int	directions_hub(char *line, size_t *i, int delimiter, t_env *env)
 {
-		if (line[*i] == '<' && !delimiter)
-		{
-			if (line_shortener(line + *i, 0 + (line[*i + 1] == '<'), env))
-				return (-1);
-			(*i)--;
-		}
-		if (line[*i] == '>' && !delimiter)
-		{
-			if (line_shortener(line + *i, 2 + (line[*i + 1] == '>'), env))
-				return (-1);
-			(*i)--;
-		}
-		return (0);
+	if (line[*i] == '<' && !delimiter)
+	{
+		if (line_shortener(line + *i, 0 + (line[*i + 1] == '<'), env))
+			return (-1);
+		(*i)--;
+	}
+	if (line[*i] == '>' && !delimiter)
+	{
+		if (line_shortener(line + *i, 2 + (line[*i + 1] == '>'), env))
+			return (-1);
+		(*i)--;
+	}
+	return (0);
 }
 
 int	redirections(char *line, t_env *env)

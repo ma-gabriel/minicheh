@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:54:44 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 05:46:07 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 06:53:37 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,8 @@ int	the_execve_stuff(char *command, char *envp[], int fd[3], t_env **env)
 			|| dup2(fd[0], 0) == -1)
 		return (-(close_3_free(fd[0], fd[1], -1, NULL) || 1));
 	close_3_free(fd[0], fd[1], -1, NULL);
-	redirections(command, *env);
 	is_a_built_in_pipe(command, env, fd);
+	redirections(command, *env);
 	line = ft_strdup(command);
 	middle_command(line, envp, fd);
 	return (-1);
