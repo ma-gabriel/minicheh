@@ -6,32 +6,17 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 04:11:58 by lcamerly          #+#    #+#             */
-/*   Updated: 2024/03/14 12:36:51 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/19 02:12:02 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	ft_envlstadd_until_sorted(t_env **lst, t_env *new_lst)
+static void	keep_going(t_env *temp, t_env *new_lst)
 {
-	t_env	*temp;
 	t_env	*temp2;
 
-	if (!new_lst)
-		return ;
-	if (!(*lst))
-	{
-		*lst = new_lst;
-		return ;
-	}
-	temp = *lst;
 	temp2 = temp;
-	if (ft_strcmp(new_lst->key, temp->key) < 0)
-	{
-		*lst = new_lst;
-		new_lst->next = temp;
-		return ;
-	}
 	while (temp->next && ft_strcmp(new_lst->key, temp->key) > 0)
 	{
 		temp2 = temp;
@@ -46,13 +31,36 @@ void	ft_envlstadd_until_sorted(t_env **lst, t_env *new_lst)
 	{
 		if (temp->value && new_lst->value)
 			free(temp->value);
-		(void) (new_lst->value && (temp->value = new_lst->value));
+		if (new_lst->value)
+			temp->value = new_lst->value;
 		free(new_lst->key);
 		free(new_lst);
 	}
 	else
 		temp->next = new_lst;
 }
+
+void	ft_envlstadd_until_sorted(t_env **lst, t_env *new_lst)
+{
+	t_env	*temp;
+
+	if (!new_lst)
+		return ;
+	if (!(*lst))
+	{
+		*lst = new_lst;
+		return ;
+	}
+	temp = *lst;
+	if (ft_strcmp(new_lst->key, temp->key) < 0)
+	{
+		*lst = new_lst;
+		new_lst->next = temp;
+		return ;
+	}
+	keep_going(temp, new_lst);
+}
+
 void	ft_envclear(t_env *env)
 {
 	t_env	*temp;

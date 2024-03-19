@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 01:13:48 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 01:32:37 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 02:14:29 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ static size_t	word_len_until_equal(char *str)
 	while (str[i] && str[i] != '=')
 		i++;
 	return (i);
+}
+
+static void	*free_key_value(char *key, char *value)
+{
+	free(key);
+	free(value);
+	return (NULL);
 }
 
 char	**sep_in_two(char *str)
@@ -45,11 +52,7 @@ char	**sep_in_two(char *str)
 	}
 	res = malloc(16);
 	if (!res)
-	{
-		free(key);
-		free(value);
-		return (NULL);
-	}
+		return (free_key_value(key, value));
 	ft_strlcpy(key, str, word_len_until_equal(str) + 1);
 	res[0] = key;
 	res[1] = value;
