@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 23:40:12 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 05:50:55 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 07:31:55 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <sys/wait.h>
 # include <errno.h>
 # include <stdlib.h>
-# include "../../inc/struct.h"
+# include "struct.h"
 
 char	**ft_split(char const *s, char c);
 char	*ft_strjoin_free_first(char *s1, char *s2);

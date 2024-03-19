@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 04:23:47 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 07:18:32 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 07:28:04 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ static int	open_heredocs(char *command, int fd, t_env *env)
 	if (!limiter)
 		return (-1);
 	line = readline(">");
+	if (line)
+		line = replace_env(line, env);
 	if (line)
 		len = ft_strlen(line);
 	while (line && ft_strcmp(line, limiter))

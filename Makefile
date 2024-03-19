@@ -2,6 +2,9 @@ NAME = minishell
 CC = cc
 FLAGS = -Wall -Wextra -Werror -g3
 HEADER = -I inc -I libft
+DEPS = inc/minishell.h \
+       inc/struct.h \
+       inc/pipex.h
 LIBFT = libft/libft.a
 SRCS =	build_in/built_in_echo.c \
 	build_in/built_in_env.c \
@@ -41,7 +44,7 @@ all: $(NAME) end
 $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(HEADER) -Llibft -lft -lreadline
 
-$(OBJS_DIR)/%.o: srcs/%.c
+$(OBJS_DIR)/%.o: srcs/%.c $(DEPS)
 	mkdir -p $(OBJS_DIR)/kind_of_pipex
 	mkdir -p $(OBJS_DIR)/build_in
 	$(CC) $(FLAGS) $(HEADER) -c $< -o $@ -I./inc -I./libft
