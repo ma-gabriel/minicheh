@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sig.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 01:55:47 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 01:55:56 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 12:07:57 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,16 @@ void	sahandler_fake(int sig)
 	{
 		write(1, "\n", 1);
 		the_return_value(130);
+	}
+}
+
+void	sahander_here_doc(int sig)
+{
+	if (SIGINT == sig)
+	{
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
 }

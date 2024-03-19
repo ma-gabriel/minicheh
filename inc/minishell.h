@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 06:04:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 11:03:20 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/19 12:58:08 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,42 +34,42 @@
 # define C      "\033[1;36m"   /* Bold Cyan */
 # define W      "\033[1;37m"   /* Bold White */
 
-void	loops_minishell(t_env **envp);
+t_env	*ft_envlstnew(char *key, char *value);
+t_env	*ft_envlstnew(char *key, char *value);
+t_env	*ft_envlstnew_frees(char **key_value);
+char	*get_value(char *str, t_env *env);
 char	*get_a_new_line(t_env *env);
+char	*get_pwd(void);
+char	*ft_space_strtok(char *str);
 char	*replace_env(char *str, t_env *env);
 char	**create_envp(t_env *env);
 char	**sep_in_two(char *str);
+void	executions(char *line, t_env **env);
+void	rm_useless_quotes(char *str);
+void	rm_useless_quotes_argv(char **str);
+void	sahandler_fake(int sig);
+void	sahandler_true(int sig);
+void	loops_minishell(t_env **envp);
+void	ft_envclear(t_env *env);
+void	set_shlvl(t_env *env);
+void	sahander_here_doc(int sig);
 void	ft_envlstadd_until_sorted(t_env **lst, t_env *new_lst);
-t_env	*ft_envlstnew(char *key, char *value);
+void	ft_envlstadd_until_sorted(t_env **lst, t_env *new_lst);
 int		ft_strsfree(char **strs);
 int		the_return_value(size_t value);
+int		bi_export(char *line, t_env **env);
 int		replace_inside(char **p_s, size_t start, size_t end, char *s2);
-void	get_sig(int signal);
-void	ft_envlstadd_until_sorted(t_env **lst, t_env *new_lst);
-void	ft_envclear(t_env *env);
-t_env	*ft_envlstnew(char *key, char *value);
-t_env	*ft_envlstnew_frees(char **key_value);
 int		bi_env(char *line, t_env **env);
 int		bi_echo(char *line, t_env **env);
 int		bi_pwd(char *line, t_env **env);
 int		bi_cd(char *line, t_env **env);
 int		bi_exit(char *line, t_env **env);
 int		bi_unset(char *line, t_env **env);
-int		bi_export(char *line, t_env **env);
-void	executions(char *line, t_env **env);
-void	rm_useless_quotes(char *str);
-void	rm_useless_quotes_argv(char **str);
-char	*get_pwd(void);
-char	*ft_space_strtok(char *str);
-void	sahandler_fake(int sig);
-void	sahandler_true(int sig);
-char	*get_value(char *str, t_env *env);
 int		almost_pipex(char **argv, char **envp, void *env);
 int		redirections(char *line, t_env *env);
 int		is_a_built_in(char *line, t_env **env);
 int		ft_envlst_remove_if(t_env **start, char *line);
 int		get_heredoc(char *line, t_env *env);
 int		redirect_before_bi(char *line, t_env **env);
-void	set_shlvl(t_env *env);
 
 #endif 

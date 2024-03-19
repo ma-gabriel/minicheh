@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 04:23:47 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 08:03:45 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 12:05:52 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static int	open_heredocs(char *command, int fd, t_env *env)
 	if (!limiter)
 		return (-1);
 	line = readline(">");
+	signal(SIGINT, &sahander_here_doc);
 	if (line)
 		line = replace_env(line, env);
 	if (line)
