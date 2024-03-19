@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 00:19:25 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 03:29:01 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 06:31:28 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,10 @@ int	bi_unset(char *line, t_env **env)
 {
 	char	*args;
 
+	if (!redirect_before_bi(line, env))
+		return (the_return_value(1));
+	while (*line == ' ' || *line == '\'' || *line == '\"')
+		line++;
 	line += 5;
 	while (*line == ' ')
 		line++;

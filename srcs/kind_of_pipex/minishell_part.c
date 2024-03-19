@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:43:19 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/18 23:54:34 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 06:43:40 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static void	destruction(char *line, t_env **env, int fd[3], int temp)
 		if (temp == -1)
 			temp = 0;
 		free(line);
-		ft_envclear(*((t_env **)env));
+		ft_envclear(*env);
 		exit((close_3_free(fd[0], fd[1], -1, NULL) || 1) * temp);
 	}
 }
 
-int	is_a_built_in_pipe(char *line, void *env, int fd[3])
+int	is_a_built_in_pipe(char *line, t_env **env, int fd[3])
 {
 	int		temp;
 	size_t	i;
@@ -35,18 +35,18 @@ int	is_a_built_in_pipe(char *line, void *env, int fd[3])
 	while (*(line + i) == ' ')
 		i++;
 	if (!ft_strncmp(line + i, "env", 3) && (line[3 + i] == ' ' || !line[3 + i]))
-		temp = bi_env((t_env **) env);
+		temp = bi_env(line, env);
 	else if (!ft_strncmp(line + i, "echo ", 5))
-		temp = bi_echo(line + i);
+		temp = bi_echo(line, env);
 	else if (!ft_strncmp(line + i, "pwd", 3)
 		&& (line[3 + i] == ' ' || !line[3 + i]))
-		temp = bi_pwd();
+		temp = bi_pwd(line, env);
 	else if (!ft_strncmp(line + i, "cd", 2)
 		&& (line[2 + i] == ' ' || !line[2 + i]))
-		temp = bi_cd(line + i, (t_env **) env);
+		temp = bi_cd(line, env);
 	else if (!ft_strncmp(line + i, "exit", 4)
 		&& (line[4 + i] == ' ' || !line[4 + i]))
-		temp = bi_exit(line);
+		temp = bi_exit(line, env);
 	if (temp != -2)
 		destruction(line, env, fd, temp);
 	return (-1);

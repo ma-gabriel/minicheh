@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:22:00 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 03:02:47 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 06:40:36 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,21 @@ int	is_a_built_in(char *line, t_env **env)
 	while (*(line + i) == ' ' || *(line + i) == '\"' || *(line + i) == '\'')
 		i++;
 	if (!ft_strncmp(line + i, "env", 3) && (line[i + 3] == ' ' || !line[i + 3]))
-		return (bi_env(env) || 1);
+		return (bi_env(line, env) || 1);
 	if (!ft_strncmp(line + i, "echo", 4)
 		&& (line[i + 4] == ' ' || !line[i + 4]))
-		return (bi_echo(line + i) || 1);
+		return (bi_echo(line, env) || 1);
 	if (!ft_strncmp(line + i, "pwd", 3) && (line[i + 3] == ' ' || !line[i + 3]))
-		return (bi_pwd() || 1);
+		return (bi_pwd(line, env) || 1);
 	if (!ft_strncmp(line + i, "cd", 2) && (line[i + 2] == ' ' || !line[i + 2]))
-		return (bi_cd(line + i, env) || 1);
+		return (bi_cd(line, env) || 1);
 	if (!ft_strncmp(line + i, "unset", 5) && (line[5] == ' ' || !line[i + 5]))
-		return (bi_unset(line + i, env) || 1);
+		return (bi_unset(line, env) || 1);
 	if (!ft_strncmp(line + i, "export", 6)
 		&& (line[i + 6] == ' ' || !line[i + 6]))
 		return (bi_export(line, env) || 1);
 	if (!ft_strncmp(line, "exit", 4) && (line[4] == ' ' || !line[4]))
-		return (bi_exit(line) || 1);
+		return (bi_exit(line, env) || 1);
 	return (0);
 }
 
@@ -80,25 +80,23 @@ int	redirect_before_bi(char *line, t_env **env)
 
 	fd[0] = dup(0);
 	if (fd[0] == -1)
-		return (-1);
+		return (0);
 	fd[1] = dup(1);
 	if (fd[1] == -1)
 	{
 		close(fd[0]);
-		return (-1);
+		return (0);
 	}
-	res = redirections(line);
-	if (res != -1)
-		res = is_a_built_in(line, env);
+	res = redirections(line, *env);
 	if (dup2(fd[0], 0) == -1 || dup2(fd[1], 1) == -1)
 	{
 		close(fd[0]);
 		close(fd[1]);
-		return (-(bi_exit(line) || 1));
+		return (bi_exit(line, env) && 0);
 	}
 	close(fd[0]);
 	close(fd[1]);
-	return (res);
+	return (res != -1);
 }
 
 void	executions(char *line, t_env **env)
@@ -122,7 +120,7 @@ void	executions(char *line, t_env **env)
 	}
 	change_split(argv, -2, '|');
 	rm_useless_quotes_argv(argv);
-	if (argv[0] && (argv[1] || !(redirect_before_bi(line, env))))
+	if (argv[0] && (argv[1] || !(is_a_built_in(line, env))))
 		the_return_value(almost_pipex(argv, envp, (void *) env));
 	ft_strsfree(envp);
 	ft_strsfree(argv);

@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 08:27:35 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/18 23:55:21 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 06:31:59 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,13 @@ int	the_return_value(size_t value)
 	return (value);
 }
 
-int	bi_env(t_env **env)
+int	bi_env(char *line, t_env **env)
 {
 	char	**envp;
 	size_t	i;
 
+	if (!redirect_before_bi(line, env))
+		return (the_return_value(1));
 	i = -1;
 	envp = create_envp(*env);
 	if (!envp)

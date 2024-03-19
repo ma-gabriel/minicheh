@@ -18,6 +18,7 @@ SRCS =	build_in/built_in_echo.c \
 	main.c \
 	replace_str.c \
 	sig.c \
+	here_doc.c \
 	redirections.c \
 	env_utils.c \
 	execution.c \

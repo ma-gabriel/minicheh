@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 09:15:38 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 03:00:11 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 06:31:43 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,15 @@ static size_t	parameters_nl(char *line)
 	return (res);
 }
 
-int	bi_echo(char *line)
+int	bi_echo(char *line, t_env **env)
 {
 	short	b00l;
 
+	if (!redirect_before_bi(line, env))
+		return (the_return_value(1));
 	rm_useless_quotes(line);
+	while (*line == ' ')
+		line++;
 	line += 4;
 	while (*line == ' ')
 		line++;

@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 06:04:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 02:00:25 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 06:29:33 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,11 @@
 # include <signal.h>
 # include <errno.h>
 # include <fcntl.h>
+# include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/libft.h"
-
-typedef struct s_env
-{
-	char			*key;
-	char			*value;
-	struct s_env	*next;
-}	t_env;
+# include "struct.h"
 
 # define RST    "\033[0m"      /* Reset to default color */
 # define RED	"\033[1;31m"   /* Bold Red */
@@ -54,11 +49,11 @@ void	ft_envlstadd_until_sorted(t_env **lst, t_env *new_lst);
 void	ft_envclear(t_env *env);
 t_env	*ft_envlstnew(char *key, char *value);
 t_env	*ft_envlstnew_frees(char **key_value);
-int		bi_env(t_env **env);
-int		bi_echo(char *line);
-int		bi_pwd(void);
+int		bi_env(char *line, t_env **env);
+int		bi_echo(char *line, t_env **env);
+int		bi_pwd(char *line, t_env **env);
 int		bi_cd(char *line, t_env **env);
-int		bi_exit(char *line);
+int		bi_exit(char *line, t_env **env);
 int		bi_unset(char *line, t_env **env);
 int		bi_export(char *line, t_env **env);
 void	executions(char *line, t_env **env);
@@ -70,8 +65,10 @@ void	sahandler_fake(int sig);
 void	sahandler_true(int sig);
 char	*get_value(char *str, t_env *env);
 int		almost_pipex(char **argv, char **envp, void *env);
-int		redirections(char *line);
+int		redirections(char *line, t_env *env);
 int		is_a_built_in(char *line, t_env **env);
 int		ft_envlst_remove_if(t_env **start, char *line);
+int		get_heredoc(char *line, t_env *env);
+int		redirect_before_bi(char *line, t_env **env);
 
 #endif 

@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 03:11:22 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 03:00:24 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 06:32:19 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,14 @@ static int	check_args_exit(char *line)
 	return (0);
 }
 
-int	bi_exit(char *line)
+int	bi_exit(char *line, t_env **env)
 {
 	char	*line_cpy;
 	int		res;
 	int		args_flag;
 
+	if (!redirect_before_bi(line, env))
+		return (the_return_value(1));
 	rm_useless_quotes(line);
 	line_cpy = line;
 	while (*line == ' ')

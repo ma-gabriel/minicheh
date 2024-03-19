@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:54:44 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/18 23:51:16 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 05:46:07 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static char	*ft_strdup(const char *src)
 	return (dest);
 }
 
-int	the_execve_stuff(char *command, char *envp[], int fd[3], void *env)
+int	the_execve_stuff(char *command, char *envp[], int fd[3], t_env **env)
 {
 	int		pid;
 	char	*line;
@@ -102,14 +102,14 @@ int	the_execve_stuff(char *command, char *envp[], int fd[3], void *env)
 			|| dup2(fd[0], 0) == -1)
 		return (-(close_3_free(fd[0], fd[1], -1, NULL) || 1));
 	close_3_free(fd[0], fd[1], -1, NULL);
-	redirections(command);
+	redirections(command, *env);
 	is_a_built_in_pipe(command, env, fd);
 	line = ft_strdup(command);
 	middle_command(line, envp, fd);
 	return (-1);
 }
 
-int	loops_executions(char **argv, char **envp, int init_fd[2], void *env)
+int	loops_executions(char **argv, char **envp, int init_fd[2], t_env **env)
 {
 	size_t	i;
 	int		fd_old[2];

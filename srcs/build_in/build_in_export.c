@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 00:21:40 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 03:25:12 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 06:31:15 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,10 @@ int	bi_export(char *line, t_env **env)
 {
 	int	res;
 
+	if (!redirect_before_bi(line, env))
+		return (the_return_value(1));
+	while (*line == ' ' || *line == '\'' || *line == '\"')
+		line++;
 	line += 7;
 	while (*line == ' ')
 		line++;

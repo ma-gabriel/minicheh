@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:58:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 00:36:27 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 06:42:46 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static size_t	path_len(char *str)
 	return (i);
 }
 
-static int	open_dup2(char *line, size_t len, int flag)
+static int	open_dup2(char *line, size_t len, int flag, t_env *env)
 {
 	char	*file;
 	int		fd_temp;
@@ -41,14 +41,15 @@ static int	open_dup2(char *line, size_t len, int flag)
 		return (-1);
 	if (flag == 0)
 		fd_temp = open(file, O_RDONLY);
-	//else if (flag == 1)
-	//	fd = get_heredoc()
+	else if (flag == 1)
+		fd_temp = get_heredoc(line, env);
 	else if (flag == 2)
 		fd_temp = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	else if (flag == 3)
 		fd_temp = open(file, O_WRONLY | O_CREAT | O_APPEND, 0666);
-	if (fd_temp == -1)
+	if (fd_temp == -1 && flag != 1)
 		perror(file);
+	printf("%i\n", fd_temp);
 	free(file);
 	if (fd_temp == -1)
 		return (-1);
@@ -57,7 +58,7 @@ static int	open_dup2(char *line, size_t len, int flag)
 	return (res);
 }
 
-static int	line_shortener(char *line, int flag)
+static int	line_shortener(char *line, int flag, t_env *env)
 {
 	int		spaces;
 	size_t	len;
@@ -72,14 +73,31 @@ static int	line_shortener(char *line, int flag)
 	len = path_len(line + (flag == 1 || flag == 3) + spaces + 1);
 	if (len != 0)
 		returned = open_dup2(line + (flag == 1 || flag == 3) \
-				+ spaces + 1, len, flag);
+				+ spaces + 1, len, flag, env);
 	else
 		write(2, "minishell: syntax error near unexpected token\n", 47);
 	ft_strcpy(line, line + (flag == 1 || flag == 3) + spaces + 1 + len);
 	return (-(returned == -1));
 }
 
-int	redirections(char *line)
+static int	directions_hub(char *line, size_t *i, int delimiter, t_env *env)
+{
+		if (line[*i] == '<' && !delimiter)
+		{
+			if (line_shortener(line + *i, 0 + (line[*i + 1] == '<'), env))
+				return (-1);
+			(*i)--;
+		}
+		if (line[*i] == '>' && !delimiter)
+		{
+			if (line_shortener(line + *i, 2 + (line[*i + 1] == '>'), env))
+				return (-1);
+			(*i)--;
+		}
+		return (0);
+}
+
+int	redirections(char *line, t_env *env)
 {
 	size_t	i;
 	int		delimiter;
@@ -96,12 +114,8 @@ int	redirections(char *line)
 			delimiter = 1;
 		else if (line[i] == '\'' && !delimiter)
 			delimiter = 2;
-		if (line[i] == '<' && !delimiter)
-			if (line_shortener(line + i, 0 + (line[i + 1] == '<')))
-				return (-1);
-		if (line[i] == '>' && !delimiter)
-			if (line_shortener(line + i, 2 + (line[i + 1] == '>')))
-				return (-1);
+		if (directions_hub(line, &i, delimiter, env) == -1)
+			return (-1);
 		i++;
 	}
 	return (0);

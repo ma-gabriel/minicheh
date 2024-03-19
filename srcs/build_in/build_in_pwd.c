@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 01:13:29 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 02:59:45 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 06:33:51 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ char	*get_pwd(void)
 	return (NULL);
 }
 
-int	bi_pwd(void)
+int	bi_pwd(char *line, t_env **env)
 {
 	char	*pwd_string;
 
+	if (!redirect_before_bi(line, env))
+		return (the_return_value(1));
 	pwd_string = get_pwd();
 	if (!pwd_string)
 		return (the_return_value(1));
