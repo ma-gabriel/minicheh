@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 04:23:47 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 07:28:04 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 08:03:45 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	get_heredoc(char *line, t_env *env)
 	}
 	fd = open(".here_doc", O_CREAT | O_TRUNC | O_RDWR, 0666);
 	if (fd == -1)
-		return (-(write(2, "couldn't open the here_doc file\n", 33) || 1));
+		return (-1);
 	kid = open_heredocs(line, fd, env);
 	close(fd);
 	exit(kid);
