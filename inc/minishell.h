@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 06:04:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 06:29:33 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 11:03:20 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ int		is_a_built_in(char *line, t_env **env);
 int		ft_envlst_remove_if(t_env **start, char *line);
 int		get_heredoc(char *line, t_env *env);
 int		redirect_before_bi(char *line, t_env **env);
+void	set_shlvl(t_env *env);
 
 #endif 

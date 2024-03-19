@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 02:56:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 06:09:32 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 11:03:28 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static t_env	*dup_envp(char **envp)
 	}
 	the_return_value((size_t) & env);
 	the_return_value(0);
+	set_shlvl(env);
 	return (env);
 }
 
@@ -46,6 +47,7 @@ static t_env	*hardcode_env(void)
 	temp = ft_envlstnew(ft_strdup("PWD"), pwd);
 	temp->next = ft_envlstnew(ft_strdup("SHLVL"), ft_strdup("1"));
 	temp->next->next = ft_envlstnew(ft_strdup("?"), ft_strdup("0"));
+	set_shlvl(temp);
 	return (temp);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   more_env_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 01:13:48 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 02:14:29 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 11:04:00 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,22 @@ char	**sep_in_two(char *str)
 	res[0] = key;
 	res[1] = value;
 	return (res);
+}
+
+void	set_shlvl(t_env *env)
+{
+	int	temp;
+
+	while (env)
+	{
+		if (ft_strcmp(env->key, "SHLVL") == 0)
+		{
+			temp = ft_atoi(env->value);
+			temp++;
+			free(env->value);
+			env->value = ft_itoa(temp);
+			return ;
+		}
+		env = env->next;
+	}
 }
