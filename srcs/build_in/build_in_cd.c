@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 00:32:15 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 01:06:37 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 02:59:25 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int	bi_cd(char *line, t_env **env)
 	int		res;
 	size_t	args;
 
+	rm_useless_quotes(line);
 	line += 2;
 	while (*line == ' ')
 		line++;

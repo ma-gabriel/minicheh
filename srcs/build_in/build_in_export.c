@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 00:21:40 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 01:11:20 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 03:25:12 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ static int	any_forbidden_chars_export(char *temp)
 	i = 0;
 	while (temp[i] != '=' && temp[i] && temp[i] != ' ')
 	{
-		if (!ft_isalnum(temp[i]) && temp[i] != '_')
+		if (!ft_isalnum(temp[i]) && temp[i] != '_' && temp[i] != ' '
+			&& temp[i] != '\"' && temp[i] != '\'')
 		{
 			write(2, "minishell: export: the identifier is not valid\n", 48);
 			return (the_return_value(1));
@@ -70,6 +71,7 @@ static int	export_multiple(char *line, t_env **env)
 		key_value = sep_in_two(temp);
 		if (!key_value)
 			return (free_ret_1(temp));
+		rm_useless_quotes(key_value[1]);
 		new_lst = ft_envlstnew_frees(key_value);
 		if (!new_lst)
 			return (free_ret_1(temp));

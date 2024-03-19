@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 09:15:38 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 01:35:36 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 03:00:11 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	bi_echo(char *line)
 {
 	short	b00l;
 
+	rm_useless_quotes(line);
 	line += 4;
 	while (*line == ' ')
 		line++;

@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 03:11:22 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/18 23:54:52 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 03:00:24 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	bi_exit(char *line)
 	int		res;
 	int		args_flag;
 
+	rm_useless_quotes(line);
 	line_cpy = line;
 	while (*line == ' ')
 		line++;

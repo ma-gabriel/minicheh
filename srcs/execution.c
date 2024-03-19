@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:22:00 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 01:59:30 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 03:02:47 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	is_a_built_in(char *line, t_env **env)
 	size_t	i;
 
 	i = 0;
-	while (*(line + i) == ' ')
+	while (*(line + i) == ' ' || *(line + i) == '\"' || *(line + i) == '\'')
 		i++;
 	if (!ft_strncmp(line + i, "env", 3) && (line[i + 3] == ' ' || !line[i + 3]))
 		return (bi_env(env) || 1);
@@ -122,7 +122,6 @@ void	executions(char *line, t_env **env)
 	}
 	change_split(argv, -2, '|');
 	rm_useless_quotes_argv(argv);
-	rm_useless_quotes(line);
 	if (argv[0] && (argv[1] || !(redirect_before_bi(line, env))))
 		the_return_value(almost_pipex(argv, envp, (void *) env));
 	ft_strsfree(envp);

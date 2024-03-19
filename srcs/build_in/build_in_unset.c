@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 00:19:25 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 00:20:31 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/19 03:29:01 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ char	*ft_space_strtok(char *str)
 	static char	*save;
 	char		*temp;
 	char		*res;
+	int			quote;
 
 	if (str)
 		save = str;
@@ -68,12 +69,18 @@ char	*ft_space_strtok(char *str)
 	while (*save == ' ')
 		save++;
 	temp = save;
-	while (*save && *save != ' ')
+	quote = 0;
+	while (*save && (*save != ' ' || quote))
+	{
+		if ((*save == '\'' || *save == '\"') && !quote)
+			quote = 1 + (*save == '\'');
+		else if ((*save == '\'' && quote == 2) || (*save == '\"' && quote == 1))
+			quote = 0;
 		save++;
+	}
 	res = malloc(save - temp + 1);
-	if (!res)
-		return (NULL);
-	ft_strlcpy(res, temp, save - temp + 1);
+	if (res)
+		ft_strlcpy(res, temp, save - temp + 1);
 	return (res);
 }
 
