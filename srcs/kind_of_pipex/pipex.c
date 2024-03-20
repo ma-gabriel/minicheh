@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 23:08:43 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/15 03:56:56 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/20 22:17:05 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,12 @@ static int	wait_everything(int pid)
 	{
 		res = waitpid(0, &infos, 0);
 		if (res == pid)
-			if (WIFEXITED(infos) || WTERMSIG(infos) != SIGINT)
+		{
+			if (WIFEXITED(infos))
 				return_value = WEXITSTATUS(infos);
+			else if (WIFSIGNALED(infos))
+				return_value = WTERMSIG(infos) + 128;
+		}
 	}
 	return (return_value);
 }

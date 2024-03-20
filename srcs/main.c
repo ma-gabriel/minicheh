@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 02:56:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 11:03:28 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/20 22:36:28 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	main(int argc, char **argv, char **envp)
 	if (!env)
 		return (2);
 	the_return_value((size_t) & env);
-	signal(SIGQUIT, &sahandler_true);
 	loops_minishell(&env);
 	end = ft_atoi(get_value("?", env));
 	ft_envclear(env);
