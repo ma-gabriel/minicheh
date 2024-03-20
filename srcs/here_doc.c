@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 04:23:47 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 12:05:52 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/20 21:11:48 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	clean_the_mess(char *line, char *limiter)
 	else
 	{
 		write(2, "minishell: warning: here-document delimited"
-			"by end-of-file (wanted `", 69);
+			"by end-of-file (wanted `", 68);
 		write(2, limiter, ft_strlen(limiter));
 		write(2, "')\n", 3);
 	}

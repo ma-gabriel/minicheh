@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:58:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 07:15:57 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/20 21:52:01 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	line_shortener(char *line, int flag, t_env *env)
 	returned = -1;
 	spaces = 0;
 	if (line[1] == '>' && flag == 0)
-		write(2, "we can't handle that redirection\n", 35);
+		write(2, "we can't handle that redirection\n", 34);
 	while (*(line + (flag == 1 || flag == 3) + spaces + 1) == ' ')
 		spaces++;
 	len = path_len(line + (flag == 1 || flag == 3) + spaces + 1);

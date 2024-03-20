@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 06:04:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 12:58:08 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/20 21:43:45 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,7 @@ int		is_a_built_in(char *line, t_env **env);
 int		ft_envlst_remove_if(t_env **start, char *line);
 int		get_heredoc(char *line, t_env *env);
 int		redirect_before_bi(char *line, t_env **env);
+int     do_export(char *temp, t_env **env);
+int     free_ret_1(char *str);
 
 #endif 
