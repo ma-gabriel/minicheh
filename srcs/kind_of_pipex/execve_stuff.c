@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:54:44 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 04:54:49 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 05:17:52 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*find_command(char **paths, char *command, int i)
 	if (!paths)
 		return (NULL);
 	path = ft_strdup_until_space(command);
-	(void) ( (size_t) path && (len = ft_strlen_p(path)));
+	(void) ( (size_t) path && (len = ft_strlen(path)));
 	while (path && (ft_strchr(command, '/') > command + len || !ft_strchr
 			(command, '/')) && access(path, X_OK) && paths[i])
 	{
@@ -33,7 +33,7 @@ char	*find_command(char **paths, char *command, int i)
 			print_error("minishell", strerror(errno), path);
 		else
 			print_error("minishell", "command not found", path
-				+ ft_strlen_p(paths[i - 1]) + 1);
+				+ ft_strlen(paths[i - 1]) + 1);
 		f_free(path);
 		path = NULL;
 	}

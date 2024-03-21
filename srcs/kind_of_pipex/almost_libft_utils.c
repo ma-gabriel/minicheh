@@ -32,19 +32,6 @@ int	ft_strcmp_nl(const char *first, const char *second)
 	return (((unsigned char) first[i] - (unsigned char)second[i]));
 }
 
-char	*ft_strchr(char *str, int c)
-{
-	size_t	i;
-
-	i = -1;
-	while (str[++i])
-		if (str[i] == (char) c)
-			return (str + i);
-	if (!((char) c))
-		return (str + i);
-	return (0);
-}
-
 char	*ft_strdup_until_space(const char *src)
 {
 	size_t	i;

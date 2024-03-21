@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 23:40:12 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 03:46:45 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/21 05:19:23 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,12 @@
 # include "collector.h"
 
 char	*ft_strjoin_free_first(char *s1, char *s2);
-char	*ft_strerror(void);
-char	*get_next_line(int fd);
 char	*ft_strchr(char *str, int c);
 char	*ft_strdup_until_space(const char *src);
 char	*ft_getenv(char **envp, char *key);
 char	*ft_strjoinwithslash(char const *s1, char const *s2);
 char	**ft_split(char const *s, char c);
-size_t	ft_strlen_p(char *s1);
+size_t	ft_strlen(const char *s1);
 size_t	ft_wordlen(char *s1);
 int		close_3_free(int fd1, int fd2, int fd3, void *allocation);
 int		ft_strcmp_nl(const char *first, const char *second);

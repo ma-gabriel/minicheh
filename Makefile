@@ -31,10 +31,7 @@ SRCS =	build_in/built_in_echo.c \
 	defines.c \
 	kind_of_pipex/almost_libft_utils.c \
 	kind_of_pipex/execve_stuff.c \
-	kind_of_pipex/ft_split.c \
 	kind_of_pipex/ft_strjoins.c \
-	kind_of_pipex/get_next_line.c \
-	kind_of_pipex/get_next_line_utils.c \
 	kind_of_pipex/open_close_free.c \
 	kind_of_pipex/pipex.c \
 	kind_of_pipex/minishell_part.c \
