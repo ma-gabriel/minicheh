@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 03:11:22 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 10:58:32 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/21 05:32:44 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static int	check_args_exit(char *line)
 		if (!ft_isdigit(*line) && *line != ' ')
 		{
 			write(2, "minishell: exit: numeric argument required\n", 44);
-			return (1);
+			return (2);
 		}
 		if (*line == ' ' && line[1] && line[1] != ' ')
 		{
 			write(2, "minishell: exit: too many arguments\n", 36);
-			return (2);
+			return (1);
 		}
 		line++;
 	}

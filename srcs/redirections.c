@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:58:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 03:26:07 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 05:54:26 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,21 +76,25 @@ static int	line_shortener(char *line, int flag, t_env *env)
 	else
 		write(2, "minishell: syntax error near unexpected token\n", 47);
 	ft_strcpy(line, line + (flag == 1 || flag == 3) + spaces + 1 + len);
-	return (-(returned == -1));
+	return (returned);
 }
 
 static int	directions_hub(char *line, size_t *i, int delimiter, t_env *env)
 {
+	int	res;
+
 	if (line[*i] == '<' && !delimiter)
 	{
-		if (line_shortener(line + *i, 0 + (line[*i + 1] == '<'), env))
-			return (-1);
+		res = line_shortener(line + *i, 0 + (line[*i + 1] == '<'), env);
+		if (res < 0)
+			return (res);
 		(*i)--;
 	}
 	if (line[*i] == '>' && !delimiter)
 	{
-		if (line_shortener(line + *i, 2 + (line[*i + 1] == '>'), env))
-			return (-1);
+		res = line_shortener(line + *i, 2 + (line[*i + 1] == '>'), env);
+		if (res < 0)
+			return (res);
 		(*i)--;
 	}
 	return (0);
@@ -100,6 +104,7 @@ int	redirections(char *line, t_env *env)
 {
 	size_t	i;
 	int		delimiter;
+	int		res;
 
 	i = 0;
 	delimiter = 0;
@@ -113,8 +118,9 @@ int	redirections(char *line, t_env *env)
 			delimiter = 1;
 		else if (line[i] == '\'' && !delimiter)
 			delimiter = 2;
-		if (directions_hub(line, &i, delimiter, env) == -1)
-			return (-1);
+		res = directions_hub(line, &i, delimiter, env);
+		if (res < 0)
+			return (res);
 		i++;
 	}
 	return (0);

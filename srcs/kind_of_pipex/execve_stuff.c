@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:54:44 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 05:17:52 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 05:55:31 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ int	the_execve_stuff(char *command, char *envp[], int fd[3], t_env **env)
 	pid = fork();
 	if (pid != 0)
 		return (pid);
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	if (fd[2] != -1)
 		close(fd[2]);
 	fd[2] = -1;
@@ -133,7 +135,7 @@ int	loops_executions(char **argv, char **envp, int init_fd[2], t_env **env)
 		if (pid == -1 || pid == -2)
 		{
 			close_3_free(fd_old[0], fd_old[1], fd_new[0], NULL);
-			f_exit(127 - 3 * pid + 0 * close(fd_new[1]));
+			f_exit(124 - 3 * pid + 0 * close(fd_new[1]));
 		}
 		close_3_free(fd_old[0], fd_old[1], fd_new[1], NULL);
 		fd_old[0] = fd_new[0];

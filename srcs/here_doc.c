@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 04:23:47 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 04:54:24 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 05:58:01 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ static int	the_parent(void)
 		return (fd);
 	close(fd);
 	signal(SIGINT, &sahandler_fake);
-	if (WIFEXITED(kid) && WEXITSTATUS(kid) == 130)
-		return (-2);
 	return (-1);
 }
 
