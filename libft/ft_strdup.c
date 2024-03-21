@@ -12,6 +12,7 @@
 
 #include <stdlib.h>
 #include "../inc/collector.h"
+
 char	*ft_strdup(const char *src)
 {
 	size_t	i;

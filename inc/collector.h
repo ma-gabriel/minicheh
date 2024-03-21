@@ -16,7 +16,7 @@
 
 typedef struct s_alloc
 {
-	void		*alloc;
+	void			*alloc;
 	struct s_alloc	*next;
 }	t_alloc;
 

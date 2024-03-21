@@ -12,6 +12,7 @@
 
 #include <stdlib.h>
 #include "../inc/collector.h"
+
 static size_t	next_word(char const *s, char c)
 {
 	size_t	i;

@@ -55,7 +55,7 @@ static void	one_single_free(void *alloc, t_alloc *actual)
 void	add_del_everything(void *alloc, short delete)
 {
 	static t_alloc	*first = NULL;
-	t_alloc		*temp;
+	t_alloc			*temp;
 
 	if (delete == 1)
 	{

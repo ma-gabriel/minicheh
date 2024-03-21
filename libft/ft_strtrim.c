@@ -12,6 +12,7 @@
 
 #include <stdlib.h>
 #include "../inc/collector.h"
+
 static int	find_end(char const *s1, char const *set)
 {
 	size_t	set_i;
