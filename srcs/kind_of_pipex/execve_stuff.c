@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:54:44 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 02:51:36 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 03:28:07 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ int	loops_executions(char **argv, char **envp, int init_fd[2], t_env **env)
 		if (pid == -1 || pid == -2)
 		{
 			close_3_free(fd_old[0], fd_old[1], fd_new[0], NULL);
-			exit(124 - 3 * pid + 0 * close(fd_new[1]));
+			exit(127 - 3 * pid + 0 * close(fd_new[1]));
 		}
 		close_3_free(fd_old[0], fd_old[1], fd_new[1], NULL);
 		fd_old[0] = fd_new[0];

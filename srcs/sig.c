@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 01:55:47 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 02:43:09 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 02:56:10 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,5 @@ void	sahandler_p_heredoc(int sig)
 void	sahandler_s_heredoc(int sig)
 {
 	if (sig == SIGINT)
-		fake_exit(130);
+		f_exit(130);
 }

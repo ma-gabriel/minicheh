@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 04:23:47 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 02:54:42 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 03:29:12 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,9 @@ static int	the_parent(void)
 		return (fd);
 	close(fd);
 	signal(SIGINT, &sahandler_fake);
-	return (-2);
+	if (WIFEXITED(kid) && WEXITSTATUS(kid) == 130)
+		return (-2);
+	return (-1);
 }
 
 int	get_heredoc(char *line, t_env *env)
