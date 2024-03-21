@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 20:49:07 by geymat            #+#    #+#             */
-/*   Updated: 2023/11/19 02:11:44 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 04:32:09 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-
+#include "../inc/collector.h"
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
 	char			*res;
@@ -22,7 +22,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 		return (NULL);
 	while (s[i])
 		i++;
-	res = (char *) malloc(i + 1);
+	res = (char *) f_malloc(i + 1);
 	if (!res)
 		return (NULL);
 	i = -1;

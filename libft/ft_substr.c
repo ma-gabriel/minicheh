@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 23:59:08 by geymat            #+#    #+#             */
-/*   Updated: 2023/11/16 19:22:29 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 04:32:05 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-
+#include "../inc/collector.h"
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*res;
@@ -22,11 +22,11 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	while (s[i])
 		i++;
 	if (i < start)
-		res = malloc(1);
+		res = f_malloc(1);
 	else if (i - start <= len)
-		res = malloc(i - start + 1);
+		res = f_malloc(i - start + 1);
 	else if (i - start > len)
-		res = malloc(len + 1);
+		res = f_malloc(len + 1);
 	if (!res)
 		return (NULL);
 	if (i < start)

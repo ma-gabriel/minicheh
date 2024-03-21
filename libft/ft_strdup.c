@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 07:32:06 by geymat            #+#    #+#             */
-/*   Updated: 2023/11/17 15:32:08 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 04:32:13 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-
+#include "../inc/collector.h"
 char	*ft_strdup(const char *src)
 {
 	size_t	i;
@@ -22,7 +22,7 @@ char	*ft_strdup(const char *src)
 	len = 0;
 	while (src[len])
 		len++;
-	dest = (char *) malloc((len + 1) * sizeof(char));
+	dest = (char *) f_malloc((len + 1) * sizeof(char));
 	if (!dest)
 		return (NULL);
 	while (++i < len)

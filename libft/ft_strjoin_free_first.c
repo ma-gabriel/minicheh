@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin_free_first.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 05:09:51 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 01:04:37 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 04:32:12 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
-
+#include "../inc/collector.h"
 char	*ft_strjoin_free_first(char *s1, char *s2)
 {
 	size_t	i;
@@ -23,7 +23,7 @@ char	*ft_strjoin_free_first(char *s1, char *s2)
 		return (NULL);
 	j = ft_strlen(s1);
 	i = ft_strlen(s2);
-	res = malloc((i + j + 1) * sizeof(char));
+	res = f_malloc((i + j + 1) * sizeof(char));
 	if (!res)
 	{
 		free(s1);

@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 14:30:07 by geymat            #+#    #+#             */
-/*   Updated: 2023/11/17 15:31:48 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 04:32:16 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-
+#include "../inc/collector.h"
 static size_t	next_word(char const *s, char c)
 {
 	size_t	i;
@@ -29,7 +29,7 @@ static int	create_new_subarray(char const *s,
 	{
 		if (*vars[1] + 1)
 			res[*vars[1]][(*vars[0])++] = 0;
-		res[++*vars[1]] = (char *) malloc(next_word(s, c) + 1);
+		res[++*vars[1]] = (char *) f_malloc(next_word(s, c) + 1);
 		if (!res[*vars[1]])
 		{
 			while (--*vars[1] + 1)
@@ -88,7 +88,7 @@ char	**ft_split(char const *s, char c)
 		if (s[i] != c)
 			nw = 0;
 	}
-	res = (char **) malloc((cw + 1) * sizeof(char *));
+	res = (char **) f_malloc((cw + 1) * sizeof(char *));
 	if (!res || !fill_the_array(s - 1, res, c))
 		return (NULL);
 	res[cw] = 0;

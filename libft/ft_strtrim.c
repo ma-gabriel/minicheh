@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:07 by geymat            #+#    #+#             */
-/*   Updated: 2023/11/17 16:00:26 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 04:32:08 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-
+#include "../inc/collector.h"
 static int	find_end(char const *s1, char const *set)
 {
 	size_t	set_i;
@@ -55,7 +55,7 @@ char	*ft_strtrim(char const *s, char const *set)
 				temp = 1;
 	}
 	temp = find_end(--s1, set);
-	res = (char *) malloc((temp + 2));
+	res = (char *) f_malloc((temp + 2));
 	if (!res)
 		return (NULL);
 	i = -1;
