@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 02:27:31 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/20 23:35:54 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 03:38:27 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	loops_minishell(t_env **env)
 {
 	char	*line;
 
-	line = malloc(1);
+	line = f_malloc(1);
 	if (line)
 		line[0] = 0;
 	while (line && ft_strncmp(line, "exit", 42))

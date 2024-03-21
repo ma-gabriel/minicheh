@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve_stuff.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:54:44 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 03:28:07 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 03:39:07 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static char	*ft_strdup(const char *src)
 	len = 0;
 	while (src[len])
 		len++;
-	dest = malloc(len + 1);
+	dest = f_malloc(len + 1);
 	if (!dest)
 		return (NULL);
 	while (++i < len)

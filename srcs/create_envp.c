@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 08:09:18 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 02:02:05 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 03:38:48 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	**create_envp(t_env *env)
 	size_t	i;
 	char	*line;
 
-	res = malloc((ft_envlstsize_to_env(env) + 1) * sizeof(char *));
+	res = f_malloc((ft_envlstsize_to_env(env) + 1) * sizeof(char *));
 	if (!res)
 		return (NULL);
 	i = 0;

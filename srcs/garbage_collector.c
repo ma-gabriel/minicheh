@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 01:30:03 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 02:27:13 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 03:38:35 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static	t_alloc	*new_alloc(void *alloc)
 {
 	t_alloc	*temp;
 
-	temp = malloc(sizeof(t_alloc));
+	temp = f_malloc(sizeof(t_alloc));
 	if (!temp)
 		return (NULL);
 	temp->alloc = alloc;

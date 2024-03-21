@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_in_pwd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 01:13:29 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 06:33:51 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 03:39:21 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*get_pwd(void)
 		if (path)
 			free(path);
 		errno = 0;
-		path = malloc(i);
+		path = f_malloc(i);
 		if (!path)
 			return (NULL);
 		getcwd(path, i);

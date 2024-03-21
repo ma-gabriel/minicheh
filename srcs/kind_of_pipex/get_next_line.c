@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:55:05 by geymat            #+#    #+#             */
-/*   Updated: 2024/02/18 18:07:12 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 03:48:29 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "collector.h"
 
 static void	*join_and_strlcpy(char buffer[BUFFER_SIZE], char *res)
 {
@@ -55,7 +56,7 @@ char	*get_next_line(int fd)
 	if (BUFFER_SIZE <= 0
 		|| (!buffer[0] && !read_return(buffer, &nb, fd)))
 		return (NULL);
-	res = malloc(1);
+	res = f_malloc(1);
 	if (!res)
 		return (NULL);
 	res[0] = 0;

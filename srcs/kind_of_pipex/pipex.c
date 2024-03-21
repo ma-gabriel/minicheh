@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 23:08:43 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/20 22:17:05 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 03:38:51 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	print_error(char *name, char *error, char *file)
 	char	*temp;
 	int		i;
 
-	temp = malloc(1);
+	temp = f_malloc(1);
 	if (!temp)
 		return ;
 	temp[0] = 0;

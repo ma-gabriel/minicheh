@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 01:13:48 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 11:17:12 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/21 03:38:21 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	**sep_in_two(char *str)
 	char	**res;
 
 	value = NULL;
-	key = malloc(word_len_until_equal(str) + 1);
+	key = f_malloc(word_len_until_equal(str) + 1);
 	if (!key)
 		return (NULL);
 	if (ft_strchr(str, '='))
@@ -50,7 +50,7 @@ char	**sep_in_two(char *str)
 			return (NULL);
 		}
 	}
-	res = malloc(16);
+	res = f_malloc(16);
 	if (!res)
 		return (free_key_value(key, value));
 	ft_strlcpy(key, str, word_len_until_equal(str) + 1);

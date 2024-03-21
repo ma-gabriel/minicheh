@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoins.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 01:10:47 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/08 16:56:21 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 03:48:05 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "collector.h"
 
 size_t	ft_strlen_p(char *s1)
 {
@@ -42,7 +43,7 @@ char	*ft_strjoin_free_first(char *s1, char *s2)
 		return (NULL);
 	j = ft_strlen_p(s1);
 	i = ft_strlen_p(s2);
-	res = malloc((i + j + 1) * sizeof(char));
+	res = f_malloc((i + j + 1) * sizeof(char));
 	if (!res)
 	{
 		free(s1);
@@ -68,7 +69,7 @@ char	*ft_strjoinwithslash(char const *s1, char const *s2)
 	len1 = 0;
 	while (s1[len1])
 		len1++;
-	res = malloc(len1 + ft_wordlen(s2) + 2);
+	res = f_malloc(len1 + ft_wordlen(s2) + 2);
 	if (!res)
 		return (NULL);
 	i = -1;

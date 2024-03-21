@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_in_unset.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 00:19:25 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 06:31:28 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 03:39:19 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*ft_space_strtok(char *str)
 			quote = 0;
 		save++;
 	}
-	res = malloc(save - temp + 1);
+	res = f_malloc(save - temp + 1);
 	if (res)
 		ft_strlcpy(res, temp, save - temp + 1);
 	return (res);

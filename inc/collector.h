@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   collector.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 01:33:16 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 02:55:39 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 03:40:46 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENZO_GABRIEL_H
-# define ENZO_GABRIEL_H
+#ifndef COLLECTOR_H
+# define COLLECTOR_H
 # include <stdlib.h>
 
 typedef struct s_alloc

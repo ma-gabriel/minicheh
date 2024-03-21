@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 04:11:58 by lcamerly          #+#    #+#             */
-/*   Updated: 2024/03/19 02:12:02 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 03:38:41 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_env	*ft_envlstnew(char *key, char *value)
 {
 	t_env	*new;
 
-	new = malloc(sizeof(t_env));
+	new = f_malloc(sizeof(t_env));
 	if (!new)
 		return (NULL);
 	new->key = key;

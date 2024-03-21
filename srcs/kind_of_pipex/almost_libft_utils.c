@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   almost_libft_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 04:48:30 by geymat            #+#    #+#             */
-/*   Updated: 2024/02/22 17:53:11 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 03:47:32 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "../../inc/minishell.h"
+#include "collector.h"
 
 int	ft_strcmp_nl(const char *first, const char *second)
 {
@@ -54,7 +55,7 @@ char	*ft_strdup_until_space(const char *src)
 	len = 0;
 	while (src[len] && src[len] != ' ')
 		len++;
-	dest = (char *) malloc((len + 1) * sizeof(char));
+	dest = (char *) f_malloc((len + 1) * sizeof(char));
 	if (!dest)
 		return (NULL);
 	while (++i < len)

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 13:03:29 by geymat            #+#    #+#             */
-/*   Updated: 2024/02/18 18:06:05 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 03:48:23 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "collector.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
@@ -62,7 +63,7 @@ char	*ft_strjoin_free_first_gnl(char *s1, char *s2, size_t lim)
 	len2 = 0;
 	while (s2[len2] && len2 < lim)
 		len2++;
-	res = (char *) malloc((len1 + len2 + 1) * sizeof(char));
+	res = (char *) f_malloc((len1 + len2 + 1) * sizeof(char));
 	if (!res)
 		return (free_ret_null(s1));
 	len1 = -1;

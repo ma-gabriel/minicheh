@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 05:14:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 01:57:14 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 03:38:03 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	replace_inside(char **p_s, size_t start, size_t end, char *s2)
 
 	s1 = *p_s;
 	i = -1;
-	res = malloc(ft_strlen(s1) + ft_strlen(s2) + start - end + 1);
+	res = f_malloc(ft_strlen(s1) + ft_strlen(s2) + start - end + 1);
 	*p_s = res;
 	if (!res)
 	{
