@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:54:44 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/20 22:20:58 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 02:51:36 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ static char	*ft_strdup(const char *src)
 int	the_execve_stuff(char *command, char *envp[], int fd[3], t_env **env)
 {
 	int		pid;
+	int		res;
 	char	*line;
 
 	pid = fork();
@@ -103,7 +104,9 @@ int	the_execve_stuff(char *command, char *envp[], int fd[3], t_env **env)
 		return (-(close_3_free(fd[0], fd[1], -1, NULL) || 1));
 	close_3_free(fd[0], fd[1], -1, NULL);
 	is_a_built_in_pipe(command, env, fd);
-	redirections(command, *env);
+	res = redirections(command, *env);
+	if (res == -1 || res == -2)
+		return (res);
 	line = ft_strdup(command);
 	middle_command(line, envp, fd);
 	return (-1);
@@ -127,10 +130,10 @@ int	loops_executions(char **argv, char **envp, int init_fd[2], t_env **env)
 		merge_fd(fd_old[0], fd_new[1], fd_merged);
 		fd_merged[2] = fd_new[0];
 		pid = the_execve_stuff(argv[i], envp, fd_merged, env);
-		if (pid == -1)
+		if (pid == -1 || pid == -2)
 		{
-			close_3_free(fd_old[0], fd_old[1], -1, NULL);
-			exit(127 + 0 * close_3_free(fd_new[0], fd_new[1], -1, NULL));
+			close_3_free(fd_old[0], fd_old[1], fd_new[0], NULL);
+			exit(124 - 3 * pid + 0 * close(fd_new[1]));
 		}
 		close_3_free(fd_old[0], fd_old[1], fd_new[1], NULL);
 		fd_old[0] = fd_new[0];

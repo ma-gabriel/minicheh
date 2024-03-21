@@ -4,6 +4,7 @@ FLAGS = -Wall -Wextra -Werror -g3
 HEADER = -I inc -I libft
 DEPS = inc/minishell.h \
        inc/struct.h \
+       inc/collector.h \
        inc/pipex.h
 LIBFT = libft/libft.a
 SRCS =	build_in/built_in_echo.c \
@@ -26,6 +27,8 @@ SRCS =	build_in/built_in_echo.c \
 	redirections.c \
 	env_utils.c \
 	execution.c \
+	garbage_collector.c \
+	defines.c \
 	kind_of_pipex/almost_libft_utils.c \
 	kind_of_pipex/execve_stuff.c \
 	kind_of_pipex/ft_split.c \

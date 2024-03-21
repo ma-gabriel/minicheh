@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 23:40:12 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 12:58:47 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/21 02:34:04 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <errno.h>
 # include <stdlib.h>
 # include "struct.h"
+# include "collector.h"
 
 char	*ft_strjoin_free_first(char *s1, char *s2);
 char	*ft_strerror(void);

@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 02:27:31 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/20 22:41:34 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/20 23:35:54 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	loops_minishell(t_env **env)
 	{
 		free(line);
 		signal(SIGINT, &sahandler_true);
-		signal(SIGQUIT, &sahandler_true);
+		signal(SIGQUIT, SIG_IGN);
 		line = get_a_new_line(*env);
 		signal(SIGINT, &sahandler_fake);
 		signal(SIGQUIT, &sahandler_fake);

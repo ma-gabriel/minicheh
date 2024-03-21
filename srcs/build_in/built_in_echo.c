@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 09:15:38 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 06:31:43 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 01:22:15 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@ static size_t	only_char_until_space(char *line, char c)
 	return (i);
 }
 
-static size_t	parameters_nl(char *line)
+static int	parameters_nl(char *line)
 {
 	size_t	n;
-	size_t	res;
+	int		res;
 
+	if (!*line)
+		return (0);
 	n = only_char_until_space(line + 1, 'n');
 	res = (n != 0);
 	while (line[0] == '-' && n)

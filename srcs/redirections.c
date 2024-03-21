@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:58:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/20 21:52:01 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/21 00:28:17 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	open_dup2(char *line, size_t len, int flag, t_env *env)
 	int		fd_temp;
 	int		res;
 
-	fd_temp = -1;
+	fd_temp = -2;
 	file = ft_substr(line, 0, len);
 	if (!file)
 		return (-1);
@@ -50,8 +50,8 @@ static int	open_dup2(char *line, size_t len, int flag, t_env *env)
 	if (fd_temp == -1 && flag != 1)
 		perror(file);
 	free(file);
-	if (fd_temp == -1)
-		return (-1);
+	if (fd_temp == -2 || fd_temp == -1)
+		return (-fd_temp - 2);
 	res = dup2(fd_temp, flag / 2);
 	close(fd_temp);
 	return (res);

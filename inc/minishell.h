@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 06:04:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/20 21:43:45 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/21 02:36:08 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <readline/history.h>
 # include "../libft/libft.h"
 # include "struct.h"
+# include "collector.h"
 
 # define RST    "\033[0m"      /* Reset to default color */
 # define RED	"\033[1;31m"   /* Bold Red */
@@ -49,11 +50,11 @@ void	rm_useless_quotes(char *str);
 void	rm_useless_quotes_argv(char **str);
 void	sahandler_fake(int sig);
 void	sahandler_true(int sig);
+void	sahandler_p_heredoc(int sig);
+void	sahandler_s_heredoc(int sig);
 void	loops_minishell(t_env **envp);
 void	ft_envclear(t_env *env);
 void	set_shlvl(t_env *env);
-void	sahander_here_doc(int sig);
-void	ft_envlstadd_until_sorted(t_env **lst, t_env *new_lst);
 void	ft_envlstadd_until_sorted(t_env **lst, t_env *new_lst);
 int		ft_strsfree(char **strs);
 int		the_return_value(size_t value);
@@ -71,7 +72,7 @@ int		is_a_built_in(char *line, t_env **env);
 int		ft_envlst_remove_if(t_env **start, char *line);
 int		get_heredoc(char *line, t_env *env);
 int		redirect_before_bi(char *line, t_env **env);
-int     do_export(char *temp, t_env **env);
-int     free_ret_1(char *str);
+int		do_export(char *temp, t_env **env);
+int		free_ret_1(char *str);
 
 #endif 
