@@ -52,7 +52,8 @@ static int	any_forbidden_chars_export(char *temp)
 
 int	free_ret_1(char *str)
 {
-	free(str);
+	if (str)
+		f_free(str);
 	return (1);
 }
 
@@ -73,7 +74,7 @@ static int	export_multiple(char *line, t_env **env)
 			line++;
 		while (*line == ' ')
 			line++;
-		free(temp);
+		f_free(temp);
 	}
 	if (trigger == 1)
 		write(2, "minishell: export: the identifier is not valid\n", 48);

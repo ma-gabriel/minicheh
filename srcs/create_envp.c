@@ -35,10 +35,10 @@ int	ft_strsfree(char **strs)
 		return (-1);
 	while (*strs)
 	{
-		free(*strs);
+		f_free(*strs);
 		strs++;
 	}
-	free(copy);
+	f_free(copy);
 	return (0);
 }
 

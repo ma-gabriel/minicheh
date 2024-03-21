@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:54:44 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 03:39:07 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/21 04:54:49 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*find_command(char **paths, char *command, int i)
 	while (path && (ft_strchr(command, '/') > command + len || !ft_strchr
 			(command, '/')) && access(path, X_OK) && paths[i])
 	{
-		free(path);
+		f_free(path);
 		path = ft_strjoinwithslash(paths[i++], command);
 	}
 	if (paths && path && access(path, X_OK))
@@ -34,7 +34,7 @@ char	*find_command(char **paths, char *command, int i)
 		else
 			print_error("minishell", "command not found", path
 				+ ft_strlen_p(paths[i - 1]) + 1);
-		free(path);
+		f_free(path);
 		path = NULL;
 	}
 	free_the_split(paths);
@@ -58,13 +58,13 @@ int	middle_command(char *line, char **envp, int fd[3])
 		return (close_3_free(fd[0], fd[1], -1, (char *) remember_line));
 	args = ft_split(line, ' ');
 	if (!args)
-		free((char *) remember_line);
+		f_free((char *) remember_line);
 	if (!args)
 		return (close_3_free(fd[0], fd[1], -1, command));
 	close_3_free(fd[0], fd[1], -1, (char *) remember_line);
 	execve(command, args, envp);
 	free_the_split(args);
-	free(command);
+	f_free(command);
 	return (0);
 }
 
@@ -124,7 +124,7 @@ int	loops_executions(char **argv, char **envp, int init_fd[2], t_env **env)
 	while (argv[++i])
 	{
 		if (argv[i + 1] && pipe(fd_new))
-			exit(close_3_free(fd_old[0], fd_old[1], -1, NULL));
+			f_exit(close_3_free(fd_old[0], fd_old[1], -1, NULL));
 		if (!argv[i + 1])
 			merge_fd(-1, init_fd[1], fd_new);
 		merge_fd(fd_old[0], fd_new[1], fd_merged);
@@ -133,7 +133,7 @@ int	loops_executions(char **argv, char **envp, int init_fd[2], t_env **env)
 		if (pid == -1 || pid == -2)
 		{
 			close_3_free(fd_old[0], fd_old[1], fd_new[0], NULL);
-			exit(127 - 3 * pid + 0 * close(fd_new[1]));
+			f_exit(127 - 3 * pid + 0 * close(fd_new[1]));
 		}
 		close_3_free(fd_old[0], fd_old[1], fd_new[1], NULL);
 		fd_old[0] = fd_new[0];

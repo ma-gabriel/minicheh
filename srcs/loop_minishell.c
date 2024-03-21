@@ -21,7 +21,7 @@ void	loops_minishell(t_env **env)
 		line[0] = 0;
 	while (line && ft_strncmp(line, "exit", 42))
 	{
-		free(line);
+		f_free(line);
 		signal(SIGINT, &sahandler_true);
 		signal(SIGQUIT, SIG_IGN);
 		line = get_a_new_line(*env);
@@ -32,5 +32,5 @@ void	loops_minishell(t_env **env)
 		executions(line, env);
 	}
 	if (line)
-		free(line);
+		f_free(line);
 }

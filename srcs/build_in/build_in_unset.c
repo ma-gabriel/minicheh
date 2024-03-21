@@ -44,9 +44,9 @@ int	ft_envlst_remove_if(t_env **start, char *line)
 				prev->next = temp->next;
 			else
 				*start = temp->next;
-			free(temp->key);
-			free(temp->value);
-			free(temp);
+			f_free(temp->key);
+			f_free(temp->value);
+			f_free(temp);
 			return (1);
 		}
 		prev = temp;
@@ -104,7 +104,7 @@ int	bi_unset(char *line, t_env **env)
 	{
 		ft_envlst_remove_if(env, args);
 		line = NULL;
-		free(args);
+		f_free(args);
 		args = ft_space_strtok(line);
 	}
 	the_return_value(0);

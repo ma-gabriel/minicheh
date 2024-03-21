@@ -42,14 +42,14 @@ int	change_pwd_env(t_env **env)
 		return (2);
 	litterally_pwd = ft_strdup("PWD");
 	if (!litterally_pwd)
-		free(pwd);
+		f_free(pwd);
 	if (!litterally_pwd)
 		return (3);
 	temp = ft_envlstnew(litterally_pwd, pwd);
 	if (!temp)
 	{
-		free(pwd);
-		free(litterally_pwd);
+		f_free(pwd);
+		f_free(litterally_pwd);
 		return (4);
 	}
 	ft_envlstadd_until_sorted(env, temp);

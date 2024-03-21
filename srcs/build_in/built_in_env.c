@@ -27,14 +27,14 @@ int	the_return_value(size_t value)
 	key = ft_strdup("?");
 	if (!key)
 	{
-		free(env_value);
+		f_free(env_value);
 		return (value);
 	}
 	new_env = ft_envlstnew(key, env_value);
 	if (!new_env)
 	{
-		free(env_value);
-		free(key);
+		f_free(env_value);
+		f_free(key);
 		return (value);
 	}
 	ft_envlstadd_until_sorted(env, new_env);

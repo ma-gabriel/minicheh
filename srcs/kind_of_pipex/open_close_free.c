@@ -37,7 +37,7 @@ int	close_3_free(int fd1, int fd2, int fd3, void *allocation)
 		close(fd3);
 	if (allocation)
 	{
-		free(allocation);
+		f_free(allocation);
 		return (-1);
 	}
 	return (-2);
@@ -49,6 +49,6 @@ void	free_the_split(char **argv)
 
 	i = 0;
 	while (argv[i])
-		free(argv[i++]);
-	free(argv);
+		f_free(argv[i++]);
+	f_free(argv);
 }

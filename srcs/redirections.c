@@ -49,7 +49,7 @@ static int	open_dup2(char *line, size_t len, int flag, t_env *env)
 		fd_temp = open(file, O_WRONLY | O_CREAT | O_APPEND, 0666);
 	if (fd_temp == -1 && flag != 1)
 		perror(file);
-	free(file);
+	f_free(file);
 	if (fd_temp == -3 || fd_temp == -2 || fd_temp == -1)
 		return (-fd_temp - 3);
 	res = dup2(fd_temp, flag / 2);

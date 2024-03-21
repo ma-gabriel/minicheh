@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 02:56:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/20 22:36:28 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 05:04:48 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static t_env	*hardcode_env(void)
 	temp = NULL;
 	pwd = get_pwd();
 	if (!pwd)
-		exit(1);
+		f_exit(1);
 	temp = ft_envlstnew(ft_strdup("PWD"), pwd);
 	temp->next = ft_envlstnew(ft_strdup("SHLVL"), ft_strdup("1"));
 	temp->next->next = ft_envlstnew(ft_strdup("?"), ft_strdup("0"));
@@ -68,5 +68,6 @@ int	main(int argc, char **argv, char **envp)
 	end = ft_atoi(get_value("?", env));
 	ft_envclear(env);
 	rl_clear_history();
+	add_del_everything(NULL, 1);
 	return (end);
 }

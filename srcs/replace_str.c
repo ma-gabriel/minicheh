@@ -24,7 +24,7 @@ int	replace_inside(char **p_s, size_t start, size_t end, char *s2)
 	*p_s = res;
 	if (!res)
 	{
-		free(s1);
+		f_free(s1);
 		return (-1);
 	}
 	while (++i < start)
@@ -36,7 +36,7 @@ int	replace_inside(char **p_s, size_t start, size_t end, char *s2)
 	while (++i < ft_strlen(s1) - end)
 		res[i + start + ft_strlen(s2)] = s1[i + end];
 	res[i + start + ft_strlen(s2)] = '\0';
-	free(s1);
+	f_free(s1);
 	return (0);
 }
 

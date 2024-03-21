@@ -13,18 +13,6 @@
 #include "../../inc/minishell.h"
 #include "pipex.h"
 
-static void	destruction(char *line, t_env **env, int fd[3], int temp)
-{
-	if (temp != -2)
-	{
-		if (temp == -1)
-			temp = 0;
-		free(line);
-		ft_envclear(*env);
-		exit((close_3_free(fd[0], fd[1], -1, NULL) || 1) * temp);
-	}
-}
-
 int	is_a_built_in_pipe(char *line, t_env **env, int fd[3])
 {
 	int		temp;
@@ -48,6 +36,6 @@ int	is_a_built_in_pipe(char *line, t_env **env, int fd[3])
 		&& (line[4 + i] == ' ' || !line[4 + i]))
 		temp = bi_exit(line, env);
 	if (temp != -2)
-		destruction(line, env, fd, temp);
+		f_exit((close_3_free(fd[0], fd[1], -1, NULL) || 1) * temp);
 	return (-1);
 }

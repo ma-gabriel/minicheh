@@ -59,7 +59,7 @@ void	print_error(char *name, char *error, char *file)
 	while (temp[i])
 		i++;
 	write(2, temp, i);
-	free(temp);
+	f_free(temp);
 }
 
 void	merge_fd(size_t fd1, size_t fd2, int fd_res[2])

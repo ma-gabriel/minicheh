@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 01:30:03 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 03:38:35 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/21 04:39:35 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static	t_alloc	*new_alloc(void *alloc)
 {
 	t_alloc	*temp;
 
-	temp = f_malloc(sizeof(t_alloc));
+	temp = malloc(sizeof(t_alloc));
 	if (!temp)
 		return (NULL);
 	temp->alloc = alloc;
@@ -73,7 +73,7 @@ void	add_del_everything(void *alloc, short delete)
 		return ;
 	}
 	temp = first;
-	while (temp)
+	while (temp->next)
 		temp = temp->next;
 	temp->next = new_alloc(alloc);
 }

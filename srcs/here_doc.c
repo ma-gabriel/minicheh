@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 04:23:47 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 03:29:12 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/21 04:54:24 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ static char	*get_limiter(char *line)
 static void	clean_the_mess(char *line, char *limiter)
 {
 	if (line)
-		free(line);
+		f_free(line);
 	else
 	{
 		write(2, "minishell: warning: here-document delimited"
 			"by end-of-file\n", 59);
 	}
-	free(limiter);
+	f_free(limiter);
 }
 
 static void	open_heredocs(char *command, int fd, t_env *env)
@@ -62,7 +62,7 @@ static void	open_heredocs(char *command, int fd, t_env *env)
 	{
 		write(fd, line, len);
 		write(fd, "\n", 1);
-		free(line);
+		f_free(line);
 		line = readline(">");
 		if (line)
 			line = replace_env(line, env);
@@ -109,5 +109,6 @@ int	get_heredoc(char *line, t_env *env)
 	}
 	open_heredocs(line, fd, env);
 	close(fd);
-	exit(0);
+	f_exit(0);
+	return (0);
 }

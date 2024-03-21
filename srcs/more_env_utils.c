@@ -26,8 +26,8 @@ static size_t	word_len_until_equal(char *str)
 
 static void	*free_key_value(char *key, char *value)
 {
-	free(key);
-	free(value);
+	f_free(key);
+	f_free(value);
 	return (NULL);
 }
 
@@ -46,7 +46,7 @@ char	**sep_in_two(char *str)
 		value = ft_strdup(str + word_len_until_equal(str) + 1);
 		if (!value)
 		{
-			free(key);
+			f_free(key);
 			return (NULL);
 		}
 	}
@@ -69,7 +69,7 @@ void	set_shlvl(t_env *env)
 		{
 			temp = ft_atoi(env->value);
 			temp++;
-			free(env->value);
+			f_free(env->value);
 			env->value = ft_itoa(temp);
 			return ;
 		}

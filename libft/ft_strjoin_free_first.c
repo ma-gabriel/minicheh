@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include "libft.h"
 #include "../inc/collector.h"
+
 char	*ft_strjoin_free_first(char *s1, char *s2)
 {
 	size_t	i;
@@ -26,7 +27,7 @@ char	*ft_strjoin_free_first(char *s1, char *s2)
 	res = f_malloc((i + j + 1) * sizeof(char));
 	if (!res)
 	{
-		free(s1);
+		f_free(s1);
 		return (NULL);
 	}
 	i = -1;
@@ -36,6 +37,6 @@ char	*ft_strjoin_free_first(char *s1, char *s2)
 	while (s2[++i])
 		res[i + j] = s2[i];
 	res[i + j] = '\0';
-	free(s1);
+	f_free(s1);
 	return (res);
 }

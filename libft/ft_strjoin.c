@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "../inc/collector.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -25,7 +26,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	i = 0;
 	while (s2[i])
 		i++;
-	res = (char *) malloc((i + temp + 1) * sizeof(char));
+	res = (char *) f_malloc((i + temp + 1) * sizeof(char));
 	if (!res)
 		return (NULL);
 	i = -1;

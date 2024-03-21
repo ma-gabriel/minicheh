@@ -45,7 +45,8 @@ size_t	ft_endline(char *s)
 
 void	*free_ret_null(void *p)
 {
-	free(p);
+	if (p)
+		f_free(p);
 	return (NULL);
 }
 
@@ -73,7 +74,7 @@ char	*ft_strjoin_free_first_gnl(char *s1, char *s2, size_t lim)
 	while (s2[++len2] && len2 < lim)
 		res[len1 + len2] = s2[len2];
 	res[len1 + len2] = 0;
-	free(s1);
+	f_free(s1);
 	return (res);
 }
 

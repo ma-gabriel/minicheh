@@ -33,8 +33,8 @@ static int	create_new_subarray(char const *s,
 		if (!res[*vars[1]])
 		{
 			while (--*vars[1] + 1)
-				free(res[*vars[1]]);
-			free(res);
+				f_free(res[*vars[1]]);
+			f_free(res);
 			return (0);
 		}
 		*vars[0] = 0;

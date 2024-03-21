@@ -69,6 +69,6 @@ int	bi_echo(char *line, t_env **env)
 		return (the_return_value(1));
 	write(1, line, ft_strlen(line));
 	the_return_value(0);
-	free(line);
+	f_free(line);
 	return (0);
 }

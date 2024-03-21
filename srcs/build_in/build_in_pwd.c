@@ -23,7 +23,7 @@ char	*get_pwd(void)
 	while (errno == 34)
 	{
 		if (path)
-			free(path);
+			f_free(path);
 		errno = 0;
 		path = f_malloc(i);
 		if (!path)
@@ -34,7 +34,7 @@ char	*get_pwd(void)
 	if (!errno)
 		return (path);
 	if (path)
-		free(path);
+		f_free(path);
 	perror("pwd");
 	return (NULL);
 }
@@ -49,7 +49,7 @@ int	bi_pwd(char *line, t_env **env)
 	if (!pwd_string)
 		return (the_return_value(1));
 	printf("%s\n", pwd_string);
-	free(pwd_string);
+	f_free(pwd_string);
 	the_return_value(0);
 	return (0);
 }
