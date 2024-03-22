@@ -50,7 +50,6 @@ void	rm_useless_quotes(char *str);
 void	rm_useless_quotes_argv(char **str);
 void	sahandler_fake(int sig);
 void	sahandler_true(int sig);
-void	sahandler_p_heredoc(int sig);
 void	sahandler_s_heredoc(int sig);
 void	loops_minishell(t_env **envp);
 void	ft_envclear(t_env *env);

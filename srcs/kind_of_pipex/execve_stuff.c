@@ -111,7 +111,7 @@ int	the_execve_stuff(char *command, char *envp[], int fd[3], t_env **env)
 		return (res);
 	line = ft_strdup(command);
 	middle_command(line, envp, fd);
-	return (-1);
+	return (-4);
 }
 
 int	loops_executions(char **argv, char **envp, int init_fd[2], t_env **env)
@@ -132,11 +132,8 @@ int	loops_executions(char **argv, char **envp, int init_fd[2], t_env **env)
 		merge_fd(fd_old[0], fd_new[1], fd_merged);
 		fd_merged[2] = fd_new[0];
 		pid = the_execve_stuff(argv[i], envp, fd_merged, env);
-		if (pid == -1 || pid == -2)
-		{
-			close_3_free(fd_old[0], fd_old[1], fd_new[0], NULL);
-			f_exit(124 - 3 * pid + 0 * close(fd_new[1]));
-		}
+		if (pid < 0)
+			ultimate_exit(fd_old, fd_new, pid);
 		close_3_free(fd_old[0], fd_old[1], fd_new[1], NULL);
 		fd_old[0] = fd_new[0];
 	}

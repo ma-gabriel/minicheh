@@ -49,6 +49,8 @@ static void	one_single_free(void *alloc, t_alloc *actual)
 		free(actual->alloc);
 		actual->alloc = NULL;
 	}
+	else
+		free(alloc);
 	return ;
 }
 

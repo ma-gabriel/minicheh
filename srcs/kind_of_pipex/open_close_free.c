@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 16:10:42 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/15 03:02:31 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/22 11:45:34 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,12 @@ void	free_the_split(char **argv)
 	while (argv[i])
 		f_free(argv[i++]);
 	f_free(argv);
+}
+
+void	ultimate_exit(int fd_old[2], int fd_new[2], int pid)
+{
+	close_3_free(fd_old[0], fd_old[1], fd_new[0], NULL);
+	if (pid == -2)
+		f_exit(close(fd_new[1]) || 1);
+	f_exit(131 + pid + 0 * close(fd_new[1]));
 }

@@ -24,7 +24,7 @@ static char	*get_limiter(char *line)
 	end = start;
 	while (line[end] && line[end] != ' ')
 		end++;
-	res = malloc(end - start + 1);
+	res = f_malloc(end - start + 1);
 	if (!res)
 		return (NULL);
 	ft_strlcpy(res, line, end - start + 1);
@@ -77,7 +77,7 @@ static int	the_parent(void)
 	int	kid;
 	int	fd;
 
-	signal(SIGINT, &sahandler_p_heredoc);
+	signal(SIGINT, SIG_IGN);
 	wait(&kid);
 	fd = open(".here_doc", O_RDONLY);
 	if (fd == -1)
@@ -86,7 +86,7 @@ static int	the_parent(void)
 		return (fd);
 	close(fd);
 	signal(SIGINT, &sahandler_fake);
-	return (-1);
+	return (-2);
 }
 
 int	get_heredoc(char *line, t_env *env)

@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 23:40:12 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 05:19:23 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/22 11:45:54 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ int		open_file(char *file, char *name, int flags);
 void	merge_fd(size_t fd1, size_t fd2, int fd_res[2]);
 void	free_the_split(char **argv);
 void	print_error(char *name, char *error, char *file);
+void	ultimate_exit(int fd_old[2], int fd_new[2], int pid);
 
 #endif

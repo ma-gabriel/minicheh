@@ -56,7 +56,7 @@ char	*get_a_new_line(t_env *env)
 		str = ft_strjoin_free_first(str, temp);
 		f_free(temp);
 	}
-	if (ft_strjoin_free_first(str, "") && *str)
+	if ((str = ft_strjoin_free_first(str, "")) && *str)
 		add_history(str);
 	return (replace_env(str, env));
 }

@@ -32,12 +32,6 @@ void	sahandler_fake(int sig)
 		write(1, "Quit (core dumped)\n", 19);
 }
 
-void	sahandler_p_heredoc(int sig)
-{
-	if (sig == SIGINT)
-		write(2, "^C\n", 3);
-}
-
 void	sahandler_s_heredoc(int sig)
 {
 	if (sig == SIGINT)
