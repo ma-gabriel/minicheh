@@ -6,22 +6,13 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 01:10:47 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 05:11:02 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/24 11:41:20 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "collector.h"
-
-size_t	ft_wordlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i] && str[i] != ' ')
-		i++;
-	return (i);
-}
+#include "pipex.h"
 
 char	*ft_strjoinwithslash(char const *s1, char const *s2)
 {
@@ -32,7 +23,7 @@ char	*ft_strjoinwithslash(char const *s1, char const *s2)
 	len1 = 0;
 	while (s1[len1])
 		len1++;
-	res = f_malloc(len1 + ft_wordlen(s2) + 2);
+	res = f_malloc(len1 + ft_strlen(s2) + 2);
 	if (!res)
 		return (NULL);
 	i = -1;
@@ -40,7 +31,7 @@ char	*ft_strjoinwithslash(char const *s1, char const *s2)
 		res[i] = s1[i];
 	i = -1;
 	res[len1] = '/';
-	while (s2[++i] && s2[i] != ' ')
+	while (s2[++i])
 		res[i + len1 + 1] = s2[i];
 	res[i + len1 + 1] = 0;
 	return (res);

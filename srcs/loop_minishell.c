@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 02:27:31 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 03:38:27 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/24 21:19:45 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	loops_minishell(t_env **env)
 		signal(SIGQUIT, &sahandler_fake);
 		if (!line)
 			return ;
-		executions(line, env);
+		executions(&line, env);
 	}
 	if (line)
 		f_free(line);

@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 04:23:47 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 05:58:01 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/24 21:31:59 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static char	*get_limiter(char *line)
 	size_t	start;
 	size_t	end;
 	char	*res;
+	char	quote;
 
 	start = 0;
 	while (line[start] && line[start] == ' ')
@@ -24,10 +25,13 @@ static char	*get_limiter(char *line)
 	end = start;
 	while (line[end] && line[end] != ' ')
 		end++;
-	res = f_malloc(end - start + 1);
+	res = f_malloc(end - start + 2);
 	if (!res)
 		return (NULL);
-	ft_strlcpy(res, line, end - start + 1);
+	ft_strlcpy(res, line + start, end - start + 1);
+	quote = ft_strchr(res, '\'') || ft_strchr(res, '\"');
+	rm_useless_quotes(res);
+	res[ft_strlen(res) + 1] = quote;
 	return (res);
 }
 
@@ -54,7 +58,7 @@ static void	open_heredocs(char *command, int fd, t_env *env)
 	if (!limiter)
 		return ;
 	line = readline(">");
-	if (line)
+	if (line && !limiter[ft_strlen(limiter) + 1])
 		line = replace_env(line, env);
 	if (line)
 		len = ft_strlen(line);
@@ -64,7 +68,7 @@ static void	open_heredocs(char *command, int fd, t_env *env)
 		write(fd, "\n", 1);
 		f_free(line);
 		line = readline(">");
-		if (line)
+		if (line && !limiter[ft_strlen(limiter) + 1])
 			line = replace_env(line, env);
 		if (line)
 			len = ft_strlen(line);
@@ -72,24 +76,23 @@ static void	open_heredocs(char *command, int fd, t_env *env)
 	clean_the_mess(line, limiter);
 }
 
-static int	the_parent(void)
+static int	the_parent(char *name)
 {
-	int	kid;
-	int	fd;
+	int			kid;
+	struct stat	buff;
 
 	signal(SIGINT, SIG_IGN);
 	wait(&kid);
-	fd = open(".here_doc", O_RDONLY);
-	if (fd == -1)
-		return (-1);
-	if (WIFEXITED(kid) && WEXITSTATUS(kid) != 130)
-		return (fd);
-	close(fd);
 	signal(SIGINT, &sahandler_fake);
+	if (WIFEXITED(kid) && WEXITSTATUS(kid) != 130
+		&& WEXITSTATUS(kid) != -1)
+		return (0);
+	if (!stat(name, &buff))
+		unlink(name);
 	return (-2);
 }
 
-int	get_heredoc(char *line, t_env *env)
+int	get_heredoc(char *line, t_env *env, char *name)
 {
 	int	pid;
 	int	fd;
@@ -98,8 +101,8 @@ int	get_heredoc(char *line, t_env *env)
 	if (pid == -1)
 		return (-1);
 	if (pid)
-		return (the_parent());
-	fd = open(".here_doc", O_CREAT | O_TRUNC | O_RDWR, 0666);
+		return (the_parent(name));
+	fd = open(name, O_CREAT | O_TRUNC | O_RDWR, 0666);
 	if (fd == -1)
 	{
 		perror("minishell's here_doc");

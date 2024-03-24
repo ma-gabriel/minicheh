@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:58:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 05:54:26 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/24 21:39:10 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,15 @@ static size_t	path_len(char *str)
 	while (str[i])
 	{
 		if (!ft_isalnum(str[i]) && str[i] != '_' && \
-			str[i] != '/' && str[i] != '-' && str[i] != '.')
+			str[i] != '/' && str[i] != '-' && str[i] != '.'
+			&& str[i] != '\'' && str[i] != '\"')
 			return (i);
 		++i;
 	}
 	return (i);
 }
 
-static int	open_dup2(char *line, size_t len, int flag, t_env *env)
+static int	open_dup2(char *line, size_t len, int flag)
 {
 	char	*file;
 	int		fd_temp;
@@ -39,10 +40,12 @@ static int	open_dup2(char *line, size_t len, int flag, t_env *env)
 	file = ft_substr(line, 0, len);
 	if (!file)
 		return (-1);
-	if (flag == 0)
+	if (flag == 0 || (flag == 1 && *file != 'E'))
 		fd_temp = open(file, O_RDONLY);
+	else if (flag == 1 && *file != 'E')
+		unlink(file);
 	else if (flag == 1)
-		fd_temp = get_heredoc(line, env);
+		fd_temp = -1;
 	else if (flag == 2)
 		fd_temp = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	else if (flag == 3)
@@ -53,11 +56,10 @@ static int	open_dup2(char *line, size_t len, int flag, t_env *env)
 	if (fd_temp == -3 || fd_temp == -2 || fd_temp == -1)
 		return (-fd_temp - 3);
 	res = dup2(fd_temp, flag / 2);
-	close(fd_temp);
-	return (res);
+	return ((close(fd_temp) || 1) * res);
 }
 
-static int	line_shortener(char *line, int flag, t_env *env)
+static int	line_shortener(char *line, int flag)
 {
 	int		spaces;
 	size_t	len;
@@ -72,27 +74,27 @@ static int	line_shortener(char *line, int flag, t_env *env)
 	len = path_len(line + (flag == 1 || flag == 3) + spaces + 1);
 	if (len != 0)
 		returned = open_dup2(line + (flag == 1 || flag == 3) \
-				+ spaces + 1, len, flag, env);
+				+ spaces + 1, len, flag);
 	else
 		write(2, "minishell: syntax error near unexpected token\n", 47);
 	ft_strcpy(line, line + (flag == 1 || flag == 3) + spaces + 1 + len);
 	return (returned);
 }
 
-static int	directions_hub(char *line, size_t *i, int delimiter, t_env *env)
+static int	directions_hub(char *line, size_t *i, int delimiter)
 {
 	int	res;
 
 	if (line[*i] == '<' && !delimiter)
 	{
-		res = line_shortener(line + *i, 0 + (line[*i + 1] == '<'), env);
+		res = line_shortener(line + *i, 0 + (line[*i + 1] == '<'));
 		if (res < 0)
 			return (res);
 		(*i)--;
 	}
 	if (line[*i] == '>' && !delimiter)
 	{
-		res = line_shortener(line + *i, 2 + (line[*i + 1] == '>'), env);
+		res = line_shortener(line + *i, 2 + (line[*i + 1] == '>'));
 		if (res < 0)
 			return (res);
 		(*i)--;
@@ -100,7 +102,7 @@ static int	directions_hub(char *line, size_t *i, int delimiter, t_env *env)
 	return (0);
 }
 
-int	redirections(char *line, t_env *env)
+int	redirections(char *line)
 {
 	size_t	i;
 	int		delimiter;
@@ -118,7 +120,7 @@ int	redirections(char *line, t_env *env)
 			delimiter = 1;
 		else if (line[i] == '\'' && !delimiter)
 			delimiter = 2;
-		res = directions_hub(line, &i, delimiter, env);
+		res = directions_hub(line, &i, delimiter);
 		if (res < 0)
 			return (res);
 		i++;

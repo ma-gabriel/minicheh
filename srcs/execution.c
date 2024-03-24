@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:22:00 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 06:40:36 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/24 20:31:00 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	redirect_before_bi(char *line, t_env **env)
 		close(fd[0]);
 		return (0);
 	}
-	res = redirections(line, *env);
+	res = redirections(line);
 	if (dup2(fd[0], 0) == -1 || dup2(fd[1], 1) == -1)
 	{
 		close(fd[0]);
@@ -99,7 +99,7 @@ int	redirect_before_bi(char *line, t_env **env)
 	return (res != -1);
 }
 
-void	executions(char *line, t_env **env)
+void	executions(char **line, t_env **env)
 {
 	char	**envp;
 	char	**argv;
@@ -110,8 +110,10 @@ void	executions(char *line, t_env **env)
 		the_return_value(1);
 		return ;
 	}
-	change_string(line, '|', -2);
-	argv = ft_split(line, '|');
+	replace_all_here_docs(line, *env);
+	change_string(*line, '|', -2);
+	change_string(*line, ' ', -1);
+	argv = ft_split(*line, '|');
 	if (!argv)
 	{
 		ft_strsfree(envp);
@@ -119,8 +121,8 @@ void	executions(char *line, t_env **env)
 		return ;
 	}
 	change_split(argv, -2, '|');
-	rm_useless_quotes_argv(argv);
-	if (argv[0] && (argv[1] || !(is_a_built_in(line, env))))
+	change_string(*line, -2, '|');
+	if (argv[0] && (argv[1] || !(is_a_built_in(*line, env))))
 		the_return_value(almost_pipex(argv, envp, (void *) env));
 	ft_strsfree(envp);
 	ft_strsfree(argv);

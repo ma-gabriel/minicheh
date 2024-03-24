@@ -6,38 +6,52 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:54:44 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 05:55:31 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/24 21:31:37 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+static char	*shorten_command(char *command)
+{
+	size_t	i;
+
+	i = 0;
+	command = ft_strdup(command);
+	if (!command)
+		return (NULL);
+	while (*command == ' ')
+		command++;
+	while (command[i] && command[i] != ' ')
+		i++;
+	command[i] = 0;
+	replace_chars_in_str(command, -1, ' ');
+	rm_useless_quotes(command);
+	return (command);
+}
 
 char	*find_command(char **paths, char *command, int i)
 {
 	char	*path;
 	size_t	len;
 
-	if (!paths)
+	command = shorten_command(command);
+	if (!paths || !command)
 		return (NULL);
-	path = ft_strdup_until_space(command);
-	(void) ( (size_t) path && (len = ft_strlen(path)));
+	path = ft_strdup(command);
+	if (path)
+		len = ft_strlen(path);
 	while (path && (ft_strchr(command, '/') > command + len || !ft_strchr
 			(command, '/')) && access(path, X_OK) && paths[i])
-	{
-		f_free(path);
 		path = ft_strjoinwithslash(paths[i++], command);
-	}
-	if (paths && path && access(path, X_OK))
+	if (paths && path && (access(path, X_OK) || !*command))
 	{
 		if (ft_strchr(command, '/') > command + len || ft_strchr(command, '/'))
-			print_error("minishell", strerror(errno), path);
+			print_error("minishell", strerror(errno), command);
 		else
-			print_error("minishell", "command not found", path
-				+ ft_strlen(paths[i - 1]) + 1);
-		f_free(path);
+			print_error("minishell", "command not found", command);
 		path = NULL;
 	}
-	free_the_split(paths);
 	return (path);
 }
 
@@ -47,8 +61,6 @@ int	middle_command(char *line, char **envp, int fd[3])
 	char		*command;
 	char		**args;
 
-	while (*line == ' ')
-		line++;
 	if (ft_getenv(envp, "PATH"))
 		command = find_command(ft_split(ft_getenv(envp, "PATH") + 5, ':'),
 				line, 0);
@@ -57,34 +69,13 @@ int	middle_command(char *line, char **envp, int fd[3])
 	if (!command)
 		return (close_3_free(fd[0], fd[1], -1, (char *) remember_line));
 	args = ft_split(line, ' ');
-	if (!args)
-		f_free((char *) remember_line);
+	replace_chars_in_argv(args, -1, ' ');
+	rm_useless_quotes_argv(args);
 	if (!args)
 		return (close_3_free(fd[0], fd[1], -1, command));
 	close_3_free(fd[0], fd[1], -1, (char *) remember_line);
 	execve(command, args, envp);
-	free_the_split(args);
-	f_free(command);
 	return (0);
-}
-
-static char	*ft_strdup(const char *src)
-{
-	size_t	i;
-	char	*dest;
-	size_t	len;
-
-	i = -1;
-	len = 0;
-	while (src[len])
-		len++;
-	dest = f_malloc(len + 1);
-	if (!dest)
-		return (NULL);
-	while (++i < len)
-		dest[i] = src[i];
-	dest[i] = 0;
-	return (dest);
 }
 
 int	the_execve_stuff(char *command, char *envp[], int fd[3], t_env **env)
@@ -106,7 +97,7 @@ int	the_execve_stuff(char *command, char *envp[], int fd[3], t_env **env)
 		return (-(close_3_free(fd[0], fd[1], -1, NULL) || 1));
 	close_3_free(fd[0], fd[1], -1, NULL);
 	is_a_built_in_pipe(command, env, fd);
-	res = redirections(command, *env);
+	res = redirections(command);
 	if (res == -1 || res == -2)
 		return (res);
 	line = ft_strdup(command);

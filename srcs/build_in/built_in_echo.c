@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 09:15:38 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 01:22:15 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/24 09:45:21 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,25 @@ static int	parameters_nl(char *line)
 	return (res);
 }
 
+void	replace_chars_in_str(char *str, char c1, char c2)
+{
+	while (*str)
+	{
+		if (*str == c1)
+			*str = c2;
+		str++;
+	}
+}
+
+void	replace_chars_in_argv(char **argv, char c1, char c2)
+{
+	while (*argv)
+	{
+		replace_chars_in_str(*argv, c1, c2);
+		argv++;
+	}
+}
+
 int	bi_echo(char *line, t_env **env)
 {
 	short	b00l;
@@ -67,6 +86,7 @@ int	bi_echo(char *line, t_env **env)
 		line = ft_strjoin_free_first(line, "\n");
 	if (!line)
 		return (the_return_value(1));
+	replace_chars_in_str(line, -1, ' ');
 	write(1, line, ft_strlen(line));
 	the_return_value(0);
 	f_free(line);
