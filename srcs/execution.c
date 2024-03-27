@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:22:00 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/27 13:34:50 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/27 14:17:51 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	is_a_built_in(char *line, t_env **env)
 static char	**split_and_parsing(char *line)
 {
 	char	**argv;
-	int		i;
 
 	change_string(line, '|', -2);
 	change_string(line, ' ', -1);
@@ -73,13 +72,6 @@ static char	**split_and_parsing(char *line)
 	if (!argv)
 		return (NULL);
 	change_string(line, -2, '|');
-	rm_useless_quotes(line);
-	i = 0;
-	while (argv[i])
-	{
-		rm_useless_quotes(argv[i]);
-		i++;
-	}
 	return (argv);
 }
 

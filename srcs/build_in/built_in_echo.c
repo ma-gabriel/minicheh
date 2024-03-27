@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 09:15:38 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/27 13:06:13 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/27 14:24:02 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	bi_echo(char *line)
 	b00l = parameters_nl(line);
 	while (*line == ' ')
 		line++;
+	rm_useless_quotes(line);
 	line = ft_strdup(line);
 	if (!b00l)
 		line = ft_strjoin_free_first(line, "\n");
