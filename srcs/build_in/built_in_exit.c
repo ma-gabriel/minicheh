@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 03:11:22 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/27 13:48:01 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/27 14:57:11 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ static int	check_if_the_first_arg_is_only_spaces(char *line)
 	res = 0;
 	while (*line)
 	{
-		if (line[0] == -1)
+		if (line[0] == -1 || line[0] == '\'' || line[0] == '\"')
 		{
 			res = 1;
-			if (line[1] && line[1] != -1)
+			if (line[1] && line[1] != -1 && line[1] != '\''
+				&& line[1] != '\"')
 				return (0);
 		}
 		line++;
@@ -36,9 +37,10 @@ static int	check_args_exit(char *line)
 	if (check_if_the_first_arg_is_only_spaces(line))
 		return (2);
 	replace_chars_in_str(line, -1, ' ');
+	rm_useless_quotes(line);
 	while (*line)
 	{
-		if (!ft_isdigit(*line) && *line != ' ')
+		if (!ft_isdigit(*line) && *line != ' ' && *line)
 		{
 			write(2, "minishell: exit: numeric argument required\n", 44);
 			return (2);
