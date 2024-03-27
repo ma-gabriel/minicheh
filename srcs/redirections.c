@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:58:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/24 21:39:10 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/27 16:03:30 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static size_t	path_len(char *str)
 	{
 		if (!ft_isalnum(str[i]) && str[i] != '_' && \
 			str[i] != '/' && str[i] != '-' && str[i] != '.'
-			&& str[i] != '\'' && str[i] != '\"')
+			&& str[i] != '\'' && str[i] != '\"' && str[i] != -1)
 			return (i);
 		++i;
 	}
@@ -40,6 +40,8 @@ static int	open_dup2(char *line, size_t len, int flag)
 	file = ft_substr(line, 0, len);
 	if (!file)
 		return (-1);
+	replace_chars_in_str(line, -1, ' ');
+	rm_useless_quotes(file);
 	if (flag == 0 || (flag == 1 && *file != 'E'))
 		fd_temp = open(file, O_RDONLY);
 	else if (flag == 1 && *file != 'E')
