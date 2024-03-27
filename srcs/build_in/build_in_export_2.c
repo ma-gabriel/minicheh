@@ -6,7 +6,7 @@
 /*   By: lcamerly <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 21:43:06 by lcamerly          #+#    #+#             */
-/*   Updated: 2024/03/27 13:14:08 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/27 14:29:05 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	do_export(char *temp, t_env **env)
 	if (!key_value)
 		return (free_ret_1(temp));
 	replace_chars_in_str(key_value[1], -1, ' ');
+	rm_useless_quotes(key_value[1]);
 	new_lst = ft_envlstnew_frees(key_value);
 	if (!new_lst)
 		return (free_ret_1(temp));

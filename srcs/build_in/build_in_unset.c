@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 00:19:25 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/27 13:28:06 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/27 14:32:39 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static int	any_forbidden_chars_unset(char *temp)
 	i = 0;
 	while (temp[i])
 	{
-		if (!ft_isalnum(temp[i]) && temp[i] != '_' && temp[i] != ' ')
+		if (!ft_isalnum(temp[i]) && temp[i] != '_' && temp[i] != ' '
+			&& temp[i] != '\'' && temp[i] != '\"')
 		{
 			write(2, "minishell: unset: the identifier is not valid\n", 47);
 			return (the_return_value(1));
@@ -97,6 +98,7 @@ int	bi_unset(char *line, t_env **env)
 	args = ft_space_strtok(line);
 	while (args)
 	{
+		rm_useless_quotes(args);
 		ft_envlst_remove_if(env, args);
 		line = NULL;
 		f_free(args);
