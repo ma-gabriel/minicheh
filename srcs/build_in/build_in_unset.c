@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 00:19:25 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 03:39:19 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/27 13:01:09 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static int	any_forbidden_chars_unset(char *temp)
 	i = 0;
 	while (temp[i])
 	{
-		if (!ft_isalnum(temp[i]) && temp[i] != '_' && temp[i] != ' ')
+		if (!ft_isalnum(temp[i]) && temp[i] != '_'
+			&& temp[i] != ' ' && temp[i] != -1)
 		{
 			write(2, "minishell: unset: the identifier is not valid\n", 47);
 			return (the_return_value(1));
@@ -60,7 +61,6 @@ char	*ft_space_strtok(char *str)
 	static char	*save;
 	char		*temp;
 	char		*res;
-	int			quote;
 
 	if (str)
 		save = str;
@@ -69,27 +69,23 @@ char	*ft_space_strtok(char *str)
 	while (*save == ' ')
 		save++;
 	temp = save;
-	quote = 0;
-	while (*save && (*save != ' ' || quote))
-	{
-		if ((*save == '\'' || *save == '\"') && !quote)
-			quote = 1 + (*save == '\'');
-		else if ((*save == '\'' && quote == 2) || (*save == '\"' && quote == 1))
-			quote = 0;
+	while (*save && *save != ' ')
 		save++;
-	}
-	res = f_malloc(save - temp + 1);
-	if (res)
-		ft_strlcpy(res, temp, save - temp + 1);
+	res = malloc(save - temp + 1);
+	if (!res)
+		return (NULL);
+	ft_strlcpy(res, temp, save - temp + 1);
 	return (res);
 }
 
 int	bi_unset(char *line, t_env **env)
 {
 	char	*args;
+	int		fd[2];
 
-	if (!redirect_before_bi(line, env))
+	if (!redirect_before_bi(line, fd))
 		return (the_return_value(1));
+	restaure_redirections_bi(fd);
 	while (*line == ' ' || *line == '\'' || *line == '\"')
 		line++;
 	line += 5;

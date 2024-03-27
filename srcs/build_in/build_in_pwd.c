@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 01:13:29 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 03:39:21 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/27 13:02:59 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,22 @@ char	*get_pwd(void)
 	return (NULL);
 }
 
-int	bi_pwd(char *line, t_env **env)
+int	bi_pwd(char *line)
 {
 	char	*pwd_string;
+	int		fd[2];
 
-	if (!redirect_before_bi(line, env))
+	if (!redirect_before_bi(line, fd))
 		return (the_return_value(1));
 	pwd_string = get_pwd();
 	if (!pwd_string)
+	{
+		restaure_redirections_bi(fd);
 		return (the_return_value(1));
+	}
 	printf("%s\n", pwd_string);
 	f_free(pwd_string);
 	the_return_value(0);
+	restaure_redirections_bi(fd);
 	return (0);
 }

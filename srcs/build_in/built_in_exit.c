@@ -6,15 +6,35 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 03:11:22 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 05:32:44 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/27 13:02:34 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 #include "../../libft/libft.h"
 
+static int	check_if_the_first_arg_is_only_spaces(char *line)
+{
+	int	res;
+
+	res = 0;
+	while (*line)
+	{
+		if (line[0] == -1)
+		{
+			res = 1;
+			if (line[1] && line[1] != -1)
+				return (0);
+		}
+	}
+	return (res);
+}
+
 static int	check_args_exit(char *line)
 {
+	if (check_if_the_first_arg_is_only_spaces(line))
+		return (2);
+	replace_chars_in_str(line, -1, ' ');
 	while (*line)
 	{
 		if (!ft_isdigit(*line) && *line != ' ')
@@ -32,15 +52,16 @@ static int	check_args_exit(char *line)
 	return (0);
 }
 
-int	bi_exit(char *line, t_env **env)
+int	bi_exit(char *line)
 {
 	char	*line_cpy;
 	int		res;
 	int		args_flag;
+	int		fd[2];
 
-	if (!redirect_before_bi(line, env))
+	if (!redirect_before_bi(line, fd))
 		return (the_return_value(1));
-	rm_useless_quotes(line);
+	restaure_redirections_bi(fd);
 	line_cpy = line;
 	while (*line == ' ')
 		line++;

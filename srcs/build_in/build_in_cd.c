@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 00:32:15 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 06:30:58 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/27 12:56:03 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,11 @@ int	bi_cd(char *line, t_env **env)
 {
 	int		res;
 	size_t	args;
+	int		fd[2];
 
-	if (!redirect_before_bi(line, env))
+	if (!redirect_before_bi(line, fd))
 		return (the_return_value(1));
+	restaure_redirections_bi(fd);
 	rm_useless_quotes(line);
 	while (*line == ' ')
 		line++;

@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 00:21:40 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/20 21:49:19 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:56:14 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,11 @@ static int	export_multiple(char *line, t_env **env)
 int	bi_export(char *line, t_env **env)
 {
 	int	res;
+	int	fd[2];
 
-	if (!redirect_before_bi(line, env))
+	if (!redirect_before_bi(line, fd))
 		return (the_return_value(1));
+	restaure_redirections_bi(fd);
 	while (*line && (*line == ' ' || *line == '\'' || *line == '\"'))
 		line++;
 	line += 6;

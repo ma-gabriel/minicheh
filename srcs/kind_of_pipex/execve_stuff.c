@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:54:44 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/24 21:31:37 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/27 12:04:36 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static char	*shorten_command(char *command)
 		i++;
 	command[i] = 0;
 	replace_chars_in_str(command, -1, ' ');
-	rm_useless_quotes(command);
 	return (command);
 }
 
@@ -70,7 +69,6 @@ int	middle_command(char *line, char **envp, int fd[3])
 		return (close_3_free(fd[0], fd[1], -1, (char *) remember_line));
 	args = ft_split(line, ' ');
 	replace_chars_in_argv(args, -1, ' ');
-	rm_useless_quotes_argv(args);
 	if (!args)
 		return (close_3_free(fd[0], fd[1], -1, command));
 	close_3_free(fd[0], fd[1], -1, (char *) remember_line);

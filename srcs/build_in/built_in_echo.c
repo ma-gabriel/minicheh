@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 09:15:38 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/24 09:45:21 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/27 13:06:13 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ void	replace_chars_in_argv(char **argv, char c1, char c2)
 	}
 }
 
-int	bi_echo(char *line, t_env **env)
+int	bi_echo(char *line)
 {
 	short	b00l;
+	int		fd[2];
 
-	if (!redirect_before_bi(line, env))
+	if (!redirect_before_bi(line, fd))
 		return (the_return_value(1));
-	rm_useless_quotes(line);
 	while (*line == ' ')
 		line++;
 	line += 4;
@@ -90,5 +90,6 @@ int	bi_echo(char *line, t_env **env)
 	write(1, line, ft_strlen(line));
 	the_return_value(0);
 	f_free(line);
+	restaure_redirections_bi(fd);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 08:27:35 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/19 06:31:59 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/27 13:01:35 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ int	bi_env(char *line, t_env **env)
 {
 	char	**envp;
 	size_t	i;
+	int		fd[2];
 
-	if (!redirect_before_bi(line, env))
+	if (!redirect_before_bi(line, fd))
 		return (the_return_value(1));
 	i = -1;
 	envp = create_envp(*env);
@@ -59,5 +60,6 @@ int	bi_env(char *line, t_env **env)
 		printf("%s\n", envp[i]);
 	ft_strsfree(envp);
 	the_return_value(0);
+	restaure_redirections_bi(fd);
 	return (0);
 }
