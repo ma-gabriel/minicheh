@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 00:32:15 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/27 12:56:03 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/27 13:32:23 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ int	bi_cd(char *line, t_env **env)
 	if (!redirect_before_bi(line, fd))
 		return (the_return_value(1));
 	restaure_redirections_bi(fd);
-	rm_useless_quotes(line);
 	while (*line == ' ')
 		line++;
 	line += 2;
@@ -115,6 +114,7 @@ int	bi_cd(char *line, t_env **env)
 		write(2, "minishell: cd: HOME not set\n", 28);
 	if (args >= 2)
 		write(2, "minishell: cd: too many arguments\n", 35);
+	replace_chars_in_str(line, -1, ' ');
 	if (args != 1)
 		return (the_return_value(1));
 	res = cd(line);

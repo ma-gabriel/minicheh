@@ -15,6 +15,7 @@ SRCS =	build_in/built_in_echo.c \
 	build_in/build_in_export.c \
 	build_in/build_in_export_2.c \
 	build_in/build_in_cd.c \
+	build_in/built_in_utils.c \
 	more_env_utils.c \
 	create_envp.c \
 	get_new_line.c \
