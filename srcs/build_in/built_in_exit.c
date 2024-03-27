@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 03:11:22 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/27 13:02:34 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/27 13:46:27 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static int	check_if_the_first_arg_is_only_spaces(char *line)
 			res = 1;
 			if (line[1] && line[1] != -1)
 				return (0);
+			line++;
 		}
 	}
 	return (res);
