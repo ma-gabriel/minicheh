@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:54:44 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/27 14:16:26 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/28 13:38:28 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*find_command(char **paths, char *command, int i)
 	command = shorten_command(command);
 	if (!paths || !command)
 		return (NULL);
-	path = ft_strdup(command);
+	path = ft_strjoinwithslash(paths[i++], command);
 	if (path)
 		len = ft_strlen(path);
 	while (path && (ft_strchr(command, '/') > command + len || !ft_strchr
